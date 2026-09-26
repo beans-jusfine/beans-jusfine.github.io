@@ -8,7 +8,6 @@
 
     const DEFAULTS = {
         darkMode: true,
-        showSocialLabels: false,
         showFigcaptions: true,
         smallPagebar: false,
         boldFont: false,
@@ -130,7 +129,6 @@
         if (!body) return;
 
         body.classList.toggle('light-mode', !settings.darkMode);
-        body.classList.toggle('show-social-labels', !!settings.showSocialLabels);
         body.classList.toggle('hide-figcaptions', !settings.showFigcaptions);
         body.classList.toggle('small-pagebar', !!settings.smallPagebar);
         body.classList.toggle('pagebar-bottom', settings.pagebarPosition === 'bottom');

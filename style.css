@@ -669,17 +669,9 @@ body.pagebar-bottom {
     padding-bottom: 110px;
 }
 
-/* --- Show Social Labels (icon-only by default) --- */
+/* --- Social labels: always hidden (icon-only design, index.html only) --- */
 .social-label {
     display: none;
-}
-
-body.show-social-labels .social-label {
-    display: inline;
-}
-
-body:not(.show-social-labels) .strip-item {
-    justify-content: center;
 }
 
 /* --- Show Figcaptions (secondary descriptive text) --- */
