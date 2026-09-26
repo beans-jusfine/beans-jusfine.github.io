@@ -103,6 +103,10 @@ body::after {
     gap: 25px;
 }
 
+.profile-card-compact {
+    align-self: flex-start;
+}
+
 .profile-card {
     background: var(--card-bg);
     backdrop-filter: blur(var(--blur-strong));
@@ -571,7 +575,8 @@ input:checked + .slider:before {
     .content-stream {
         grid-template-columns: 1fr;
     }
-    .profile-card {
+    .profile-card,
+    .profile-card-compact {
         flex-direction: column;
         text-align: center;
         align-items: center;
