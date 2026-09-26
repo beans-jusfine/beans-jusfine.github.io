@@ -50,6 +50,18 @@ body.fade-out {
     opacity: 0;
 }
 
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    opacity: 0.035;
+    mix-blend-mode: overlay;
+}
+
 .nav-bar {
     position: fixed;
     top: 25px;
@@ -63,6 +75,7 @@ body.fade-out {
     border-radius: 12px;
     border: 1px solid var(--border-soft);
     border-bottom: 1px solid rgba(var(--accent-rgb), 0.3);
+    border-top: 1px dashed rgba(var(--accent-rgb), 0.3);
     transition: top 0.3s ease, bottom 0.3s ease, padding 0.3s ease;
 }
 
@@ -105,6 +118,22 @@ body.fade-out {
     position: sticky;
     top: 120px;
     box-shadow: 0 6px 0 rgba(var(--accent-rgb), 0.18);
+    transform: rotate(-1.1deg);
+    transition: transform 0.15s ease;
+}
+
+.profile-card::after {
+    content: "";
+    position: absolute;
+    top: -1px;
+    right: -1px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 26px 26px 0;
+    border-color: transparent var(--bg-color) transparent transparent;
+    filter: drop-shadow(-2px 2px 3px rgba(0, 0, 0, 0.35));
+    border-top-right-radius: 14px;
 }
 
 .avatar-ring {
@@ -116,7 +145,35 @@ body.fade-out {
     border-radius: 50%;
     padding: 6px;
     margin-bottom: 20px;
+    position: relative;
+    cursor: pointer;
     transition: border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+@keyframes beanWobble {
+    0% { transform: scale(1) rotate(0deg); }
+    25% { transform: scale(0.92, 1.08) rotate(-4deg); }
+    50% { transform: scale(1.06, 0.94) rotate(3deg); }
+    75% { transform: scale(0.97, 1.03) rotate(-2deg); }
+    100% { transform: scale(1) rotate(0deg); }
+}
+
+.avatar-ring.wobble {
+    animation: beanWobble 0.6s ease;
+}
+
+@keyframes beanFloat {
+    0% { transform: translate(0, 0) scale(0.6); opacity: 0; }
+    15% { opacity: 1; }
+    100% { transform: translate(var(--tx), -70px) scale(1); opacity: 0; }
+}
+
+.bean-particle {
+    position: absolute;
+    font-size: 18px;
+    pointer-events: none;
+    animation: beanFloat 1s ease-out forwards;
+    z-index: 5;
 }
 
 .avatar-ring.online {
@@ -166,6 +223,7 @@ body.fade-out {
     padding: 15px;
     border-radius: 10px;
     border: 1px solid rgba(var(--accent-rgb), 0.15);
+    transform: rotate(0.6deg);
 }
 
 .quote-bubble p {

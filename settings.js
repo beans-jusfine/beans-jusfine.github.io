@@ -257,9 +257,37 @@
         setTimeout(typeNext, 350); // let the page fade-in settle first
     }
 
+    function initAvatarBeanBurst() {
+        const ring = document.querySelector('.avatar-ring');
+        if (!ring) return;
+
+        ring.addEventListener('click', function () {
+            const reduced = document.body.classList.contains('reduced-motion');
+
+            ring.classList.remove('wobble');
+            void ring.offsetWidth; // restart the animation if clicked again quickly
+            if (!reduced) ring.classList.add('wobble');
+
+            if (reduced) return;
+
+            for (let i = 0; i < 6; i++) {
+                const particle = document.createElement('span');
+                particle.className = 'bean-particle';
+                particle.textContent = '🫘';
+                const tx = (Math.random() - 0.5) * 80;
+                particle.style.setProperty('--tx', tx + 'px');
+                particle.style.left = (45 + Math.random() * 10) + '%';
+                particle.style.top = '40%';
+                ring.appendChild(particle);
+                setTimeout(function () { particle.remove(); }, 1000);
+            }
+        });
+    }
+
     document.addEventListener('DOMContentLoaded', function () {
         applySettings(loadSettings());
         initPageFade();
         initQuoteTypewriter();
+        initAvatarBeanBurst();
     });
 })();
