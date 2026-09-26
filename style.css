@@ -1,0 +1,649 @@
+:root {
+    --accent: #a34b25;
+    --accent-glow: #f79d74;
+    --accent-rgb: 163, 75, 37;
+    --bg-color: #0c0604;
+    --text-color: #ffffff;
+    --card-bg: rgba(15, 9, 7, 0.7);
+    --box-bg: rgba(15, 9, 7, 0.55);
+    --overlay-bg: rgba(0, 0, 0, 0.25);
+    --nav-bg: rgba(18, 10, 7, 0.65);
+    --dropdown-bg: rgba(18, 10, 7, 0.8);
+    --border-soft: rgba(255, 255, 255, 0.04);
+    --blur-strong: 22px;
+    --blur-medium: 12px;
+    --blur-nav: 18px;
+    --font-family: 'Plus Jakarta Sans', sans-serif;
+    --display-font: 'Fraunces', Georgia, serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--font-family);
+    color: var(--text-color);
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+    background-color: var(--bg-color);
+    background-image:
+        radial-gradient(circle at 12% 18%, rgba(var(--accent-rgb), 0.16) 0%, transparent 42%),
+        radial-gradient(circle at 88% 80%, rgba(var(--accent-rgb), 0.12) 0%, transparent 46%),
+        repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.015) 0px, rgba(255, 255, 255, 0.015) 1px, transparent 1px, transparent 7px);
+    background-attachment: fixed;
+    display: flex;
+    justify-content: center;
+    padding: 120px 20px 60px 20px;
+    overflow-x: hidden;
+    opacity: 0;
+    transition: background-color 0.3s ease, color 0.3s ease, opacity 0.3s ease;
+}
+
+body.page-loaded {
+    opacity: 1;
+}
+
+body.fade-out {
+    opacity: 0;
+}
+
+.nav-bar {
+    position: fixed;
+    top: 25px;
+    z-index: 1000;
+    display: flex;
+    gap: 22px;
+    background: var(--nav-bg);
+    backdrop-filter: blur(var(--blur-nav));
+    -webkit-backdrop-filter: blur(var(--blur-nav));
+    padding: 12px 26px;
+    border-radius: 12px;
+    border: 1px solid var(--border-soft);
+    border-bottom: 1px solid rgba(var(--accent-rgb), 0.3);
+    transition: top 0.3s ease, bottom 0.3s ease, padding 0.3s ease;
+}
+
+.nav-item {
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    opacity: 0.6;
+    padding-bottom: 4px;
+    border-bottom: 2px solid transparent;
+    transition: opacity 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+}
+
+.nav-item:hover, .nav-item.active {
+    opacity: 1;
+    color: var(--accent-glow);
+    border-bottom-color: var(--accent);
+}
+
+.dashboard-container {
+    width: 100%;
+    max-width: 960px;
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 25px;
+    align-items: start;
+}
+
+.profile-card {
+    background: var(--card-bg);
+    backdrop-filter: blur(var(--blur-strong));
+    -webkit-backdrop-filter: blur(var(--blur-strong));
+    border-radius: 14px;
+    border: 1px solid rgba(var(--accent-rgb), 0.25);
+    padding: 40px 25px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: sticky;
+    top: 120px;
+    box-shadow: 0 6px 0 rgba(var(--accent-rgb), 0.18);
+}
+
+.avatar-ring {
+    width: 130px;
+    height: 130px;
+    background: rgba(var(--accent-rgb), 0.1);
+    border: 3px solid var(--accent);
+    box-shadow: 5px 5px 0 rgba(var(--accent-rgb), 0.3);
+    border-radius: 50%;
+    padding: 6px;
+    margin-bottom: 20px;
+    transition: border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+.avatar-ring.online {
+    border-color: #23a55a;
+    box-shadow: 5px 5px 0 rgba(35, 165, 90, 0.35);
+}
+
+.avatar-ring.idle {
+    border-color: #f0b232;
+    box-shadow: 5px 5px 0 rgba(240, 178, 50, 0.35);
+}
+
+.avatar-ring.dnd {
+    border-color: #f23f43;
+    box-shadow: 5px 5px 0 rgba(242, 63, 67, 0.35);
+}
+
+.avatar-ring.offline {
+    border-color: #80848e;
+    box-shadow: 5px 5px 0 rgba(128, 132, 142, 0.25);
+}
+
+.profile-avatar {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.profile-name {
+    font-family: var(--display-font);
+    font-size: 26px;
+    font-weight: 600;
+    letter-spacing: -0.3px;
+    color: var(--text-color);
+}
+
+.profile-tag {
+    font-size: 13px;
+    opacity: 0.5;
+    margin-top: 4px;
+    margin-bottom: 20px;
+}
+
+.quote-bubble {
+    background: var(--overlay-bg);
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid rgba(var(--accent-rgb), 0.15);
+}
+
+.quote-bubble p {
+    font-size: 13px;
+    line-height: 1.5;
+    opacity: 0.75;
+    font-style: italic;
+}
+
+.quote-bubble p.typing::after {
+    content: '|';
+    display: inline-block;
+    margin-left: 2px;
+    animation: blinkCursor 0.8s steps(2, start) infinite;
+}
+
+@keyframes blinkCursor {
+    to { visibility: hidden; }
+}
+
+.content-stream {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.dash-box {
+    background: var(--box-bg);
+    backdrop-filter: blur(var(--blur-medium));
+    -webkit-backdrop-filter: blur(var(--blur-medium));
+    border-radius: 10px;
+    border: 1px solid var(--border-soft);
+    padding: 25px;
+    transition: border 0.3s ease;
+}
+
+.dash-box:hover {
+    border-color: rgba(var(--accent-rgb), 0.3);
+}
+
+.box-title {
+    font-family: var(--display-font);
+    font-size: 17px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border-soft);
+    color: var(--accent-glow);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.spotify-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: var(--overlay-bg);
+    padding: 16px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.02);
+}
+
+.spotify-art {
+    width: 64px;
+    height: 64px;
+    border-radius: 6px;
+    object-fit: cover;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.spotify-info {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    gap: 4px;
+    overflow: hidden;
+}
+
+.spotify-song-title {
+    font-size: 15px;
+    font-weight: 700;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: var(--text-color);
+}
+
+.spotify-artist-name {
+    font-size: 13px;
+    opacity: 0.6;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.spotify-bar-container {
+    width: 100%;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    margin-top: 6px;
+    overflow: hidden;
+}
+
+.spotify-bar {
+    height: 100%;
+    width: 0%;
+    background: #1DB954;
+    border-radius: 4px;
+    transition: width 1s linear;
+}
+
+.activity-matrix {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.activity-node {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--overlay-bg);
+    padding: 12px 20px;
+    border-radius: 8px;
+    border: 1px solid var(--border-soft);
+    border-left: 2px solid transparent;
+}
+
+.node-label {
+    font-size: 13px;
+    font-weight: 600;
+    opacity: 0.5;
+}
+
+.node-value {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.activity-node.gaming { border-left-color: var(--accent); }
+.activity-node.gaming .node-value { color: var(--accent-glow); }
+.activity-node.coding { border-left-color: var(--accent); }
+.activity-node.coding .node-value { color: var(--accent-glow); }
+
+.link-strips {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.strip-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: rgba(255, 255, 255, 0.02);
+    padding: 14px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    border: 1px solid var(--border-soft);
+    border-left: 2px solid transparent;
+    transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.strip-item:hover {
+    background: rgba(var(--accent-rgb), 0.1);
+    border-left-color: var(--accent);
+}
+
+.spec-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+}
+
+.spec-item {
+    background: var(--overlay-bg);
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid var(--border-soft);
+    border-left: 2px solid transparent;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.spec-icon {
+    font-size: 22px;
+    color: var(--accent-glow);
+}
+
+.spec-item[href] {
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.spec-item[href]:hover {
+    background: rgba(var(--accent-rgb), 0.1);
+    border-left-color: var(--accent);
+}
+
+.settings-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.setting-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    background: var(--overlay-bg);
+    border-radius: 8px;
+    border: 1px solid var(--border-soft);
+    font-size: 14px;
+}
+
+.dropdown-control {
+    background: var(--dropdown-bg);
+    border: 1px solid rgba(var(--accent-rgb), 0.4);
+    color: var(--accent-glow);
+    border-radius: 6px;
+    padding: 6px 14px;
+    font-size: 13px;
+    outline: none;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.dropdown-control option {
+    background: var(--bg-color);
+    color: var(--text-color);
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 42px;
+    height: 24px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    inset: 0;
+    background-color: rgba(255, 255, 255, 0.15);
+    transition: 0.25s ease;
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 2px;
+    bottom: 2px;
+    background-color: #ffffff;
+    transition: 0.25s ease;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: var(--accent);
+    border-color: rgba(var(--accent-rgb), 0.6);
+}
+
+input:checked + .slider:before {
+    transform: translateX(18px);
+}
+
+@media (max-width: 768px) {
+    .dashboard-container {
+        grid-template-columns: 1fr;
+    }
+    .profile-card {
+        position: relative;
+        top: 0;
+    }
+    body {
+        padding-top: 100px;
+    }
+}
+
+/* ===================================================
+   Settings-driven overrides
+   Each block below is toggled by a class on <body>,
+   applied live by settings.js from the saved preferences.
+   =================================================== */
+
+/* --- Dark Mode / Light Mode --- */
+body.light-mode {
+    --bg-color: #f7efe8;
+    --text-color: #2a1a12;
+    --card-bg: rgba(255, 250, 245, 0.75);
+    --box-bg: rgba(255, 250, 245, 0.65);
+    --overlay-bg: rgba(0, 0, 0, 0.05);
+    --nav-bg: rgba(255, 250, 245, 0.8);
+    --dropdown-bg: rgba(255, 250, 245, 0.92);
+    --border-soft: rgba(0, 0, 0, 0.07);
+}
+
+body.light-mode .avatar-ring.offline {
+    box-shadow: 5px 5px 0 rgba(128, 132, 142, 0.3);
+}
+
+/* --- Accent Color --- */
+body.accent-blue {
+    --accent: #3d7bf5;
+    --accent-glow: #8ab4ff;
+    --accent-rgb: 61, 123, 245;
+}
+
+body.accent-purple {
+    --accent: #9b5de5;
+    --accent-glow: #c9a6f0;
+    --accent-rgb: 155, 93, 229;
+}
+
+body.accent-black {
+    --accent: #1a1a1a;
+    --accent-glow: #d8d8d8;
+    --accent-rgb: 20, 20, 20;
+}
+
+/* --- Font --- */
+body.font-google-sans {
+    --font-family: 'Google Sans', Roboto, Arial, sans-serif;
+}
+
+body.font-inter {
+    --font-family: 'Inter', sans-serif;
+}
+
+/* --- Bold Font --- */
+body.bold-font,
+body.bold-font * {
+    font-weight: 700 !important;
+}
+
+/* --- Small Pagebar --- */
+body.small-pagebar .nav-bar {
+    padding: 8px 18px;
+    gap: 14px;
+}
+
+body.small-pagebar .nav-item {
+    font-size: 12px;
+}
+
+/* --- Pagebar Position --- */
+body.pagebar-bottom .nav-bar {
+    top: auto;
+    bottom: 25px;
+}
+
+body.pagebar-bottom {
+    padding-top: 60px;
+    padding-bottom: 110px;
+}
+
+/* --- Show Social Labels (icon-only by default) --- */
+.social-label {
+    display: none;
+}
+
+body.show-social-labels .social-label {
+    display: inline;
+}
+
+body:not(.show-social-labels) .strip-item {
+    justify-content: center;
+}
+
+/* --- Show Figcaptions (secondary descriptive text) --- */
+body.hide-figcaptions .fig-caption {
+    display: none;
+}
+
+/* --- Wallpaper --- */
+body.wallpaper-clouds {
+    background-image:
+        radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.10) 0%, transparent 50%),
+        radial-gradient(circle at 80% 65%, rgba(200, 220, 255, 0.08) 0%, transparent 55%);
+    background-color: #10161c;
+}
+
+body.wallpaper-dark {
+    background-image: none;
+    background-color: #050302;
+}
+
+/* --- Wallpaper: Beans / Black Beans / onn is peak vro (faint image layer, doesn't replace the base background) --- */
+body {
+    position: relative;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background-image: var(--wallpaper-image, none);
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+body.wallpaper-beans {
+    --wallpaper-image: url('icons/beans.png');
+}
+
+body.wallpaper-black-beans {
+    --wallpaper-image: url('icons/black-beans.png');
+}
+
+body.wallpaper-onn-peak {
+    --wallpaper-image: url('icons/le-onn-peak.png');
+}
+
+body.wallpaper-beans::before,
+body.wallpaper-black-beans::before,
+body.wallpaper-onn-peak::before {
+    opacity: 0.2;
+}
+
+body.no-wallpaper-blur.wallpaper-beans::before,
+body.no-wallpaper-blur.wallpaper-black-beans::before,
+body.no-wallpaper-blur.wallpaper-onn-peak::before {
+    opacity: 0;
+}
+
+/* --- Secret "Beans Stuff" nav link: only visible while a Beans wallpaper is active --- */
+.nav-item.nav-secret {
+    display: none;
+}
+
+body.wallpaper-beans .nav-item.nav-secret,
+body.wallpaper-black-beans .nav-item.nav-secret {
+    display: inline-block;
+}
+
+/* --- Blur Effect (UI glass blur) --- */
+body.no-blur .nav-bar,
+body.no-blur .profile-card,
+body.no-blur .dash-box {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+}
+
+/* --- Wallpaper Blur (ambient background layer) --- */
+body.no-wallpaper-blur {
+    background-image: none;
+    background-color: var(--bg-color);
+}
+
+/* --- Reduced Animation / Low-End Mode --- */
+body.reduced-motion,
+body.reduced-motion *,
+body.reduced-motion *::before,
+body.reduced-motion *::after {
+    animation: none !important;
+    transition: none !important;
+}
+
+body.low-end .dash-box:hover,
+body.low-end .strip-item:hover {
+    transform: none;
+}

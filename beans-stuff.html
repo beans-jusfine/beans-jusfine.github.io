@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>beans ツ - Beans Stuff</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="./style.css">
+    <noscript><style>body { opacity: 1 !important; }</style></noscript>
+</head>
+<body>
+
+    <nav class="nav-bar">
+        <a href="index.html" class="nav-item" data-i18n="navHome">🏠 Home</a>
+        <a href="devices.html" class="nav-item" data-i18n="navDevices">Devices</a>
+        <a href="beans-stuff.html" class="nav-item nav-secret active" data-i18n="navBeansStuff">🫘 Beans Stuff</a>
+        <a href="settings.html" class="nav-item" data-i18n="navSettings">Settings</a>
+    </nav>
+
+    <div class="dashboard-container">
+        
+        <aside class="profile-card">
+            <div class="avatar-ring">
+                <img src="icons/pfp.png" alt="Beans's Avatar" class="profile-avatar">
+            </div>
+            <h1 class="profile-name">beans ツ</h1>
+            <p class="profile-tag">@beans.jusfine</p>
+            <div class="quote-bubble">
+                <p data-i18n="quote">"i am just a can of beans, what did you think I was?"</p>
+            </div>
+        </aside>
+
+        <main class="content-stream">
+
+            <section class="dash-box">
+                <h3 class="box-title" data-i18n="titleProjects">Projects</h3>
+                <div class="spec-grid">
+                    <a href="https://drive.google.com/file/d/1rVd6vW9nraZErqP4T-njpdjQ3depT6R4/view?usp=drivesdk" target="_blank" rel="noopener noreferrer" class="spec-item">
+                        <i class="fa-solid fa-gamepad spec-icon"></i>
+                        <div style="display: flex; flex-direction: column; gap: 2px;">
+                            <span class="spec-text" style="font-weight: 700; font-size: 15px;">Games I made with Google AI Studio</span>
+                            <span class="fig-caption" style="font-size: 12px; opacity: 0.6;">View on Google Drive</span>
+                        </div>
+                    </a>
+                    <a href="https://github.com/beans-jusfine/beans-jusfine.github.io" target="_blank" rel="noopener noreferrer" class="spec-item">
+                        <i class="fa-brands fa-github spec-icon"></i>
+                        <div style="display: flex; flex-direction: column; gap: 2px;">
+                            <span class="spec-text" style="font-weight: 700; font-size: 15px;">Source Code</span>
+                            <span class="fig-caption" style="font-size: 12px; opacity: 0.6;">View on GitHub</span>
+                        </div>
+                    </a>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <script src="./settings.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>beans ツ</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="./style.css">
+    <noscript><style>body { opacity: 1 !important; }</style></noscript>
+</head>
+<body>
+
+    <nav class="nav-bar">
+        <a href="index.html" class="nav-item active" data-i18n="navHome">🏠 Home</a>
+        <a href="devices.html" class="nav-item" data-i18n="navDevices">Devices</a>
+        <a href="beans-stuff.html" class="nav-item nav-secret" data-i18n="navBeansStuff">🫘 Beans Stuff</a>
+        <a href="settings.html" class="nav-item" data-i18n="navSettings">Settings</a>
+    </nav>
+
+    <div class="dashboard-container">
+        
+        <aside class="profile-card">
+            <div class="avatar-ring" id="avatar-ring">
+                <img src="icons/pfp.png" alt="Beans's Avatar" class="profile-avatar">
+            </div>
+            <h1 class="profile-name">beans ツ</h1>
+            <p class="profile-tag">@beans.jusfine</p>
+            <div class="quote-bubble">
+                <p data-i18n="quote">"i am just a can of beans, what did you think I was?"</p>
+            </div>
+        </aside>
+
+        <main class="content-stream">
+            
+            <section id="home" class="page-section">
+                
+                <section class="dash-box">
+                    <h3 class="box-title" data-i18n="titleDiscord">Discord</h3>
+                    <div class="activity-matrix">
+                        
+                        <div class="activity-node dnd">
+                            <span class="node-label">Status</span>
+                            <span class="node-value" id="discord-status">OFFLINE</span>
+                        </div>
+
+                        <div class="activity-node gaming" id="activity-node" style="display: none;">
+                            <span class="node-label" id="activity-label">Playing / Watching</span>
+                            <span class="node-value" id="activity-value">Nothing rn</span>
+                        </div>
+
+                        <div class="activity-node spotify" id="spotify-node" style="display: none; align-items: center; gap: 12px; margin-top: 8px;">
+                            <img src="" alt="Album Art" id="spotify-art" style="width: 42px; height: 42px; border-radius: 6px; object-fit: cover;">
+                            <div style="display: flex; flex-direction: column; gap: 2px;">
+                                <span class="node-label" style="font-size: 11px; opacity: 0.7;">Listening to Spotify</span>
+                                <span class="node-value" id="spotify-title" style="font-size: 13px; font-weight: 600; line-height: 1.2;">Track Title</span>
+                                <span id="spotify-artist" style="font-size: 11px; opacity: 0.8;">by Artist</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </section>
+
+                <section class="dash-box">
+                    <h3 class="box-title" data-i18n="titleSocials">Check out my socials below!</h3>
+                    <div class="link-strips">
+                        <a href="https://youtube.com/@beans.jusfine?si=p0Y1LlmMPey6sGk3" target="_blank" rel="noopener noreferrer" class="strip-item">
+                            <i class="fa-brands fa-youtube" style="font-size: 18px; color: #ff0000; width: 24px; text-align: center;"></i>
+                            <span class="social-label">YouTube</span>
+                        </a>
+                        <a href="javascript:void(0)" onclick="openTikTokModal()" class="strip-item">
+                            <i class="fa-brands fa-tiktok" style="font-size: 18px; color: #ffffff; width: 24px; text-align: center;"></i>
+                            <span class="social-label">TikTok</span>
+                        </a>
+                        <a href="https://x.com/beans_jusfine" target="_blank" rel="noopener noreferrer" class="strip-item">
+                            <img src="icons/twitter.png" alt="X/Twitter" style="width: 18px; height: 18px; object-fit: contain; margin-right: 6px;">
+                            <span class="social-label">X / Twitter</span>
+                        </a>
+                        <a href="https://www.twitch.tv/beansjusfinettv" target="_blank" rel="noopener noreferrer" class="strip-item">
+                            <i class="fa-brands fa-twitch" style="font-size: 18px; color: #9146ff; width: 24px; text-align: center;"></i>
+                            <span class="social-label">Twitch</span>
+                        </a>
+                        <a href="https://www.roblox.com/users/4248417181/profile" target="_blank" rel="noopener noreferrer" class="strip-item">
+                            <img src="icons/roblox.png" alt="Roblox" style="width: 18px; height: 18px; object-fit: contain; margin-right: 6px;">
+                            <span class="social-label">Roblox</span>
+                        </a>
+                        <a href="https://steamcommunity.com/id/beans_jusfine/" target="_blank" rel="noopener noreferrer" class="strip-item">
+                            <i class="fa-brands fa-steam" style="font-size: 18px; color: #171a21; width: 24px; text-align: center;"></i>
+                            <span class="social-label">Steam</span>
+                        </a>
+                        <a href="https://bsky.app/profile/beans-jusfine.bsky.social" target="_blank" rel="noopener noreferrer" class="strip-item">
+                            <img src="icons/bsky.png" alt="Bluesky" style="width: 18px; height: 18px; object-fit: contain; margin-right: 6px;">
+                            <span class="social-label">Bluesky</span>
+                        </a>
+                        <a href="https://sites.google.com/view/beans-games" target="_blank" rel="noopener noreferrer" class="strip-item">
+                            <i class="fa-solid fa-ghost" style="font-size: 18px; color: #a34b25; width: 24px; text-align: center;"></i>
+                            <span class="social-label">Unblocked Games Site</span>
+                        </a>
+                    </div>
+                </section>
+
+            </section>
+
+        </main>
+    </div>
+
+    <div id="tiktok-modal" style="display: none; position: fixed; inset: 0; background: rgba(0, 0, 0, 0.4); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); z-index: 1000; align-items: center; justify-content: center; padding: 20px;">
+        <div style="background: rgba(var(--accent-rgb), 0.25); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 16px; padding: 20px; width: 100%; max-width: 320px; box-shadow: 0 8px 32px rgba(0,0,0,0.3); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); color: #fff; position: relative;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                <h4 style="margin: 0; font-size: 18px; font-weight: 600;">TikTok</h4>
+                <button onclick="closeTikTokModal()" style="background: none; border: none; color: rgba(255, 255, 255, 0.8); font-size: 18px; cursor: pointer; padding: 0; line-height: 1;">✕</button>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 10px;">
+                <a href="https://www.tiktok.com/@beans.jusfine" target="_blank" rel="noopener noreferrer" style="color: var(--accent-glow); text-decoration: underline; font-size: 14px; font-weight: 500;">Main Account</a>
+                <a href="https://www.tiktok.com/@6splus.hype" target="_blank" rel="noopener noreferrer" style="color: var(--accent-glow); text-decoration: underline; font-size: 14px; font-weight: 500;">Alt Account</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="./settings.js"></script>
+    <script>
+        const DISCORD_ID = "1157101597000749086"; 
+
+        function openTikTokModal() {
+            document.getElementById('tiktok-modal').style.display = 'flex';
+        }
+
+        function closeTikTokModal() {
+            document.getElementById('tiktok-modal').style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById('tiktok-modal');
+            if (event.target === modal) {
+                closeTikTokModal();
+            }
+        };
+
+        async function fetchLanyardData() {
+            try {
+                const res = await fetch(`https://api.lanyard.rest/v1/users/${DISCORD_ID}`);
+                const response = await res.json();
+                
+                if (!response.success || !response.data) return;
+                const data = response.data;
+                
+                const avatarRing = document.getElementById('avatar-ring');
+                if (avatarRing) {
+                    const status = data.discord_status || 'offline';
+                    avatarRing.className = `avatar-ring ${status}`;
+                }
+
+                const statusEl = document.getElementById('discord-status');
+                statusEl.innerText = data.discord_status.toUpperCase().replace('DND', 'DO NOT DISTURB');
+                
+                const activityNode = document.getElementById('activity-node');
+                const activityValue = document.getElementById('activity-value');
+                
+                if (data.activities && data.activities.length > 0) {
+                    const customAct = data.activities.find(act => 
+                        act.id !== 'spotify' && 
+                        act.name.toLowerCase() !== 'spotify' && 
+                        act.type !== 4
+                    );
+                    if (customAct) {
+                        activityValue.innerText = customAct.details ? `${customAct.name} (${customAct.details})` : customAct.name;
+                        activityNode.style.display = 'flex';
+                    } else {
+                        activityNode.style.display = 'none';
+                    }
+                } else {
+                    activityNode.style.display = 'none';
+                }
+                
+                const spotifyNode = document.getElementById('spotify-node');
+                if (data.listening_to_spotify && data.spotify) {
+                    document.getElementById('spotify-art').src = data.spotify.album_art_url;
+                    document.getElementById('spotify-title').innerText = data.spotify.track_id ? data.spotify.song : 'Track Title';
+                    document.getElementById('spotify-artist').innerText = `by ${data.spotify.artist}`;
+                    spotifyNode.style.display = 'flex';
+                } else {
+                    spotifyNode.style.display = 'none';
+                }
+            } catch (err) {
+                console.error("Failed linking live presence profiles:", err);
+            }
+        }
+
+        fetchLanyardData();
+        setInterval(fetchLanyardData, 6000);
+    </script>
+
+</body>
+</html>

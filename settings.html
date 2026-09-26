@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>beans ツ - Settings</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="./style.css">
+    <noscript><style>body { opacity: 1 !important; }</style></noscript>
+</head>
+<body>
+
+    <nav class="nav-bar">
+        <a href="index.html" class="nav-item" data-i18n="navHome">🏠 Home</a>
+        <a href="devices.html" class="nav-item" data-i18n="navDevices">Devices</a>
+        <a href="beans-stuff.html" class="nav-item nav-secret" data-i18n="navBeansStuff">🫘 Beans Stuff</a>
+        <a href="settings.html" class="nav-item active" data-i18n="navSettings">Settings</a>
+    </nav>
+
+    <div class="dashboard-container">
+        
+        <aside class="profile-card">
+            <div class="avatar-ring">
+                <img src="icons/pfp.png" alt="Beans's Avatar" class="profile-avatar">
+            </div>
+            <h1 class="profile-name">beans ツ</h1>
+            <p class="profile-tag">@beans.jusfine</p>
+            <div class="quote-bubble">
+                <p data-i18n="quote">"i am just a can of beans, what did you think I was?"</p>
+            </div>
+        </aside>
+
+        <main class="content-stream">
+            
+            <section class="dash-box">
+                <h3 class="box-title" data-i18n="titleVisual">Visual Settings</h3>
+                <div class="settings-list">
+                    
+                    <div class="setting-row">
+                        <span>Dark Mode</span>
+                        <label class="switch">
+                            <input type="checkbox" id="dark-mode" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="setting-row">
+                        <span>Show Social Labels</span>
+                        <label class="switch">
+                            <input type="checkbox" id="show-social-labels">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="setting-row">
+                        <span>Show Figcaptions</span>
+                        <label class="switch">
+                            <input type="checkbox" id="show-figcaptions" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="setting-row">
+                        <span>Small Pagebar</span>
+                        <label class="switch">
+                            <input type="checkbox" id="small-pagebar">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="setting-row">
+                        <span>Bold Font</span>
+                        <label class="switch">
+                            <input type="checkbox" id="bold-font">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="setting-row">
+                        <span>Font</span>
+                        <select id="font-select" class="dropdown-control">
+                            <option value="google-sans">Google Sans</option>
+                            <option value="plus-jakarta" selected>Plus Jakarta</option>
+                            <option value="inter">Inter</option>
+                        </select>
+                    </div>
+
+                    <div class="setting-row">
+                        <span>Language</span>
+                        <select id="language-select" class="dropdown-control">
+                            <option value="en" selected>English</option>
+                            <option value="es">Spanish</option>
+                            <option value="fr">French</option>
+                        </select>
+                    </div>
+
+                    <div class="setting-row">
+                        <span>Pagebar Position</span>
+                        <select id="pagebar-position" class="dropdown-control">
+                            <option value="top" selected>Top</option>
+                            <option value="bottom">Bottom</option>
+                        </select>
+                    </div>
+
+                    <div class="setting-row">
+                        <span>Wallpaper</span>
+                        <select id="wallpaper-select" class="dropdown-control">
+                            <option value="default" selected>Default</option>
+                            <option value="clouds">Clouds</option>
+                            <option value="dark">Dark Solid</option>
+                            <option value="beans">Beans</option>
+                            <option value="black-beans">Black Beans</option>
+                            <option value="onn-peak">onn is peak vro</option>
+                        </select>
+                    </div>
+
+                    <div class="setting-row">
+                        <span>Accent Color</span>
+                        <select id="accent-color" class="dropdown-control">
+                            <option value="orange" selected>Bean Orange</option>
+                            <option value="blue">Blue</option>
+                            <option value="purple">Purple</option>
+                            <option value="black">Black</option>
+                        </select>
+                    </div>
+
+                </div>
+            </section>
+
+            <section class="dash-box">
+                <h3 class="box-title" data-i18n="titlePerformance">Performance Settings</h3>
+                <div class="settings-list">
+                    
+                    <div class="setting-row">
+                        <span>Blur Effect</span>
+                        <label class="switch">
+                            <input type="checkbox" id="blur-effect" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="setting-row">
+                        <span>Wallpaper Blur</span>
+                        <label class="switch">
+                            <input type="checkbox" id="wallpaper-blur" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="setting-row">
+                        <span>Reduced Animation</span>
+                        <label class="switch">
+                            <input type="checkbox" id="reduced-animation">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="setting-row">
+                        <span>Low-End Mode</span>
+                        <label class="switch">
+                            <input type="checkbox" id="low-end-mode">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+
+                </div>
+            </section>
+
+            <section class="dash-box">
+                <h3 class="box-title" data-i18n="titleExperimental">Experimental Settings</h3>
+                <div class="settings-list">
+                    <div class="setting-row">
+                        <span>Experimental Features</span>
+                        <label class="switch">
+                            <input type="checkbox" id="experimental-features">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <script src="./settings.js"></script>
+    <script>
+        (function () {
+            function ready(fn) {
+                if (document.readyState !== 'loading') fn();
+                else document.addEventListener('DOMContentLoaded', fn);
+            }
+
+            ready(function () {
+                const settings = window.beansSettings.load();
+
+                function bindCheckbox(id, key) {
+                    const el = document.getElementById(id);
+                    if (!el) return;
+                    el.checked = !!settings[key];
+                    el.addEventListener('change', function () {
+                        settings[key] = el.checked;
+                        commit();
+                    });
+                }
+
+                function bindSelect(id, key) {
+                    const el = document.getElementById(id);
+                    if (!el) return;
+                    el.value = settings[key];
+                    el.addEventListener('change', function () {
+                        settings[key] = el.value;
+                        commit();
+                    });
+                }
+
+                function commit() {
+                    window.beansSettings.save(settings);
+                    window.beansSettings.apply(settings);
+                    syncLowEndUI();
+                }
+
+                function syncLowEndUI() {
+                    const forced = !!settings.lowEndMode;
+                    ['blur-effect', 'wallpaper-blur', 'reduced-animation'].forEach(function (id) {
+                        const el = document.getElementById(id);
+                        if (el) el.disabled = forced;
+                    });
+                }
+
+                bindCheckbox('dark-mode', 'darkMode');
+                bindCheckbox('show-social-labels', 'showSocialLabels');
+                bindCheckbox('show-figcaptions', 'showFigcaptions');
+                bindCheckbox('small-pagebar', 'smallPagebar');
+                bindCheckbox('bold-font', 'boldFont');
+                bindSelect('font-select', 'font');
+                bindSelect('language-select', 'language');
+                bindSelect('pagebar-position', 'pagebarPosition');
+                bindSelect('wallpaper-select', 'wallpaper');
+                bindSelect('accent-color', 'accentColor');
+                bindCheckbox('blur-effect', 'blurEffect');
+                bindCheckbox('wallpaper-blur', 'wallpaperBlur');
+                bindCheckbox('reduced-animation', 'reducedAnimation');
+                bindCheckbox('low-end-mode', 'lowEndMode');
+                bindCheckbox('experimental-features', 'experimentalFeatures');
+
+                syncLowEndUI();
+                window.beansSettings.apply(settings);
+            });
+        })();
+    </script>
+
+</body>
+</html>
