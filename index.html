@@ -33,6 +33,31 @@
                     <p data-i18n="quote">"i am just a can of beans, what did you think I was?"</p>
                 </div>
             </div>
+            <div class="profile-card-status">
+                <h3 class="box-title" data-i18n="titleDiscord">Discord</h3>
+                <div class="activity-matrix">
+
+                    <div class="activity-node dnd">
+                        <span class="node-label">Status</span>
+                        <span class="node-value" id="discord-status">OFFLINE</span>
+                    </div>
+
+                    <div class="activity-node gaming" id="activity-node" style="display: none;">
+                        <span class="node-label" id="activity-label">Playing / Watching</span>
+                        <span class="node-value" id="activity-value">Nothing rn</span>
+                    </div>
+
+                    <div class="activity-node spotify" id="spotify-node" style="display: none; align-items: center; gap: 12px; margin-top: 8px;">
+                        <img src="" alt="Album Art" id="spotify-art" style="width: 42px; height: 42px; border-radius: 6px; object-fit: cover;">
+                        <div style="display: flex; flex-direction: column; gap: 2px;">
+                            <span class="node-label" style="font-size: 11px; opacity: 0.7;">Listening to Spotify</span>
+                            <span class="node-value" id="spotify-title" style="font-size: 13px; font-weight: 600; line-height: 1.2;">Track Title</span>
+                            <span id="spotify-artist" style="font-size: 11px; opacity: 0.8;">by Artist</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
         </aside>
 
         <main class="content-stream">
@@ -40,64 +65,38 @@
             <section id="home" class="page-section">
                 
                 <section class="dash-box">
-                    <h3 class="box-title" data-i18n="titleDiscord">Discord</h3>
-                    <div class="activity-matrix">
-                        
-                        <div class="activity-node dnd">
-                            <span class="node-label">Status</span>
-                            <span class="node-value" id="discord-status">OFFLINE</span>
-                        </div>
-
-                        <div class="activity-node gaming" id="activity-node" style="display: none;">
-                            <span class="node-label" id="activity-label">Playing / Watching</span>
-                            <span class="node-value" id="activity-value">Nothing rn</span>
-                        </div>
-
-                        <div class="activity-node spotify" id="spotify-node" style="display: none; align-items: center; gap: 12px; margin-top: 8px;">
-                            <img src="" alt="Album Art" id="spotify-art" style="width: 42px; height: 42px; border-radius: 6px; object-fit: cover;">
-                            <div style="display: flex; flex-direction: column; gap: 2px;">
-                                <span class="node-label" style="font-size: 11px; opacity: 0.7;">Listening to Spotify</span>
-                                <span class="node-value" id="spotify-title" style="font-size: 13px; font-weight: 600; line-height: 1.2;">Track Title</span>
-                                <span id="spotify-artist" style="font-size: 11px; opacity: 0.8;">by Artist</span>
-                            </div>
-                        </div>
-
-                    </div>
-                </section>
-
-                <section class="dash-box">
-                    <h3 class="box-title" data-i18n="titleSocials">Check out my socials below!</h3>
+                    <h3 class="box-title box-title-center" data-i18n="titleSocials">Socials</h3>
                     <div class="link-strips">
                         <a href="https://youtube.com/@beans.jusfine?si=p0Y1LlmMPey6sGk3" target="_blank" rel="noopener noreferrer" class="strip-item">
-                            <i class="fa-brands fa-youtube" style="font-size: 18px; color: #ff0000; width: 24px; text-align: center;"></i>
+                            <i class="fa-brands fa-youtube"></i>
                             <span class="social-label">YouTube</span>
                         </a>
                         <a href="javascript:void(0)" onclick="openTikTokModal()" class="strip-item">
-                            <i class="fa-brands fa-tiktok" style="font-size: 18px; color: #ffffff; width: 24px; text-align: center;"></i>
+                            <i class="fa-brands fa-tiktok"></i>
                             <span class="social-label">TikTok</span>
                         </a>
                         <a href="https://x.com/beans_jusfine" target="_blank" rel="noopener noreferrer" class="strip-item">
-                            <img src="icons/twitter.png" alt="X/Twitter" style="width: 18px; height: 18px; object-fit: contain; margin-right: 6px;">
+                            <i class="fa-brands fa-x-twitter"></i>
                             <span class="social-label">X / Twitter</span>
                         </a>
                         <a href="https://www.twitch.tv/beansjusfinettv" target="_blank" rel="noopener noreferrer" class="strip-item">
-                            <i class="fa-brands fa-twitch" style="font-size: 18px; color: #9146ff; width: 24px; text-align: center;"></i>
+                            <i class="fa-brands fa-twitch"></i>
                             <span class="social-label">Twitch</span>
                         </a>
                         <a href="https://www.roblox.com/users/4248417181/profile" target="_blank" rel="noopener noreferrer" class="strip-item">
-                            <img src="icons/roblox.png" alt="Roblox" style="width: 18px; height: 18px; object-fit: contain; margin-right: 6px;">
+                            <img src="icons/roblox.png" alt="Roblox" class="strip-icon-img">
                             <span class="social-label">Roblox</span>
                         </a>
                         <a href="https://steamcommunity.com/id/beans_jusfine/" target="_blank" rel="noopener noreferrer" class="strip-item">
-                            <i class="fa-brands fa-steam" style="font-size: 18px; color: #171a21; width: 24px; text-align: center;"></i>
+                            <i class="fa-brands fa-steam"></i>
                             <span class="social-label">Steam</span>
                         </a>
                         <a href="https://bsky.app/profile/beans-jusfine.bsky.social" target="_blank" rel="noopener noreferrer" class="strip-item">
-                            <img src="icons/bsky.png" alt="Bluesky" style="width: 18px; height: 18px; object-fit: contain; margin-right: 6px;">
+                            <img src="icons/bsky.png" alt="Bluesky" class="strip-icon-img">
                             <span class="social-label">Bluesky</span>
                         </a>
                         <a href="https://sites.google.com/view/beans-games" target="_blank" rel="noopener noreferrer" class="strip-item">
-                            <i class="fa-solid fa-ghost" style="font-size: 18px; color: #a34b25; width: 24px; text-align: center;"></i>
+                            <i class="fa-solid fa-globe"></i>
                             <span class="social-label">Unblocked Games Site</span>
                         </a>
                     </div>

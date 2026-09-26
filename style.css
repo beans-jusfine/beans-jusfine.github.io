@@ -114,9 +114,32 @@ body::after {
     display: flex;
     flex-direction: row;
     align-items: center;
+    flex-wrap: wrap;
     gap: 25px;
     box-shadow: 0 6px 0 rgba(var(--accent-rgb), 0.18);
     position: relative;
+}
+
+.profile-card-status {
+    flex: 1;
+    min-width: 220px;
+    border-left: 1px solid var(--border-soft);
+    padding-left: 24px;
+}
+
+.profile-card-status .box-title {
+    margin-bottom: 10px;
+    padding-bottom: 0;
+    border-bottom: none;
+    font-size: 15px;
+}
+
+.profile-card-status .activity-matrix {
+    gap: 8px;
+}
+
+.profile-card-status .activity-node {
+    padding: 8px 14px;
 }
 
 .profile-card::after {
@@ -296,6 +319,10 @@ body::after {
     gap: 8px;
 }
 
+.box-title-center {
+    justify-content: center;
+}
+
 .spotify-card {
     display: flex;
     align-items: center;
@@ -391,26 +418,42 @@ body::after {
 
 .link-strips {
     display: flex;
-    flex-direction: column;
-    gap: 8px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 18px;
 }
 
 .strip-item {
     display: flex;
     align-items: center;
-    gap: 15px;
-    background: rgba(255, 255, 255, 0.02);
-    padding: 14px 20px;
-    border-radius: 8px;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.03);
     text-decoration: none;
     border: 1px solid var(--border-soft);
-    border-left: 2px solid transparent;
-    transition: background 0.2s ease, border-color 0.2s ease;
+    transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.strip-item i {
+    font-size: 21px;
+    color: var(--text-color);
+}
+
+.strip-icon-img {
+    width: 21px;
+    height: 21px;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
 }
 
 .strip-item:hover {
-    background: rgba(var(--accent-rgb), 0.1);
-    border-left-color: var(--accent);
+    background: rgba(var(--accent-rgb), 0.18);
+    border-color: rgba(var(--accent-rgb), 0.45);
+    transform: translateY(-3px);
+    box-shadow: 0 0 16px rgba(var(--accent-rgb), 0.35);
 }
 
 .spec-grid {
@@ -535,6 +578,14 @@ input:checked + .slider:before {
     }
     .profile-card .quote-bubble {
         max-width: 100%;
+    }
+    .profile-card-status {
+        border-left: none;
+        border-top: 1px solid var(--border-soft);
+        padding-left: 0;
+        padding-top: 20px;
+        width: 100%;
+        text-align: left;
     }
     body {
         padding-top: 100px;
@@ -680,9 +731,12 @@ body.wallpaper-onn-peak {
 }
 
 body.wallpaper-beans::before,
-body.wallpaper-black-beans::before,
-body.wallpaper-onn-peak::before {
+body.wallpaper-black-beans::before {
     opacity: 0.2;
+}
+
+body.wallpaper-onn-peak::before {
+    opacity: 0.06;
 }
 
 body.no-wallpaper-blur.wallpaper-beans::before,
