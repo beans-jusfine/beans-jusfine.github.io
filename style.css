@@ -97,11 +97,10 @@ body::after {
 
 .dashboard-container {
     width: 100%;
-    max-width: 960px;
-    display: grid;
-    grid-template-columns: 300px 1fr;
+    max-width: 1040px;
+    display: flex;
+    flex-direction: column;
     gap: 25px;
-    align-items: start;
 }
 
 .profile-card {
@@ -110,16 +109,14 @@ body::after {
     -webkit-backdrop-filter: blur(var(--blur-strong));
     border-radius: 14px;
     border: 1px solid rgba(var(--accent-rgb), 0.25);
-    padding: 40px 25px;
-    text-align: center;
+    padding: 25px 30px;
+    text-align: left;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
-    position: sticky;
-    top: 120px;
+    gap: 25px;
     box-shadow: 0 6px 0 rgba(var(--accent-rgb), 0.18);
-    transform: rotate(-1.1deg);
-    transition: transform 0.15s ease;
+    position: relative;
 }
 
 .profile-card::after {
@@ -134,6 +131,24 @@ body::after {
     border-color: transparent var(--bg-color) transparent transparent;
     filter: drop-shadow(-2px 2px 3px rgba(0, 0, 0, 0.35));
     border-top-right-radius: 14px;
+}
+
+.profile-card .avatar-ring {
+    flex-shrink: 0;
+    margin-bottom: 0;
+    width: 92px;
+    height: 92px;
+}
+
+.profile-card-info {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.profile-card .quote-bubble {
+    margin-top: 10px;
+    max-width: 480px;
 }
 
 .avatar-ring {
@@ -215,7 +230,6 @@ body::after {
     font-size: 13px;
     opacity: 0.5;
     margin-top: 4px;
-    margin-bottom: 20px;
 }
 
 .quote-bubble {
@@ -245,9 +259,14 @@ body::after {
 }
 
 .content-stream {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 20px;
+    align-items: start;
+}
+
+.page-section {
+    display: contents;
 }
 
 .dash-box {
@@ -506,12 +525,16 @@ input:checked + .slider:before {
 }
 
 @media (max-width: 768px) {
-    .dashboard-container {
+    .content-stream {
         grid-template-columns: 1fr;
     }
     .profile-card {
-        position: relative;
-        top: 0;
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+    }
+    .profile-card .quote-bubble {
+        max-width: 100%;
     }
     body {
         padding-top: 100px;
