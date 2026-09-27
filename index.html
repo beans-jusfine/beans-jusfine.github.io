@@ -168,17 +168,6 @@
                     if (customAct) {
                         activityValue.innerText = customAct.details ? `${customAct.name} (${customAct.details})` : customAct.name;
                         activityNode.style.display = 'flex';
-
-                        // Discord only exposes a direct link for some activity types
-                        // (e.g. Streaming/Watching integrations that set a url field).
-                        if (customAct.url) {
-                            activityNode.dataset.url = customAct.url;
-                            activityNode.dataset.label = customAct.name || 'this';
-                            activityNode.style.cursor = 'pointer';
-                        } else {
-                            delete activityNode.dataset.url;
-                            activityNode.style.cursor = 'default';
-                        }
                     } else {
                         activityNode.style.display = 'none';
                     }
@@ -219,7 +208,6 @@
             }
         }
 
-        document.getElementById('activity-node').addEventListener('click', handleActivityClick);
         document.getElementById('spotify-node').addEventListener('click', handleActivityClick);
 
         fetchLanyardData();
