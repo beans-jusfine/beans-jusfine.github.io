@@ -1,0 +1,29 @@
+name: OpenCode Agent Automation
+on:
+  issue_comment:
+    types: [created]
+
+jobs:
+  opencode-agent:
+    if: startsWith(github.event.comment.body, '/OC')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Install OpenCode CLI
+        run: npm install --global @opencode/cli
+
+      - name: Execute Agent Command
+        run: opencode github run
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # Replace with your chosen model provider secret keys below:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }} 
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # Tell OpenCode to route requests through OpenRouter
+          OPENAI_API_BASE: "https://openrouter.ai"
+          OPENAI_API_KEY: ${{ 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 }}
+          # Optional: Define your default model choice via environment variables if needed
+          # OPENAI_MODEL_NAME: "anthropic/claude-5-sonnet"
