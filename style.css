@@ -651,9 +651,22 @@ body.font-pixel {
     --font-family: 'Press Start 2P', 'Courier New', monospace;
 }
 
-body.font-8bit {
-    --font-family: 'Press Start 2P', monospace;
-}
+/* Press Start 2P renders much bigger than other fonts at the same px size,
+   so scale down the key text elements specifically for this font. */
+body.font-pixel .nav-item { font-size: 11px; }
+body.font-pixel .profile-name { font-size: 15px; }
+body.font-pixel .profile-tag { font-size: 10px; }
+body.font-pixel .quote-bubble p { font-size: 10px; }
+body.font-pixel .box-title { font-size: 12px; }
+body.font-pixel .profile-card-status .box-title { font-size: 11px; }
+body.font-pixel .node-label { font-size: 10px; }
+body.font-pixel .node-value { font-size: 11px; }
+body.font-pixel .spotify-song-title { font-size: 11px; }
+body.font-pixel .spotify-artist-name { font-size: 10px; }
+body.font-pixel .setting-row { font-size: 11px; }
+body.font-pixel .dropdown-control { font-size: 10px; }
+body.font-pixel .spec-text { font-size: 11px !important; }
+body.font-pixel .fig-caption { font-size: 9px !important; }
 
 /* --- Bold Font --- */
 body.bold-font,
