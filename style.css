@@ -752,8 +752,13 @@ body.wallpaper-onn-peak {
     --wallpaper-image: url('icons/le-onn-peak.png');
 }
 
+body.wallpaper-blue {
+    --wallpaper-image: url('icons/blue-wallpaper.png');
+}
+
 body.wallpaper-beans::before,
-body.wallpaper-black-beans::before {
+body.wallpaper-black-beans::before,
+body.wallpaper-blue::before {
     opacity: 0.2;
 }
 
@@ -763,7 +768,8 @@ body.wallpaper-onn-peak::before {
 
 body.no-wallpaper-blur.wallpaper-beans::before,
 body.no-wallpaper-blur.wallpaper-black-beans::before,
-body.no-wallpaper-blur.wallpaper-onn-peak::before {
+body.no-wallpaper-blur.wallpaper-onn-peak::before,
+body.no-wallpaper-blur.wallpaper-blue::before {
     opacity: 0;
 }
 

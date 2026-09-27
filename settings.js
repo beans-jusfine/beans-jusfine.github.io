@@ -145,12 +145,13 @@
         else if (settings.accentColor === 'purple') body.classList.add('accent-purple');
         else if (settings.accentColor === 'black') body.classList.add('accent-black');
 
-        body.classList.remove('wallpaper-clouds', 'wallpaper-dark', 'wallpaper-beans', 'wallpaper-black-beans', 'wallpaper-onn-peak');
+        body.classList.remove('wallpaper-clouds', 'wallpaper-dark', 'wallpaper-beans', 'wallpaper-black-beans', 'wallpaper-onn-peak', 'wallpaper-blue');
         if (settings.wallpaper === 'clouds') body.classList.add('wallpaper-clouds');
         else if (settings.wallpaper === 'dark') body.classList.add('wallpaper-dark');
         else if (settings.wallpaper === 'beans') body.classList.add('wallpaper-beans');
         else if (settings.wallpaper === 'black-beans') body.classList.add('wallpaper-black-beans');
         else if (settings.wallpaper === 'onn-peak') body.classList.add('wallpaper-onn-peak');
+        else if (settings.wallpaper === 'blue') body.classList.add('wallpaper-blue');
 
         // Low-End Mode is a master switch: it forces the individual
         // performance toggles off/on regardless of their own state.
