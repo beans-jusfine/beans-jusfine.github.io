@@ -619,6 +619,10 @@ body.light-mode .avatar-ring.offline {
     box-shadow: 5px 5px 0 rgba(128, 132, 142, 0.3);
 }
 
+body.light-mode .strip-icon-img {
+    filter: brightness(0) invert(0);
+}
+
 /* --- Accent Color --- */
 body.accent-blue {
     --accent: #3d7bf5;
