@@ -134,9 +134,11 @@
         body.classList.toggle('pagebar-bottom', settings.pagebarPosition === 'bottom');
         body.classList.toggle('bold-font', !!settings.boldFont);
 
-        body.classList.remove('font-google-sans', 'font-inter');
+        body.classList.remove('font-google-sans', 'font-inter', 'font-pixel');
         if (settings.font === 'google-sans') body.classList.add('font-google-sans');
         else if (settings.font === 'inter') body.classList.add('font-inter');
+        else if (settings.font === 'pixel') body.classList.add('font-pixel');
+        else if (settings.font === '8bit') body.classList.add('font-8bit');
 
         body.classList.remove('accent-blue', 'accent-purple', 'accent-black');
         if (settings.accentColor === 'blue') body.classList.add('accent-blue');
