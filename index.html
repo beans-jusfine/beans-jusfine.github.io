@@ -42,17 +42,33 @@
                         <span class="node-value" id="discord-status">OFFLINE</span>
                     </div>
 
-                    <div class="activity-node gaming" id="activity-node" style="display: none;">
-                        <span class="node-label" id="activity-label">Playing / Watching</span>
-                        <span class="node-value" id="activity-value">Nothing rn</span>
+                    <div class="activity-node gaming" id="activity-node" style="display: none; flex-direction: column; align-items: stretch; gap: 6px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <span class="node-label" id="activity-label">Playing / Watching</span>
+                            <span class="node-value" id="activity-value">Nothing rn</span>
+                        </div>
+                        <div class="spotify-progress" id="activity-progress" style="display: none; align-items: center; gap: 8px;">
+                            <span id="activity-elapsed" style="font-size: 10px; opacity: 0.6; min-width: 32px;">0:00</span>
+                            <div class="spotify-bar-container" style="margin-top: 0; flex: 1;">
+                                <div class="spotify-bar" id="activity-bar-fill"></div>
+                            </div>
+                            <span id="activity-total" style="font-size: 10px; opacity: 0.6; min-width: 32px; text-align: right;">0:00</span>
+                        </div>
                     </div>
 
                     <div class="activity-node spotify" id="spotify-node" style="display: none; align-items: center; gap: 12px; margin-top: 8px;">
-                        <img src="" alt="Album Art" id="spotify-art" style="width: 42px; height: 42px; border-radius: 6px; object-fit: cover;">
-                        <div style="display: flex; flex-direction: column; gap: 2px;">
+                        <img src="" alt="Album Art" id="spotify-art" style="width: 42px; height: 42px; border-radius: 6px; object-fit: cover; flex-shrink: 0;">
+                        <div style="display: flex; flex-direction: column; gap: 2px; flex: 1; min-width: 160px;">
                             <span class="node-label" style="font-size: 11px; opacity: 0.7;">Listening to Spotify</span>
                             <span class="node-value" id="spotify-title" style="font-size: 13px; font-weight: 600; line-height: 1.2;">Track Title</span>
                             <span id="spotify-artist" style="font-size: 11px; opacity: 0.8;">by Artist</span>
+                            <div class="spotify-progress" style="display: flex; align-items: center; gap: 8px; margin-top: 4px;">
+                                <span id="spotify-elapsed" style="font-size: 10px; opacity: 0.6; min-width: 32px;">0:00</span>
+                                <div class="spotify-bar-container" style="margin-top: 0; flex: 1;">
+                                    <div class="spotify-bar" id="spotify-bar-fill"></div>
+                                </div>
+                                <span id="spotify-total" style="font-size: 10px; opacity: 0.6; min-width: 32px; text-align: right;">0:00</span>
+                            </div>
                         </div>
                     </div>
 
@@ -158,6 +174,7 @@
                 
                 const activityNode = document.getElementById('activity-node');
                 const activityValue = document.getElementById('activity-value');
+                const activityProgress = document.getElementById('activity-progress');
                 
                 if (data.activities && data.activities.length > 0) {
                     const customAct = data.activities.find(act => 
@@ -168,11 +185,23 @@
                     if (customAct) {
                         activityValue.innerText = customAct.details ? `${customAct.name} (${customAct.details})` : customAct.name;
                         activityNode.style.display = 'flex';
+
+                        // Not every Rich Presence integration provides timestamps
+                        // (e.g. many games only send a start time, some send none at all).
+                        if (customAct.timestamps && customAct.timestamps.start && customAct.timestamps.end) {
+                            trackedTimestamps.activity = { start: customAct.timestamps.start, end: customAct.timestamps.end };
+                            activityProgress.style.display = 'flex';
+                        } else {
+                            trackedTimestamps.activity = null;
+                            activityProgress.style.display = 'none';
+                        }
                     } else {
                         activityNode.style.display = 'none';
+                        trackedTimestamps.activity = null;
                     }
                 } else {
                     activityNode.style.display = 'none';
+                    trackedTimestamps.activity = null;
                 }
                 
                 const spotifyNode = document.getElementById('spotify-node');
@@ -181,6 +210,12 @@
                     document.getElementById('spotify-title').innerText = data.spotify.track_id ? data.spotify.song : 'Track Title';
                     document.getElementById('spotify-artist').innerText = `by ${data.spotify.artist}`;
                     spotifyNode.style.display = 'flex';
+
+                    if (data.spotify.timestamps && data.spotify.timestamps.start && data.spotify.timestamps.end) {
+                        trackedTimestamps.spotify = { start: data.spotify.timestamps.start, end: data.spotify.timestamps.end };
+                    } else {
+                        trackedTimestamps.spotify = null;
+                    }
 
                     if (data.spotify.track_id) {
                         spotifyNode.dataset.url = `https://open.spotify.com/track/${data.spotify.track_id}`;
@@ -192,7 +227,10 @@
                     }
                 } else {
                     spotifyNode.style.display = 'none';
+                    trackedTimestamps.spotify = null;
                 }
+
+                updateProgressBars();
             } catch (err) {
                 console.error("Failed linking live presence profiles:", err);
             }
@@ -208,10 +246,42 @@
             }
         }
 
+        function formatTime(ms) {
+            const totalSeconds = Math.max(0, Math.floor(ms / 1000));
+            const minutes = Math.floor(totalSeconds / 60);
+            const seconds = totalSeconds % 60;
+            return `${minutes}:${seconds.toString().padStart(2, '0')}`;
+        }
+
+        const trackedTimestamps = { spotify: null, activity: null };
+
+        function updateProgressBars() {
+            const now = Date.now();
+
+            if (trackedTimestamps.spotify) {
+                const { start, end } = trackedTimestamps.spotify;
+                const elapsed = Math.min(Math.max(now - start, 0), end - start);
+                const percent = (elapsed / (end - start)) * 100;
+                document.getElementById('spotify-elapsed').innerText = formatTime(elapsed);
+                document.getElementById('spotify-total').innerText = formatTime(end - start);
+                document.getElementById('spotify-bar-fill').style.width = percent + '%';
+            }
+
+            if (trackedTimestamps.activity) {
+                const { start, end } = trackedTimestamps.activity;
+                const elapsed = Math.min(Math.max(now - start, 0), end - start);
+                const percent = (elapsed / (end - start)) * 100;
+                document.getElementById('activity-elapsed').innerText = formatTime(elapsed);
+                document.getElementById('activity-total').innerText = formatTime(end - start);
+                document.getElementById('activity-bar-fill').style.width = percent + '%';
+            }
+        }
+
         document.getElementById('spotify-node').addEventListener('click', handleActivityClick);
 
         fetchLanyardData();
         setInterval(fetchLanyardData, 6000);
+        setInterval(updateProgressBars, 1000);
     </script>
 
 </body>

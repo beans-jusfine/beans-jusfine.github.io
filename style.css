@@ -126,7 +126,7 @@ body::after {
 
 .profile-card-status {
     flex: 1;
-    min-width: 220px;
+    min-width: 260px;
     border-left: 1px solid var(--border-soft);
     padding-left: 24px;
 }
