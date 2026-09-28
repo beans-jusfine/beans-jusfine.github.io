@@ -382,7 +382,7 @@ body::after {
 .spotify-bar {
     height: 100%;
     width: 0%;
-    background: #1DB954;
+    background: var(--accent);
     border-radius: 4px;
     transition: width 1s linear;
 }
