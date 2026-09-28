@@ -246,7 +246,7 @@ body::after {
 }
 
 .profile-name {
-    font-family: var(--display-font);
+    font-family: var(--font-family);
     font-size: 26px;
     font-weight: 600;
     letter-spacing: -0.3px;
@@ -311,7 +311,7 @@ body::after {
 }
 
 .box-title {
-    font-family: var(--display-font);
+    font-family: var(--font-family);
     font-size: 17px;
     font-weight: 600;
     margin-bottom: 20px;
