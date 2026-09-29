@@ -25,57 +25,243 @@
 
     const TRANSLATIONS = {
         en: {
-            navHome: '🏠 Home',
-            navDevices: 'Devices',
-            navSettings: 'Settings',
-            navBeansStuff: '🫘 Beans Stuff',
-            titleDiscord: 'Discord',
-            titleSocials: 'Socials',
-            titlePhones: 'Phones',
-            titleTablets: 'Tablets',
-            titleLaptops: 'Laptops',
-            titleOther: 'Other Stuff',
-            titleVisual: 'Visual Settings',
-            titlePerformance: 'Performance Settings',
-            titleExperimental: 'Experimental Settings',
-            titleProjects: 'Projects',
-            quote: '"i am just a can of beans, what did you think I was?"'
+            navHome: `🏠 Home`,
+            navDevices: `Devices`,
+            navSettings: `Settings`,
+            navBeansStuff: `🫘 Beans Stuff`,
+            titleDiscord: `Discord`,
+            titleSocials: `Socials`,
+            titlePhones: `Phones`,
+            titleTablets: `Tablets`,
+            titleLaptops: `Laptops`,
+            titleOther: `Other Stuff`,
+            titleVisual: `Visual Settings`,
+            titlePerformance: `Performance Settings`,
+            titleExperimental: `Experimental Settings`,
+            titleProjects: `Projects`,
+            quote: `"i am just a can of beans, what did you think I was?"`,
+            setDarkMode: `Dark Mode`,
+            setFigcaptions: `Show Figcaptions`,
+            setSmallPagebar: `Small Pagebar`,
+            setBoldFont: `Bold Font`,
+            setFont: `Font`,
+            setLanguage: `Language`,
+            setPagebarPos: `Pagebar Position`,
+            setWallpaper: `Wallpaper`,
+            setAccent: `Accent Color`,
+            setBlur: `Blur Effect`,
+            setWallpaperBlur: `Wallpaper Blur`,
+            setReducedAnim: `Reduced Animation`,
+            setLowEnd: `Low-End Mode`,
+            setExperimental: `Experimental Features`,
+            posTop: `Top`,
+            posBottom: `Bottom`,
+            wpDefault: `Default`,
+            wpClouds: `Clouds`,
+            wpDark: `Dark Solid`,
+            wpBeans: `Beans`,
+            wpBlackBeans: `Black Beans`,
+            wpBlue: `Blue Wallpaper`,
+            accOrange: `Bean Orange`,
+            accBlue: `Blue`,
+            accPurple: `Purple`,
+            accBlack: `Black`,
+            experimentalBadge: `🧪 Experimental Mode`,
+            nodeStatus: `Status`,
+            nodeActivity: `Playing / Watching`,
+            nodeSpotify: `Listening to Spotify`,
+            by: `by`,
+            statusOnline: `ONLINE`,
+            statusIdle: `IDLE`,
+            statusDnd: `DO NOT DISTURB`,
+            statusOffline: `OFFLINE`,
+            tiktokMain: `Main Account`,
+            tiktokAlt: `Alt Account`,
+            confirmOpen: `Open "{label}" in a new tab?`,
+            projGames: `Games I made with Google AI Studio`,
+            projGamesCap: `View on Google Drive`,
+            projSource: `Source Code`,
+            projSourceCap: `View on GitHub`,
+            nameXboxCtrl: `Xbox Series X Controller`,
+            nameFakePs4: `Fake PS4 Controller`,
+            nameRandomHeadphones: `Random Headphones`,
+            capIosMain: `iOS 15.8.3 jailbroken • Main`,
+            capAndroidSec: `Android 13 • Secondary`,
+            capLentMom: `Lent to my mom`,
+            capBroken: `Broken screen, doesn't charge, blown speakers`,
+            capMainLaptop: `Main laptop`,
+            capToshiba: `Shit harddrive, 4 GB DDR3, Windows 10`,
+            capStickDrift: `Slight stick drift`,
+            capLatency: `Too much latency with Bluetooth`,
+            capPs4NoTv: `Doesn't show up on TV`,
+            capSpeaker: `Portable Speaker`,
+            capFireStick: `Has a 2019 Fire Stick 4K`,
+            capEarbuds: `Earbuds`,
+            capOverEar: `Over-ear`
         },
         es: {
-            navHome: '🏠 Inicio',
-            navDevices: 'Dispositivos',
-            navSettings: 'Ajustes',
-            navBeansStuff: '🫘 Cosas de Frijoles',
-            titleDiscord: 'Discord',
-            titleSocials: 'Redes',
-            titlePhones: 'Teléfonos',
-            titleTablets: 'Tabletas',
-            titleLaptops: 'Portátiles',
-            titleOther: 'Otras Cosas',
-            titleVisual: 'Ajustes Visuales',
-            titlePerformance: 'Ajustes de Rendimiento',
-            titleExperimental: 'Ajustes Experimentales',
-            titleProjects: 'Proyectos',
-            quote: '"solo soy una lata de frijoles, ¿qué pensabas que era?"'
+            navHome: `🏠 Inicio`,
+            navDevices: `Dispositivos`,
+            navSettings: `Ajustes`,
+            navBeansStuff: `🫘 Cosas de Frijoles`,
+            titleDiscord: `Discord`,
+            titleSocials: `Redes`,
+            titlePhones: `Teléfonos`,
+            titleTablets: `Tabletas`,
+            titleLaptops: `Portátiles`,
+            titleOther: `Otras Cosas`,
+            titleVisual: `Ajustes Visuales`,
+            titlePerformance: `Ajustes de Rendimiento`,
+            titleExperimental: `Ajustes Experimentales`,
+            titleProjects: `Proyectos`,
+            quote: `"solo soy una lata de frijoles, ¿qué pensabas que era?"`,
+            setDarkMode: `Modo oscuro`,
+            setFigcaptions: `Mostrar leyendas`,
+            setSmallPagebar: `Barra de páginas pequeña`,
+            setBoldFont: `Fuente en negrita`,
+            setFont: `Fuente`,
+            setLanguage: `Idioma`,
+            setPagebarPos: `Posición de la barra`,
+            setWallpaper: `Fondo de pantalla`,
+            setAccent: `Color de acento`,
+            setBlur: `Efecto de desenfoque`,
+            setWallpaperBlur: `Desenfoque del fondo`,
+            setReducedAnim: `Animación reducida`,
+            setLowEnd: `Modo de bajo rendimiento`,
+            setExperimental: `Funciones experimentales`,
+            posTop: `Arriba`,
+            posBottom: `Abajo`,
+            wpDefault: `Predeterminado`,
+            wpClouds: `Nubes`,
+            wpDark: `Oscuro sólido`,
+            wpBeans: `Frijoles`,
+            wpBlackBeans: `Frijoles negros`,
+            wpBlue: `Fondo azul`,
+            accOrange: `Naranja frijol`,
+            accBlue: `Azul`,
+            accPurple: `Morado`,
+            accBlack: `Negro`,
+            experimentalBadge: `🧪 Modo experimental`,
+            nodeStatus: `Estado`,
+            nodeActivity: `Jugando / Viendo`,
+            nodeSpotify: `Escuchando en Spotify`,
+            by: `de`,
+            statusOnline: `EN LÍNEA`,
+            statusIdle: `AUSENTE`,
+            statusDnd: `NO MOLESTAR`,
+            statusOffline: `DESCONECTADO`,
+            tiktokMain: `Cuenta principal`,
+            tiktokAlt: `Cuenta alternativa`,
+            confirmOpen: `¿Abrir "{label}" en una pestaña nueva?`,
+            projGames: `Juegos que hice con Google AI Studio`,
+            projGamesCap: `Ver en Google Drive`,
+            projSource: `Código fuente`,
+            projSourceCap: `Ver en GitHub`,
+            nameXboxCtrl: `Mando de Xbox Series X`,
+            nameFakePs4: `Mando de PS4 falso`,
+            nameRandomHeadphones: `Auriculares cualquiera`,
+            capIosMain: `iOS 15.8.3 con jailbreak • Principal`,
+            capAndroidSec: `Android 13 • Secundario`,
+            capLentMom: `Prestada a mi mamá`,
+            capBroken: `Pantalla rota, no carga, altavoces reventados`,
+            capMainLaptop: `Portátil principal`,
+            capToshiba: `Disco duro de mierda, 4 GB DDR3, Windows 10`,
+            capStickDrift: `Ligero drift del joystick`,
+            capLatency: `Demasiada latencia con Bluetooth`,
+            capPs4NoTv: `No se ve en la TV`,
+            capSpeaker: `Altavoz portátil`,
+            capFireStick: `Tiene un Fire Stick 4K de 2019`,
+            capEarbuds: `Audífonos`,
+            capOverEar: `De diadema`
         },
         fr: {
-            navHome: '🏠 Accueil',
-            navDevices: 'Appareils',
-            navSettings: 'Paramètres',
-            navBeansStuff: '🫘 Trucs de Haricots',
-            titleDiscord: 'Discord',
-            titleSocials: 'Réseaux',
-            titlePhones: 'Téléphones',
-            titleTablets: 'Tablettes',
-            titleLaptops: 'Ordinateurs portables',
-            titleOther: 'Autres objets',
-            titleVisual: 'Paramètres visuels',
-            titlePerformance: 'Paramètres de performance',
-            titleExperimental: 'Paramètres expérimentaux',
-            titleProjects: 'Projets',
-            quote: '« je ne suis qu\'une boîte de haricots, à quoi t\'attendais-tu ? »'
+            navHome: `🏠 Accueil`,
+            navDevices: `Appareils`,
+            navSettings: `Paramètres`,
+            navBeansStuff: `🫘 Trucs de Haricots`,
+            titleDiscord: `Discord`,
+            titleSocials: `Réseaux`,
+            titlePhones: `Téléphones`,
+            titleTablets: `Tablettes`,
+            titleLaptops: `Ordinateurs portables`,
+            titleOther: `Autres objets`,
+            titleVisual: `Paramètres visuels`,
+            titlePerformance: `Paramètres de performance`,
+            titleExperimental: `Paramètres expérimentaux`,
+            titleProjects: `Projets`,
+            quote: `« je ne suis qu'une boîte de haricots, à quoi t'attendais-tu ? »`,
+            setDarkMode: `Mode sombre`,
+            setFigcaptions: `Afficher les légendes`,
+            setSmallPagebar: `Petite barre de pages`,
+            setBoldFont: `Police en gras`,
+            setFont: `Police`,
+            setLanguage: `Langue`,
+            setPagebarPos: `Position de la barre`,
+            setWallpaper: `Fond d'écran`,
+            setAccent: `Couleur d'accentuation`,
+            setBlur: `Effet de flou`,
+            setWallpaperBlur: `Flou du fond d'écran`,
+            setReducedAnim: `Animation réduite`,
+            setLowEnd: `Mode faible performance`,
+            setExperimental: `Fonctionnalités expérimentales`,
+            posTop: `Haut`,
+            posBottom: `Bas`,
+            wpDefault: `Par défaut`,
+            wpClouds: `Nuages`,
+            wpDark: `Sombre uni`,
+            wpBeans: `Haricots`,
+            wpBlackBeans: `Haricots noirs`,
+            wpBlue: `Fond bleu`,
+            accOrange: `Orange haricot`,
+            accBlue: `Bleu`,
+            accPurple: `Violet`,
+            accBlack: `Noir`,
+            experimentalBadge: `🧪 Mode expérimental`,
+            nodeStatus: `Statut`,
+            nodeActivity: `Joue / Regarde`,
+            nodeSpotify: `Écoute sur Spotify`,
+            by: `de`,
+            statusOnline: `EN LIGNE`,
+            statusIdle: `INACTIF`,
+            statusDnd: `NE PAS DÉRANGER`,
+            statusOffline: `HORS LIGNE`,
+            tiktokMain: `Compte principal`,
+            tiktokAlt: `Compte secondaire`,
+            confirmOpen: `Ouvrir « {label} » dans un nouvel onglet ?`,
+            projGames: `Jeux que j'ai créés avec Google AI Studio`,
+            projGamesCap: `Voir sur Google Drive`,
+            projSource: `Code source`,
+            projSourceCap: `Voir sur GitHub`,
+            nameXboxCtrl: `Manette Xbox Series X`,
+            nameFakePs4: `Manette PS4 contrefaite`,
+            nameRandomHeadphones: `Casque quelconque`,
+            capIosMain: `iOS 15.8.3 jailbreaké • Principal`,
+            capAndroidSec: `Android 13 • Secondaire`,
+            capLentMom: `Prêtée à ma mère`,
+            capBroken: `Écran cassé, ne charge pas, haut-parleurs grillés`,
+            capMainLaptop: `Ordinateur portable principal`,
+            capToshiba: `Disque dur de merde, 4 Go DDR3, Windows 10`,
+            capStickDrift: `Léger drift du stick`,
+            capLatency: `Trop de latence en Bluetooth`,
+            capPs4NoTv: `Ne s'affiche pas sur la TV`,
+            capSpeaker: `Enceinte portable`,
+            capFireStick: `Avec une Fire Stick 4K de 2019`,
+            capEarbuds: `Écouteurs`,
+            capOverEar: `Casque circum-auriculaire`
         }
     };
+
+    function t(key, vars, lang) {
+        const l = lang || loadSettings().language;
+        const dict = TRANSLATIONS[l] || TRANSLATIONS.en;
+        let str = dict[key] !== undefined ? dict[key] : (TRANSLATIONS.en[key] !== undefined ? TRANSLATIONS.en[key] : key);
+        if (vars) {
+            Object.keys(vars).forEach(function (k) {
+                str = str.split('{' + k + '}').join(vars[k]);
+            });
+        }
+        return str;
+    }
 
     function loadSettings() {
         try {
@@ -98,19 +284,20 @@
 
     function applyLanguage(lang) {
         const dict = TRANSLATIONS[lang] || TRANSLATIONS.en;
+        document.documentElement.lang = TRANSLATIONS[lang] ? lang : 'en';
         document.querySelectorAll('[data-i18n]').forEach(function (el) {
             const key = el.getAttribute('data-i18n');
-            if (dict[key]) el.textContent = dict[key];
+            const text = dict[key] !== undefined ? dict[key] : TRANSLATIONS.en[key];
+            if (text !== undefined) el.textContent = text;
         });
     }
 
-    function toggleExperimentalBadge(active) {
+    function toggleExperimentalBadge(active, lang) {
         let badge = document.getElementById('experimental-badge');
         if (active) {
             if (!badge) {
                 badge = document.createElement('div');
                 badge.id = 'experimental-badge';
-                badge.textContent = '🧪 Experimental Mode';
                 badge.style.cssText =
                     'position:fixed;bottom:16px;right:16px;z-index:1000;' +
                     'background:var(--accent, #a34b25);color:#fff;padding:8px 14px;' +
@@ -119,6 +306,7 @@
                     'backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);';
                 document.body.appendChild(badge);
             }
+            badge.textContent = t('experimentalBadge', null, lang);
         } else if (badge) {
             badge.remove();
         }
@@ -165,7 +353,7 @@
         body.classList.toggle('low-end', !!settings.lowEndMode);
 
         body.classList.toggle('experimental', !!settings.experimentalFeatures);
-        toggleExperimentalBadge(!!settings.experimentalFeatures);
+        toggleExperimentalBadge(!!settings.experimentalFeatures, settings.language);
 
         applyLanguage(settings.language);
     }
@@ -175,7 +363,8 @@
         load: loadSettings,
         save: saveSettings,
         apply: applySettings,
-        defaults: DEFAULTS
+        defaults: DEFAULTS,
+        t: t
     };
 
     const FADE_MS = 260;
@@ -216,25 +405,35 @@
         });
     }
 
-    const RANDOM_QUOTES = [
-        'i am just a can of beans, what did you think I was?',
-        'beans 🤤🤤🤤',
-        'do you love beans?',
-        'change the wallpaper from default to beans or black beans for a suprise!'
-    ];
+    const RANDOM_QUOTES = {
+        en: [
+            `i am just a can of beans, what did you think I was?`,
+            `beans 🤤🤤🤤`,
+            `do you love beans?`,
+            `change the wallpaper from default to beans or black beans for a suprise!`
+        ],
+        es: [
+            `solo soy una lata de frijoles, ¿qué pensabas que era?`,
+            `frijoles 🤤🤤🤤`,
+            `¿te encantan los frijoles?`,
+            `¡cambia el fondo de predeterminado a frijoles o frijoles negros para una sorpresa!`
+        ],
+        fr: [
+            `je ne suis qu'une boîte de haricots, à quoi t'attendais-tu ?`,
+            `haricots 🤤🤤🤤`,
+            `tu aimes les haricots ?`,
+            `change le fond d'écran de par défaut à haricots ou haricots noirs pour une surprise !`
+        ]
+    };
 
     function initQuoteTypewriter() {
         const el = document.querySelector('.quote-bubble p[data-i18n="quote"]');
         if (!el) return;
 
-        // Random quote pool only applies in English — other languages fall back
-        // to their single translated quote since these aren't translated yet.
         const settings = loadSettings();
-        let fullText = el.textContent;
-        if (settings.language === 'en') {
-            fullText = RANDOM_QUOTES[Math.floor(Math.random() * RANDOM_QUOTES.length)];
-            el.textContent = fullText;
-        }
+        const pool = RANDOM_QUOTES[settings.language] || RANDOM_QUOTES.en;
+        const fullText = pool[Math.floor(Math.random() * pool.length)];
+        el.textContent = fullText;
 
         // Respect the Reduced Animation / Low-End Mode setting — just show the text as-is.
         if (document.body.classList.contains('reduced-motion')) return;
