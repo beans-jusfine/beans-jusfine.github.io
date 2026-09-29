@@ -166,7 +166,8 @@
                 const avatarRing = document.getElementById('avatar-ring');
                 if (avatarRing) {
                     const status = data.discord_status || 'offline';
-                    avatarRing.className = `avatar-ring ${status}`;
+                    avatarRing.classList.remove('online', 'idle', 'dnd', 'offline');
+                    avatarRing.classList.add(status);
                 }
 
                 const statusEl = document.getElementById('discord-status');

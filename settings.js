@@ -262,7 +262,21 @@
         const ring = document.querySelector('.avatar-ring');
         if (!ring) return;
 
+        const CLICKS_TO_FALL = 20;
+        let clickCount = 0;
+
         ring.addEventListener('click', function () {
+            if (ring.classList.contains('fallen')) return;
+
+            clickCount++;
+
+            if (clickCount >= CLICKS_TO_FALL) {
+                ring.classList.remove('wobble');
+                ring.classList.add('fallen');
+                ring.style.cursor = 'default';
+                return;
+            }
+
             const reduced = document.body.classList.contains('reduced-motion');
 
             ring.classList.remove('wobble');
