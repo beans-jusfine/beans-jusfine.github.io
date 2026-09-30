@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>beans ツ - 404</title>
+    <meta name="robots" content="noindex">
+    <meta name="theme-color" content="#a34b25">
+    <link rel="icon" type="image/png" href="/icons/pfp.png">
+    <link rel="apple-touch-icon" href="/icons/pfp.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Press+Start+2P&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="/style.css">
+    <noscript><style>body { opacity: 1 !important; }</style></noscript>
+</head>
+<body>
+
+    <nav class="nav-bar">
+        <a href="/index.html" class="nav-item" data-i18n="navHome">🏠 Home</a>
+        <a href="/devices.html" class="nav-item" data-i18n="navDevices">Devices</a>
+        <a href="/beans-stuff.html" class="nav-item nav-secret" data-i18n="navBeansStuff">🫘 Beans Stuff</a>
+        <a href="/settings.html" class="nav-item" data-i18n="navSettings">Settings</a>
+    </nav>
+
+    <div class="dashboard-container">
+
+        <main class="content-stream">
+
+            <section class="dash-box notfound-box">
+                <div class="notfound-code">4<span class="notfound-bean">🫘</span>4</div>
+                <h3 class="box-title box-title-center" data-i18n="notFoundTitle">this can is empty</h3>
+                <p class="notfound-text" data-i18n="notFoundText">the page you're looking for got eaten. it was probably beans.</p>
+                <p class="notfound-path" id="notfound-path"></p>
+                <a href="/index.html" class="btn-link" data-i18n="notFoundButton">← back home</a>
+            </section>
+
+        </main>
+    </div>
+
+    <script src="/settings.js"></script>
+    <script>
+        document.getElementById('notfound-path').textContent = window.location.pathname;
+    </script>
+
+</body>
+</html>

@@ -4,6 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>beans ツ - Beans Stuff</title>
+    <meta name="description" content="projects, a bean game, and other bean-related things.">
+    <meta name="theme-color" content="#a34b25">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="beans ツ">
+    <meta property="og:title" content="beans ツ - Beans Stuff">
+    <meta property="og:description" content="projects, a bean game, and other bean-related things.">
+    <meta property="og:url" content="https://beans-jusfine.github.io/beans-stuff.html">
+    <meta property="og:image" content="https://beans-jusfine.github.io/icons/pfp.png">
+    <meta name="twitter:card" content="summary">
+    <link rel="icon" type="image/png" href="icons/pfp.png">
+    <link rel="apple-touch-icon" href="icons/pfp.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Press+Start+2P&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
@@ -44,10 +55,20 @@
                 </div>
             </section>
 
+            <section class="dash-box">
+                <h3 class="box-title" data-i18n="titleGame">Bean Catcher</h3>
+                <canvas id="bean-game" class="bean-game-canvas" tabindex="0" aria-label="Bean Catcher"></canvas>
+                <p class="bean-game-help" data-i18n="gameInstructions">Catch the beans, dodge the peppers. Move with your mouse, your finger, or the ← → keys.</p>
+                <div class="bean-game-controls">
+                    <button type="button" class="btn-link" id="bean-game-start" data-i18n="gameStart">Play</button>
+                </div>
+            </section>
+
         </main>
     </div>
 
     <script src="./settings.js"></script>
+    <script src="./bean-game.js"></script>
 
 </body>
 </html>

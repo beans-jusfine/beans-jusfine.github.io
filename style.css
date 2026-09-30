@@ -824,3 +824,163 @@ body.low-end .dash-box:hover,
 body.low-end .strip-item:hover {
     transform: none;
 }
+
+.profile-clock {
+    font-size: 12px;
+    opacity: 0.6;
+    margin-top: 2px;
+    font-variant-numeric: tabular-nums;
+}
+
+.profile-clock i {
+    margin-right: 4px;
+}
+
+.btn-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: rgba(var(--accent-rgb), 0.12);
+    border: 1px solid rgba(var(--accent-rgb), 0.45);
+    border-radius: 8px;
+    color: var(--accent-glow);
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.btn-link:hover {
+    background: rgba(var(--accent-rgb), 0.24);
+    border-color: rgba(var(--accent-rgb), 0.7);
+}
+
+.bean-game-canvas {
+    display: block;
+    width: 100%;
+    max-width: 480px;
+    aspect-ratio: 3 / 2;
+    margin: 0 auto;
+    background: var(--overlay-bg);
+    border: 1px solid var(--border-soft);
+    border-radius: 8px;
+    cursor: pointer;
+    outline: none;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.bean-game-canvas.playing {
+    cursor: none;
+}
+
+.bean-game-canvas:focus-visible {
+    border-color: rgba(var(--accent-rgb), 0.6);
+}
+
+.bean-game-help {
+    max-width: 480px;
+    margin: 12px auto 0;
+    font-size: 12px;
+    line-height: 1.5;
+    text-align: center;
+    opacity: 0.65;
+}
+
+.bean-game-controls {
+    display: flex;
+    justify-content: center;
+    margin-top: 14px;
+}
+
+.notfound-box {
+    width: 100%;
+    max-width: 560px;
+    justify-self: center;
+    padding: 45px 25px;
+    text-align: center;
+}
+
+.notfound-code {
+    margin-bottom: 14px;
+    font-size: 72px;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--accent-glow);
+}
+
+.notfound-text {
+    max-width: 420px;
+    margin: 0 auto 10px;
+    font-size: 14px;
+    line-height: 1.6;
+    opacity: 0.75;
+}
+
+.notfound-path {
+    margin-bottom: 24px;
+    font-size: 12px;
+    opacity: 0.45;
+    word-break: break-all;
+}
+
+.bean-rain {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.bean-rain-item {
+    position: absolute;
+    top: -60px;
+    animation: beanRainFall linear forwards;
+}
+
+@keyframes beanRainFall {
+    to { transform: translateY(calc(100vh + 120px)) rotate(var(--spin)); }
+}
+
+.secret-toast {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    z-index: 2100;
+    padding: 10px 20px;
+    background: var(--nav-bg);
+    backdrop-filter: blur(var(--blur-nav));
+    -webkit-backdrop-filter: blur(var(--blur-nav));
+    border: 1px solid rgba(var(--accent-rgb), 0.45);
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 600;
+    opacity: 0;
+    pointer-events: none;
+    transform: translate(-50%, 10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.secret-toast.show {
+    opacity: 1;
+    transform: translate(-50%, 0);
+}
+
+body.no-blur .secret-toast {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+}
+
+body.font-pixel .profile-clock { font-size: 9px; }
+body.font-pixel .btn-link { font-size: 10px; }
+body.font-pixel .bean-game-help { font-size: 9px; }
+body.font-pixel .notfound-code { font-size: 40px; }
+body.font-pixel .notfound-text { font-size: 10px; }
+body.font-pixel .notfound-path { font-size: 9px; }
+body.font-pixel .secret-toast { font-size: 10px; }
+
+@media (max-width: 768px) {
+    .notfound-code { font-size: 56px; }
+}

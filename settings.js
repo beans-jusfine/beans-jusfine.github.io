@@ -97,7 +97,19 @@
             capSpeaker: `Portable Speaker`,
             capFireStick: `Has a 2019 Fire Stick 4K`,
             capEarbuds: `Earbuds`,
-            capOverEar: `Over-ear`
+            capOverEar: `Over-ear`,
+            notFoundTitle: `this can is empty`,
+            notFoundText: `the page you're looking for got eaten. it was probably beans.`,
+            notFoundButton: `← back home`,
+            clockLabel: `it's {time} for beans`,
+            secretToast: `you typed the secret code 🫘`,
+            titleGame: `Bean Catcher`,
+            gameInstructions: `Catch the beans, dodge the peppers. Move with your mouse, your finger, or the ← → keys.`,
+            gameStart: `Play`,
+            gamePlayAgain: `Play again`,
+            gameScore: `Score`,
+            gameBest: `Best`,
+            gameOver: `Game over`
         },
         es: {
             navHome: `🏠 Inicio`,
@@ -172,7 +184,19 @@
             capSpeaker: `Altavoz portátil`,
             capFireStick: `Tiene un Fire Stick 4K de 2019`,
             capEarbuds: `Audífonos`,
-            capOverEar: `De diadema`
+            capOverEar: `De diadema`,
+            notFoundTitle: `esta lata está vacía`,
+            notFoundText: `la página que buscas se la comieron. seguro fueron los frijoles.`,
+            notFoundButton: `← volver al inicio`,
+            clockLabel: `hora de beans: {time}`,
+            secretToast: `escribiste el código secreto 🫘`,
+            titleGame: `Atrapa Frijoles`,
+            gameInstructions: `Atrapa los frijoles, esquiva los chiles. Muévete con el ratón, el dedo o las teclas ← →.`,
+            gameStart: `Jugar`,
+            gamePlayAgain: `Jugar otra vez`,
+            gameScore: `Puntos`,
+            gameBest: `Récord`,
+            gameOver: `Fin del juego`
         },
         fr: {
             navHome: `🏠 Accueil`,
@@ -247,7 +271,19 @@
             capSpeaker: `Enceinte portable`,
             capFireStick: `Avec une Fire Stick 4K de 2019`,
             capEarbuds: `Écouteurs`,
-            capOverEar: `Casque circum-auriculaire`
+            capOverEar: `Casque circum-auriculaire`,
+            notFoundTitle: `cette boîte est vide`,
+            notFoundText: `la page que tu cherches a été mangée. c'était sûrement des haricots.`,
+            notFoundButton: `← retour à l'accueil`,
+            clockLabel: `heure de beans : {time}`,
+            secretToast: `tu as tapé le code secret 🫘`,
+            titleGame: `Attrape-Haricots`,
+            gameInstructions: `Attrape les haricots, évite les piments. Déplace-toi à la souris, au doigt ou avec les touches ← →.`,
+            gameStart: `Jouer`,
+            gamePlayAgain: `Rejouer`,
+            gameScore: `Score`,
+            gameBest: `Record`,
+            gameOver: `Partie terminée`
         }
     };
 
@@ -498,10 +534,104 @@
         });
     }
 
+    const BEANS_TIMEZONE = 'America/Grand_Turk';
+    const CLOCK_LOCALES = { en: 'en-US', es: 'es-ES', fr: 'fr-FR' };
+
+    function formatBeansTime(lang) {
+        const locale = CLOCK_LOCALES[lang] || 'en-US';
+        const options = { hour: 'numeric', minute: '2-digit' };
+        try {
+            return new Date().toLocaleTimeString(locale, Object.assign({ timeZone: BEANS_TIMEZONE }, options));
+        } catch (e) {
+            return new Date().toLocaleTimeString(locale, options);
+        }
+    }
+
+    function initLiveClock() {
+        const textEl = document.getElementById('profile-clock-text');
+        if (!textEl) return;
+
+        const lang = loadSettings().language;
+        let last = '';
+
+        function tick() {
+            const next = t('clockLabel', { time: formatBeansTime(lang) }, lang);
+            if (next !== last) {
+                textEl.textContent = next;
+                last = next;
+            }
+        }
+
+        tick();
+        setInterval(tick, 1000);
+    }
+
+    function showToast(message) {
+        let toast = document.getElementById('secret-toast');
+        if (!toast) {
+            toast = document.createElement('div');
+            toast.id = 'secret-toast';
+            toast.className = 'secret-toast';
+            toast.setAttribute('role', 'status');
+            document.body.appendChild(toast);
+        }
+        toast.textContent = message;
+        toast.classList.add('show');
+        clearTimeout(showToast.timer);
+        showToast.timer = setTimeout(function () {
+            toast.classList.remove('show');
+        }, 2800);
+    }
+
+    function triggerBeanRain() {
+        showToast(t('secretToast'));
+        if (document.body.classList.contains('reduced-motion')) return;
+
+        const layer = document.createElement('div');
+        layer.className = 'bean-rain';
+        document.body.appendChild(layer);
+
+        for (let i = 0; i < 70; i++) {
+            const piece = document.createElement('span');
+            piece.className = 'bean-rain-item';
+            piece.textContent = Math.random() < 0.15 ? '🥫' : '🫘';
+            piece.style.left = (Math.random() * 100) + 'vw';
+            piece.style.fontSize = (18 + Math.random() * 26) + 'px';
+            piece.style.animationDuration = (2.2 + Math.random() * 2.3) + 's';
+            piece.style.animationDelay = (Math.random() * 1.6) + 's';
+            piece.style.setProperty('--spin', (Math.random() * 720 - 360) + 'deg');
+            layer.appendChild(piece);
+        }
+
+        setTimeout(function () { layer.remove(); }, 6500);
+    }
+
+    function initSecretCode() {
+        const SECRET_CODE = 'beans';
+        let typed = '';
+
+        document.addEventListener('keydown', function (e) {
+            const target = e.target;
+            const tag = target && target.tagName ? target.tagName : '';
+            if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return;
+            if (target && target.isContentEditable) return;
+            if (e.ctrlKey || e.metaKey || e.altKey) return;
+            if (!e.key || e.key.length !== 1) return;
+
+            typed = (typed + e.key.toLowerCase()).slice(-SECRET_CODE.length);
+            if (typed === SECRET_CODE) {
+                typed = '';
+                triggerBeanRain();
+            }
+        });
+    }
+
     document.addEventListener('DOMContentLoaded', function () {
         applySettings(loadSettings());
         initPageFade();
         initQuoteTypewriter();
         initAvatarBeanBurst();
+        initLiveClock();
+        initSecretCode();
     });
 })();
