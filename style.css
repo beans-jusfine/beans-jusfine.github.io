@@ -1235,6 +1235,7 @@ body.exp-matrix .dashboard-container {
     z-index: 2;
 }
 
+/* EXPERIMENTAL RUN 5: CRT Mode */
 body.exp-crt::after {
     z-index: 3000;
     opacity: 0.16;
