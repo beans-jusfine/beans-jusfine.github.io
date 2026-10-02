@@ -679,7 +679,6 @@
                 matrixResize = resize;
                 window.addEventListener('resize', matrixResize);
                 matrixFrame = requestAnimationFrame(draw);
-                draw();
             }
             if (!on) {
                 if (matrixFrame) cancelAnimationFrame(matrixFrame);
