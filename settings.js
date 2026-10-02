@@ -639,7 +639,7 @@
             print(on ? 'Low-Gravity Mode: ON' : 'Low-Gravity Mode: OFF');
         }
 
-        // EXPERIMENTAL RUN 4: Matrix Mode
+        // EXPERIMENTAL REDO RUN 4: Matrix Mode
         function matrix(on) {
             state.matrix = on;
             document.body.classList.toggle('exp-matrix', on);
