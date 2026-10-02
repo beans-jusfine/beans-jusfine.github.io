@@ -661,8 +661,11 @@
                         canvas.remove();
                         return;
                     }
+                    // Fade only the Matrix trails; do not paint a black veil over the page.
+                    ctx.globalCompositeOperation = 'destination-out';
                     ctx.fillStyle = 'rgba(0,0,0,0.08)';
                     ctx.fillRect(0, 0, canvas.width, canvas.height);
+                    ctx.globalCompositeOperation = 'source-over';
                     ctx.fillStyle = '#32ff75';
                     ctx.font = '14px monospace';
                     const chars = '01{}[]<>/|$#@%*';
