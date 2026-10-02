@@ -1218,10 +1218,15 @@ body.font-pixel .exp-btn { font-size: 10px; }
     background: rgba(50, 255, 117, 0.25);
 }
 
+body.exp-matrix {
+    position: relative;
+    isolation: isolate;
+}
+
 .exp-matrix-canvas {
     position: fixed;
     inset: 0;
-    z-index: 1;
+    z-index: -1;
     width: 100vw;
     height: 100vh;
     pointer-events: none;
