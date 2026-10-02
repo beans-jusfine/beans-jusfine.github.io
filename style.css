@@ -1266,6 +1266,7 @@ body.exp-crt::after {
         radial-gradient(ellipse at center, transparent 55%, rgba(0, 0, 0, 0.65) 100%);
 }
 
+/* EXPERIMENTAL RUN 3: Low-Gravity Mode */
 body.exp-gravity .dashboard-container > *,
 body.exp-gravity .content-stream > *,
 body.exp-gravity .profile-card {
