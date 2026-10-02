@@ -66,7 +66,6 @@
             accBlue: `Blue`,
             accPurple: `Purple`,
             accBlack: `Black`,
-            experimentalBadge: `🧪 Experimental Mode`,
             nodeStatus: `Status`,
             nodeActivity: `Playing / Watching`,
             nodeSpotify: `Listening to Spotify`,
@@ -83,7 +82,7 @@
             projSource: `Source Code`,
             projSourceCap: `View on GitHub`,
             projSora: `My old Sora videos`,
-            projSoraCap: `Zip on Google Drive`,
+            projSoraCap: `ZIP on Google Drive`,
             nameXboxCtrl: `Xbox Series X Controller`,
             nameFakePs4: `Fake PS4 Controller`,
             nameRandomHeadphones: `Random Headphones`,
@@ -105,6 +104,13 @@
             notFoundButton: `← back home`,
             clockLabel: `it's {time} for beans ツ rn`,
             secretToast: `you typed the secret code 🫘`,
+            expTitle: `Enable Experimental Mode?`,
+            expText: `Are you sure you want to enable Experimental Mode?`,
+            expPassword: `Password`,
+            expHint: `Hint: first online name on home page`,
+            expWrong: `Wrong password. Try again.`,
+            expCancel: `Cancel`,
+            expEnable: `Enable`,
             titleGame: `Bean Catcher`,
             gameInstructions: `Catch the beans, dodge the peppers. Move with your mouse, your finger, or the ← → keys.`,
             gameStart: `Play`,
@@ -155,7 +161,6 @@
             accBlue: `Azul`,
             accPurple: `Morado`,
             accBlack: `Negro`,
-            experimentalBadge: `🧪 Modo experimental`,
             nodeStatus: `Estado`,
             nodeActivity: `Jugando / Viendo`,
             nodeSpotify: `Escuchando en Spotify`,
@@ -172,7 +177,7 @@
             projSource: `Código fuente`,
             projSourceCap: `Ver en GitHub`,
             projSora: `Mis videos viejos de Sora`,
-            projSoraCap: `Zip en Google Drive`,
+            projSoraCap: `ZIP en Google Drive`,
             nameXboxCtrl: `Mando de Xbox Series X`,
             nameFakePs4: `Mando de PS4 falso`,
             nameRandomHeadphones: `Auriculares cualquiera`,
@@ -194,6 +199,13 @@
             notFoundButton: `← volver al inicio`,
             clockLabel: `hora de beans ツ ahora: {time}`,
             secretToast: `escribiste el código secreto 🫘`,
+            expTitle: `¿Activar el Modo Experimental?`,
+            expText: `¿Seguro que quieres activar el Modo Experimental?`,
+            expPassword: `Contraseña`,
+            expHint: `Pista: el primer nombre en línea de la página principal`,
+            expWrong: `Contraseña incorrecta. Inténtalo de nuevo.`,
+            expCancel: `Cancelar`,
+            expEnable: `Activar`,
             titleGame: `Atrapa Frijoles`,
             gameInstructions: `Atrapa los frijoles, esquiva los chiles. Muévete con el ratón, el dedo o las teclas ← →.`,
             gameStart: `Jugar`,
@@ -244,7 +256,6 @@
             accBlue: `Bleu`,
             accPurple: `Violet`,
             accBlack: `Noir`,
-            experimentalBadge: `🧪 Mode expérimental`,
             nodeStatus: `Statut`,
             nodeActivity: `Joue / Regarde`,
             nodeSpotify: `Écoute sur Spotify`,
@@ -261,7 +272,7 @@
             projSource: `Code source`,
             projSourceCap: `Voir sur GitHub`,
             projSora: `Mes anciennes vidéos Sora`,
-            projSoraCap: `Zip sur Google Drive`,
+            projSoraCap: `ZIP sur Google Drive`,
             nameXboxCtrl: `Manette Xbox Series X`,
             nameFakePs4: `Manette PS4 contrefaite`,
             nameRandomHeadphones: `Casque quelconque`,
@@ -283,6 +294,13 @@
             notFoundButton: `← retour à l'accueil`,
             clockLabel: `heure de beans ツ maintenant : {time}`,
             secretToast: `tu as tapé le code secret 🫘`,
+            expTitle: `Activer le mode expérimental ?`,
+            expText: `Tu veux vraiment activer le mode expérimental ?`,
+            expPassword: `Mot de passe`,
+            expHint: `Indice : le premier nom en ligne sur la page d'accueil`,
+            expWrong: `Mot de passe incorrect. Réessaie.`,
+            expCancel: `Annuler`,
+            expEnable: `Activer`,
             titleGame: `Attrape-Haricots`,
             gameInstructions: `Attrape les haricots, évite les piments. Déplace-toi à la souris, au doigt ou avec les touches ← →.`,
             gameStart: `Jouer`,
@@ -334,26 +352,6 @@
         });
     }
 
-    function toggleExperimentalBadge(active, lang) {
-        let badge = document.getElementById('experimental-badge');
-        if (active) {
-            if (!badge) {
-                badge = document.createElement('div');
-                badge.id = 'experimental-badge';
-                badge.style.cssText =
-                    'position:fixed;bottom:16px;right:16px;z-index:1000;' +
-                    'background:var(--accent, #a34b25);color:#fff;padding:8px 14px;' +
-                    'border-radius:20px;font-size:12px;font-weight:600;' +
-                    'box-shadow:0 6px 20px rgba(0,0,0,0.4);' +
-                    'backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);';
-                document.body.appendChild(badge);
-            }
-            badge.textContent = t('experimentalBadge', null, lang);
-        } else if (badge) {
-            badge.remove();
-        }
-    }
-
     function applySettings(settings) {
         const body = document.body;
         if (!body) return;
@@ -395,7 +393,6 @@
         body.classList.toggle('low-end', !!settings.lowEndMode);
 
         body.classList.toggle('experimental', !!settings.experimentalFeatures);
-        toggleExperimentalBadge(!!settings.experimentalFeatures, settings.language);
 
         applyLanguage(settings.language);
     }

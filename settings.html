@@ -25,7 +25,7 @@
 <body>
 
     <nav class="nav-bar">
-        <a href="/" class="nav-item" data-i18n="navHome">🏠 Home</a>
+        <a href="./" class="nav-item" data-i18n="navHome">🏠 Home</a>
         <a href="devices.html" class="nav-item" data-i18n="navDevices">Devices</a>
         <a href="beans-stuff.html" class="nav-item nav-secret" data-i18n="navBeansStuff">🫘 Beans Stuff</a>
         <a href="settings.html" class="nav-item active" data-i18n="navSettings">Settings</a>
@@ -179,6 +179,21 @@
         </main>
     </div>
 
+    <dialog id="experimental-dialog" class="exp-dialog" aria-labelledby="exp-title">
+        <div class="exp-dialog-body">
+            <h2 id="exp-title" class="exp-title" data-i18n="expTitle">Enable Experimental Mode?</h2>
+            <p class="exp-text" data-i18n="expText">Are you sure you want to enable Experimental Mode?</p>
+            <label class="exp-label" for="exp-password" data-i18n="expPassword">Password</label>
+            <input type="password" id="exp-password" class="exp-input" autocomplete="new-password" autocapitalize="off" spellcheck="false">
+            <p class="exp-hint" data-i18n="expHint">Hint: first online name on home page</p>
+            <p class="exp-error" id="exp-error" role="alert" hidden data-i18n="expWrong">Wrong password. Try again.</p>
+            <div class="exp-actions">
+                <button type="button" class="exp-btn" id="exp-cancel" data-i18n="expCancel">Cancel</button>
+                <button type="button" class="exp-btn exp-btn-primary" id="exp-enable" data-i18n="expEnable">Enable</button>
+            </div>
+        </div>
+    </dialog>
+
     <script src="./settings.js"></script>
     <script>
         (function () {
@@ -237,7 +252,74 @@
                 bindCheckbox('wallpaper-blur', 'wallpaperBlur');
                 bindCheckbox('reduced-animation', 'reducedAnimation');
                 bindCheckbox('low-end-mode', 'lowEndMode');
-                bindCheckbox('experimental-features', 'experimentalFeatures');
+
+                const expToggle = document.getElementById('experimental-features');
+                const expDialog = document.getElementById('experimental-dialog');
+                const expInput = document.getElementById('exp-password');
+                const expError = document.getElementById('exp-error');
+                const EXPERIMENTAL_PASSWORDS = ['beans', 'beans.jusfine'];
+
+                function normalizeAnswer(value) {
+                    return value.replace(/ツ/g, '').replace(/^\s*@/, '').trim().toLowerCase();
+                }
+
+                function openExperimentalDialog() {
+                    expInput.value = '';
+                    expInput.classList.remove('invalid');
+                    expError.hidden = true;
+                    expDialog.showModal();
+                    expInput.focus();
+                }
+
+                function tryEnableExperimental() {
+                    if (EXPERIMENTAL_PASSWORDS.indexOf(normalizeAnswer(expInput.value)) === -1) {
+                        expError.hidden = false;
+                        expInput.classList.add('invalid');
+                        expInput.select();
+                        return;
+                    }
+                    expDialog.close();
+                    expToggle.checked = true;
+                    settings.experimentalFeatures = true;
+                    commit();
+                }
+
+                expToggle.checked = !!settings.experimentalFeatures;
+
+                expToggle.addEventListener('click', function (e) {
+                    if (expToggle.checked) {
+                        e.preventDefault();
+                        openExperimentalDialog();
+                    }
+                });
+
+                expToggle.addEventListener('change', function () {
+                    if (!expToggle.checked) {
+                        settings.experimentalFeatures = false;
+                        commit();
+                    }
+                });
+
+                document.getElementById('exp-enable').addEventListener('click', tryEnableExperimental);
+                document.getElementById('exp-cancel').addEventListener('click', function () {
+                    expDialog.close();
+                });
+
+                expInput.addEventListener('keydown', function (e) {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        tryEnableExperimental();
+                    }
+                });
+
+                expInput.addEventListener('input', function () {
+                    expError.hidden = true;
+                    expInput.classList.remove('invalid');
+                });
+
+                expDialog.addEventListener('click', function (e) {
+                    if (e.target === expDialog) expDialog.close();
+                });
 
                 syncLowEndUI();
                 window.beansSettings.apply(settings);
