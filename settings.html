@@ -173,6 +173,38 @@
                             <span class="slider"></span>
                         </label>
                     </div>
+
+                    <div class="setting-row">
+                        <span data-i18n="setExperimentalGravity">Low-Gravity Mode</span>
+                        <label class="switch">
+                            <input type="checkbox" id="experimental-gravity">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="setting-row">
+                        <span data-i18n="setExperimentalMatrix">Matrix Mode</span>
+                        <label class="switch">
+                            <input type="checkbox" id="experimental-matrix">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="setting-row">
+                        <span data-i18n="setExperimentalCrt">CRT Mode</span>
+                        <label class="switch">
+                            <input type="checkbox" id="experimental-crt">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="setting-row">
+                        <span data-i18n="setExperimentalBios">Fake BIOS Screen</span>
+                        <label class="switch">
+                            <input type="checkbox" id="experimental-bios">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
                 </div>
             </section>
 
@@ -229,11 +261,20 @@
                     window.beansSettings.save(settings);
                     window.beansSettings.apply(settings);
                     syncLowEndUI();
+                    syncExperimentalUI();
                 }
 
                 function syncLowEndUI() {
                     const forced = !!settings.lowEndMode;
                     ['blur-effect', 'wallpaper-blur', 'reduced-animation'].forEach(function (id) {
+                        const el = document.getElementById(id);
+                        if (el) el.disabled = forced;
+                    });
+                }
+
+                function syncExperimentalUI() {
+                    const forced = !settings.experimentalFeatures;
+                    ['experimental-gravity', 'experimental-matrix', 'experimental-crt', 'experimental-bios'].forEach(function (id) {
                         const el = document.getElementById(id);
                         if (el) el.disabled = forced;
                     });
@@ -252,6 +293,10 @@
                 bindCheckbox('wallpaper-blur', 'wallpaperBlur');
                 bindCheckbox('reduced-animation', 'reducedAnimation');
                 bindCheckbox('low-end-mode', 'lowEndMode');
+                bindCheckbox('experimental-gravity', 'experimentalGravity');
+                bindCheckbox('experimental-matrix', 'experimentalMatrix');
+                bindCheckbox('experimental-crt', 'experimentalCrt');
+                bindCheckbox('experimental-bios', 'experimentalBios');
 
                 const expToggle = document.getElementById('experimental-features');
                 const expDialog = document.getElementById('experimental-dialog');
@@ -300,6 +345,21 @@
                     }
                 });
 
+                window.addEventListener('beansExperimentalChange', function (e) {
+                    const detail = e.detail || {};
+                    if (!detail.key) return;
+                    settings[detail.key] = !!detail.value;
+                    const checkboxIds = {
+                        experimentalBios: 'experimental-bios',
+                        experimentalGravity: 'experimental-gravity',
+                        experimentalMatrix: 'experimental-matrix',
+                        experimentalCrt: 'experimental-crt'
+                    };
+                    const checkbox = document.getElementById(checkboxIds[detail.key] || '');
+                    if (checkbox) checkbox.checked = !!detail.value;
+                    syncExperimentalUI();
+                });
+
                 document.getElementById('exp-enable').addEventListener('click', tryEnableExperimental);
                 document.getElementById('exp-cancel').addEventListener('click', function () {
                     expDialog.close();
@@ -322,6 +382,7 @@
                 });
 
                 syncLowEndUI();
+                syncExperimentalUI();
                 window.beansSettings.apply(settings);
             });
         })();
