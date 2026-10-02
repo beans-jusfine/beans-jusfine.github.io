@@ -614,6 +614,9 @@
         if (!document.body.classList.contains('experimental')) return;
 
         let state = { gravity: false, matrix: false, crt: false };
+        let matrixCanvas = null;
+        let matrixFrame = 0;
+        let matrixResize = null;
         const panel = document.createElement('div');
         panel.className = 'exp-console';
         panel.innerHTML = '<div class="exp-console-head"><span>BEANS EXPERIMENTAL CONSOLE</span><button type="button" class="exp-console-close" aria-label="Close console">×</button></div><div class="exp-console-output" aria-live="polite"></div><div class="exp-console-line"><span>&gt;</span><input class="exp-console-input" type="text" autocomplete="off" spellcheck="false" aria-label="Experimental command"></div>';
@@ -666,16 +669,23 @@
                         if (drops[i] * 16 > canvas.height && Math.random() > 0.975) drops[i] = 0;
                         drops[i]++;
                     }
-                    requestAnimationFrame(draw);
+                    matrixFrame = requestAnimationFrame(draw);
                 }
 
                 resize();
-                window.addEventListener('resize', resize);
+                matrixCanvas = canvas;
+                matrixResize = resize;
+                window.addEventListener('resize', matrixResize);
+                matrixFrame = requestAnimationFrame(draw);
                 draw();
             }
             if (!on) {
-                const canvas = document.querySelector('.exp-matrix-canvas');
-                if (canvas) canvas.remove();
+                if (matrixFrame) cancelAnimationFrame(matrixFrame);
+                matrixFrame = 0;
+                if (matrixResize) window.removeEventListener('resize', matrixResize);
+                matrixResize = null;
+                if (matrixCanvas) matrixCanvas.remove();
+                matrixCanvas = null;
             }
             print(on ? 'Matrix Mode: ON' : 'Matrix Mode: OFF');
         }
