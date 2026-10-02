@@ -1240,6 +1240,17 @@ body.exp-matrix .dashboard-container {
     z-index: 2;
 }
 
+/* Matrix mode always keeps the pagebar at the top. */
+body.exp-matrix .nav-bar {
+    top: 25px;
+    bottom: auto;
+}
+
+body.exp-matrix.pagebar-bottom {
+    padding-top: 60px;
+    padding-bottom: 0;
+}
+
 /* EXPERIMENTAL REDO RUN 5: CRT Mode */
 body.exp-crt::after {
     z-index: 3000;
