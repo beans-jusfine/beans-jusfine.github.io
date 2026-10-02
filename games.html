@@ -37,23 +37,10 @@
 
             <section class="dash-box">
                 <h3 class="box-title">Drift Boss</h3>
-                <p class="bean-game-help">Play Drift Boss directly on this page.</p>
+                <p class="bean-game-help">Open Drift Boss in a full-page about:blank tab.</p>
 
                 <div class="bean-game-controls">
                     <button type="button" id="drift-boss-play" class="btn-link">▶ Play Drift Boss</button>
-                </div>
-
-                <div id="drift-boss-embed" style="display:none; margin-top:18px;">
-                    <div style="position:relative; width:100%; aspect-ratio:16/9; min-height:320px; overflow:hidden; border:1px solid var(--border-soft); border-radius:10px; background:var(--overlay-bg);">
-                        <iframe
-                            src="https://driftboss.io/drift-boss.embed"
-                            title="Drift Boss"
-                            loading="lazy"
-                            allow="autoplay; fullscreen; gamepad"
-                            allowfullscreen
-                            style="position:absolute; inset:0; width:100%; height:100%; border:0;"
-                        ></iframe>
-                    </div>
                 </div>
             </section>
         </main>
@@ -64,14 +51,29 @@
     <script>
         (function () {
             const button = document.getElementById('drift-boss-play');
-            const embed = document.getElementById('drift-boss-embed');
-            if (!button || !embed) return;
+            if (!button) return;
 
             button.addEventListener('click', function () {
-                const opening = embed.style.display === 'none';
-                embed.style.display = opening ? 'block' : 'none';
-                button.textContent = opening ? '▼ Hide Drift Boss' : '▶ Play Drift Boss';
-                if (opening) embed.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                const gameWindow = window.open('about:blank', '_blank');
+                if (!gameWindow) {
+                    window.location.href = 'https://driftboss.io/drift-boss.embed';
+                    return;
+                }
+
+                gameWindow.document.title = 'Drift Boss';
+                gameWindow.document.body.style.margin = '0';
+                gameWindow.document.body.style.width = '100vw';
+                gameWindow.document.body.style.height = '100vh';
+                gameWindow.document.body.style.overflow = 'hidden';
+
+                const frame = gameWindow.document.createElement('iframe');
+                frame.src = 'https://driftboss.io/drift-boss.embed';
+                frame.title = 'Drift Boss';
+                frame.allow = 'autoplay; fullscreen; gamepad';
+                frame.allowFullscreen = true;
+                frame.style.cssText = 'position:fixed; inset:0; width:100%; height:100%; border:0;';
+
+                gameWindow.document.body.appendChild(frame);
             });
         })();
     </script>
