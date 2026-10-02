@@ -378,6 +378,21 @@
         });
     }
 
+    function syncGamesNav(settings) {
+        document.querySelectorAll('.nav-bar').forEach(function (nav) {
+            let link = nav.querySelector('.nav-games');
+            if (!link) {
+                link = document.createElement('a');
+                link.href = 'games.html';
+                link.className = 'nav-item nav-games';
+                link.setAttribute('data-i18n', 'navGames');
+                link.textContent = t('navGames', null, settings.language);
+                nav.appendChild(link);
+            }
+            link.style.display = settings.font === 'pixel' ? 'inline-block' : 'none';
+        });
+    }
+
     function applySettings(settings) {
         const body = document.body;
         if (!body) return;
@@ -425,6 +440,7 @@
         }
 
         applyLanguage(settings.language);
+        syncGamesNav(settings);
     }
 
     // Exposed so settings.html can read/write/re-apply live as controls change.
