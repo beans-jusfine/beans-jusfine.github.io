@@ -24,7 +24,8 @@
         experimentalGravity: false,
         experimentalMatrix: false,
         experimentalCrt: false,
-        experimentalBios: false
+        experimentalBios: false,
+        clockFormat: '12'
     };
 
     const TRANSLATIONS = {
@@ -53,6 +54,9 @@
             setPagebarPos: `Pagebar Position`,
             setWallpaper: `Wallpaper`,
             setAccent: `Accent Color`,
+            setClockFormat: `Clock Format`,
+            clock12: `12-hour`,
+            clock24: `24-hour`,
             setBlur: `Blur Effect`,
             setWallpaperBlur: `Wallpaper Blur`,
             setReducedAnim: `Reduced Animation`,
@@ -152,6 +156,9 @@
             setPagebarPos: `Posición de la barra`,
             setWallpaper: `Fondo de pantalla`,
             setAccent: `Color de acento`,
+            setClockFormat: `Formato del reloj`,
+            clock12: `12 horas`,
+            clock24: `24 horas`,
             setBlur: `Efecto de desenfoque`,
             setWallpaperBlur: `Desenfoque del fondo`,
             setReducedAnim: `Animación reducida`,
@@ -251,6 +258,9 @@
             setPagebarPos: `Position de la barre`,
             setWallpaper: `Fond d'écran`,
             setAccent: `Couleur d'accentuation`,
+            setClockFormat: `Format de l'horloge`,
+            clock12: `12 heures`,
+            clock24: `24 heures`,
             setBlur: `Effet de flou`,
             setWallpaperBlur: `Flou du fond d'écran`,
             setReducedAnim: `Animation réduite`,
@@ -560,9 +570,13 @@
     const BEANS_TIMEZONE = 'America/Grand_Turk';
     const CLOCK_LOCALES = { en: 'en-US', es: 'es-ES', fr: 'fr-FR' };
 
-    function formatBeansTime(lang) {
+    function formatBeansTime(lang, format) {
         const locale = CLOCK_LOCALES[lang] || 'en-US';
-        const options = { hour: 'numeric', minute: '2-digit' };
+        const options = {
+            hour: 'numeric',
+            minute: '2-digit',
+            hour12: format !== '24'
+        };
         try {
             return new Date().toLocaleTimeString(locale, Object.assign({ timeZone: BEANS_TIMEZONE }, options));
         } catch (e) {
@@ -574,11 +588,12 @@
         const textEl = document.getElementById('profile-clock-text');
         if (!textEl) return;
 
-        const lang = loadSettings().language;
         let last = '';
 
         function tick() {
-            const next = t('clockLabel', { time: formatBeansTime(lang) }, lang);
+            const settings = loadSettings();
+            const lang = settings.language;
+            const next = t('clockLabel', { time: formatBeansTime(lang, settings.clockFormat) }, lang);
             if (next !== last) {
                 textEl.textContent = next;
                 last = next;

@@ -99,6 +99,14 @@
                     </div>
 
                     <div class="setting-row">
+                        <span data-i18n="setClockFormat">Clock Format</span>
+                        <select id="clock-format" class="dropdown-control">
+                            <option value="12" data-i18n="clock12">12-hour</option>
+                            <option value="24" data-i18n="clock24">24-hour</option>
+                        </select>
+                    </div>
+
+                    <div class="setting-row">
                         <span data-i18n="setWallpaper">Wallpaper</span>
                         <select id="wallpaper-select" class="dropdown-control">
                             <option value="default" selected data-i18n="wpDefault">Default</option>
@@ -170,38 +178,6 @@
                         <span data-i18n="setExperimental">Experimental Features</span>
                         <label class="switch">
                             <input type="checkbox" id="experimental-features">
-                            <span class="slider"></span>
-                        </label>
-                    </div>
-
-                    <div class="setting-row">
-                        <span data-i18n="setExperimentalGravity">Low-Gravity Mode</span>
-                        <label class="switch">
-                            <input type="checkbox" id="experimental-gravity">
-                            <span class="slider"></span>
-                        </label>
-                    </div>
-
-                    <div class="setting-row">
-                        <span data-i18n="setExperimentalMatrix">Matrix Mode</span>
-                        <label class="switch">
-                            <input type="checkbox" id="experimental-matrix">
-                            <span class="slider"></span>
-                        </label>
-                    </div>
-
-                    <div class="setting-row">
-                        <span data-i18n="setExperimentalCrt">CRT Mode</span>
-                        <label class="switch">
-                            <input type="checkbox" id="experimental-crt">
-                            <span class="slider"></span>
-                        </label>
-                    </div>
-
-                    <div class="setting-row">
-                        <span data-i18n="setExperimentalBios">Fake BIOS Screen</span>
-                        <label class="switch">
-                            <input type="checkbox" id="experimental-bios">
                             <span class="slider"></span>
                         </label>
                     </div>
@@ -287,6 +263,7 @@
                 bindSelect('font-select', 'font');
                 bindSelect('language-select', 'language');
                 bindSelect('pagebar-position', 'pagebarPosition');
+                bindSelect('clock-format', 'clockFormat');
                 bindSelect('wallpaper-select', 'wallpaper');
                 bindSelect('accent-color', 'accentColor');
                 bindCheckbox('blur-effect', 'blurEffect');
