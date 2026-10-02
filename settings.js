@@ -609,6 +609,150 @@
         setTimeout(function () { layer.remove(); }, 6500);
     }
 
+
+    function initExperimentalFeatures() {
+        if (!document.body.classList.contains('experimental')) return;
+
+        let state = { gravity: false, matrix: false, crt: false };
+        const panel = document.createElement('div');
+        panel.className = 'exp-console';
+        panel.innerHTML = '<div class="exp-console-head"><span>BEANS EXPERIMENTAL CONSOLE</span><button type="button" class="exp-console-close" aria-label="Close console">×</button></div><div class="exp-console-output" aria-live="polite"></div><div class="exp-console-line"><span>&gt;</span><input class="exp-console-input" type="text" autocomplete="off" spellcheck="false" aria-label="Experimental command"></div>';
+        document.body.appendChild(panel);
+
+        const output = panel.querySelector('.exp-console-output');
+        const input = panel.querySelector('.exp-console-input');
+
+        function print(line) {
+            const row = document.createElement('div');
+            row.textContent = line;
+            output.appendChild(row);
+            output.scrollTop = output.scrollHeight;
+        }
+
+        function gravity(on) {
+            state.gravity = on;
+            document.body.classList.toggle('exp-gravity', on);
+            print(on ? 'Low-Gravity Mode: ON' : 'Low-Gravity Mode: OFF');
+        }
+
+        function matrix(on) {
+            state.matrix = on;
+            document.body.classList.toggle('exp-matrix', on);
+            if (on && !document.querySelector('.exp-matrix-canvas')) {
+                const canvas = document.createElement('canvas');
+                canvas.className = 'exp-matrix-canvas';
+                document.body.appendChild(canvas);
+                const ctx = canvas.getContext('2d');
+                let drops = [];
+
+                function resize() {
+                    canvas.width = window.innerWidth;
+                    canvas.height = window.innerHeight;
+                    drops = Array(Math.ceil(canvas.width / 16)).fill(1);
+                }
+
+                function draw() {
+                    if (!document.body.classList.contains('exp-matrix')) {
+                        canvas.remove();
+                        return;
+                    }
+                    ctx.fillStyle = 'rgba(0,0,0,0.08)';
+                    ctx.fillRect(0, 0, canvas.width, canvas.height);
+                    ctx.fillStyle = '#32ff75';
+                    ctx.font = '14px monospace';
+                    const chars = '01{}[]<>/|$#@%*';
+                    for (let i = 0; i < drops.length; i++) {
+                        ctx.fillText(chars.charAt(Math.floor(Math.random() * chars.length)), i * 16, drops[i] * 16);
+                        if (drops[i] * 16 > canvas.height && Math.random() > 0.975) drops[i] = 0;
+                        drops[i]++;
+                    }
+                    requestAnimationFrame(draw);
+                }
+
+                resize();
+                window.addEventListener('resize', resize);
+                draw();
+            }
+            if (!on) {
+                const canvas = document.querySelector('.exp-matrix-canvas');
+                if (canvas) canvas.remove();
+            }
+            print(on ? 'Matrix Mode: ON' : 'Matrix Mode: OFF');
+        }
+
+        function crt(on) {
+            state.crt = on;
+            document.body.classList.toggle('exp-crt', on);
+            print(on ? 'CRT Mode: ON' : 'CRT Mode: OFF');
+        }
+
+        function bios() {
+            if (document.querySelector('.exp-bios')) return;
+            const screen = document.createElement('div');
+            screen.className = 'exp-bios';
+            screen.innerHTML = '<div class="exp-bios-screen"><div class="exp-bios-title">BEANS BIOS v1.0</div><div>Copyright (C) beans ツ</div><br><div>CPU ............ BEAN PROCESSOR</div><div>MEMORY ......... OK</div><div>STORAGE ........ OK</div><div>DISPLAY ........ OK</div><div>NETWORK ........ OK</div><br><div>Experimental firmware loaded.</div><div>Press ESC or click to continue...</div><div class="exp-bios-cursor">_</div></div>';
+            document.body.appendChild(screen);
+            function close() {
+                screen.remove();
+                document.removeEventListener('keydown', key);
+            }
+            function key(e) {
+                if (e.key === 'Escape' || e.key === 'Enter') close();
+            }
+            screen.addEventListener('click', close);
+            document.addEventListener('keydown', key);
+        }
+
+        function command(raw) {
+            const cmd = raw.trim().toLowerCase();
+            if (!cmd) return;
+            print('> ' + raw.trim());
+            if (cmd === 'help') print('commands: help, gravity, matrix, crt, bios, clear, status, close');
+            else if (cmd === 'gravity') gravity(!state.gravity);
+            else if (cmd === 'matrix') matrix(!state.matrix);
+            else if (cmd === 'crt') crt(!state.crt);
+            else if (cmd === 'bios') bios();
+            else if (cmd === 'clear') output.innerHTML = '';
+            else if (cmd === 'status') print('gravity=' + (state.gravity ? 'on' : 'off') + ' | matrix=' + (state.matrix ? 'on' : 'off') + ' | crt=' + (state.crt ? 'on' : 'off'));
+            else if (cmd === 'close' || cmd === 'exit') panel.classList.remove('open');
+            else print('Unknown command. Type "help".');
+        }
+
+        panel.querySelector('.exp-console-close').addEventListener('click', function () {
+            panel.classList.remove('open');
+        });
+
+        input.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter') {
+                command(input.value);
+                input.value = '';
+            }
+            if (e.key === 'Escape') panel.classList.remove('open');
+        });
+
+        document.addEventListener('keydown', function (e) {
+            const tag = e.target && e.target.tagName ? e.target.tagName : '';
+            if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return;
+            if (e.key === String.fromCharCode(96) || (e.ctrlKey && e.key.toLowerCase() === 'k')) {
+                e.preventDefault();
+                panel.classList.toggle('open');
+                if (panel.classList.contains('open')) input.focus();
+            }
+        });
+
+        const badge = document.createElement('button');
+        badge.type = 'button';
+        badge.className = 'exp-console-badge';
+        badge.textContent = 'EXP';
+        badge.title = 'Open Experimental Console';
+        badge.addEventListener('click', function () {
+            panel.classList.add('open');
+            input.focus();
+        });
+        document.body.appendChild(badge);
+        print('Experimental console ready. Type "help".');
+    }
+
     function initSecretCode() {
         const SECRET_CODE = 'beans';
         let typed = '';
@@ -636,5 +780,6 @@
         initAvatarBeanBurst();
         initLiveClock();
         initSecretCode();
+        initExperimentalFeatures();
     });
 })();
