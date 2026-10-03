@@ -1418,28 +1418,17 @@ body.no-wallpaper-blur .beans-wallpaper-bean {
 }
 
 
-/* Secret classic/Teardrop-style UI for Experimental Mode. */
-body.experimental-ui {
-    --bg-color: #071843;
-    --text-color: #f7fbff;
-    --card-bg: rgba(41, 90, 175, 0.38);
-    --box-bg: rgba(45, 99, 190, 0.28);
-    --overlay-bg: rgba(62, 124, 220, 0.18);
-    --nav-bg: rgba(37, 92, 190, 0.60);
-    --dropdown-bg: rgba(28, 72, 155, 0.88);
-    --border-soft: rgba(171, 218, 255, 0.26);
-    --accent: #39a9ff;
-    --accent-glow: #d7f2ff;
-    --accent-rgb: 57, 169, 255;
+/* Secret classic UI unlocked by clicking the PFP 20 times. */
+body.secret-classic-ui {
     background-color: #061331;
     background-image:
-        radial-gradient(circle at 50% 18%, rgba(72, 183, 255, 0.28), transparent 32%),
-        radial-gradient(circle at 20% 90%, rgba(86, 69, 255, 0.18), transparent 38%),
-        linear-gradient(180deg, #102d73 0%, #0b1850 45%, #070b28 100%);
+        radial-gradient(circle at 50% 18%, rgba(var(--accent-rgb), 0.28), transparent 32%),
+        radial-gradient(circle at 20% 90%, rgba(var(--accent-rgb), 0.18), transparent 38%),
+        linear-gradient(180deg, rgba(var(--accent-rgb), 0.16), rgba(6, 19, 49, 0.98));
     padding-top: 95px;
 }
 
-body.experimental-ui::before {
+body.secret-classic-ui::before {
     z-index: -2;
     background-image: url('icons/beans-extended.jpg');
     background-size: cover;
@@ -1447,34 +1436,34 @@ body.experimental-ui::before {
     opacity: 0.22;
     filter: blur(8px) saturate(1.05);
     transform: scale(1.04);
-    animation: experimentalBeansBackdrop 18s ease-in-out infinite alternate;
+    animation: secretBeansBackdrop 18s ease-in-out infinite alternate;
 }
 
-body.experimental-ui::after {
+body.secret-classic-ui::after {
     z-index: -1;
     background:
-        radial-gradient(circle at 50% 28%, rgba(30, 196, 255, 0.55), transparent 28%),
-        radial-gradient(circle at 50% 60%, rgba(66, 83, 255, 0.18), transparent 42%);
+        radial-gradient(circle at 50% 28%, rgba(var(--accent-rgb), 0.42), transparent 28%),
+        radial-gradient(circle at 50% 60%, rgba(var(--accent-rgb), 0.14), transparent 42%);
     opacity: 0.75;
     mix-blend-mode: screen;
 }
 
-body.experimental-ui .nav-bar {
+body.secret-classic-ui .nav-bar {
     top: 20px;
     left: 50%;
     transform: translateX(-50%);
-    background: rgba(28, 78, 169, 0.62);
-    border: 1px solid rgba(160, 214, 255, 0.34);
+    background: rgba(18, 53, 125, 0.58);
+    border: 1px solid rgba(var(--accent-rgb), 0.34);
     box-shadow: 0 10px 28px rgba(0, 20, 80, 0.34);
     backdrop-filter: blur(20px) saturate(145%);
     -webkit-backdrop-filter: blur(20px) saturate(145%);
 }
 
-body.experimental-ui .dashboard-container {
+body.secret-classic-ui .dashboard-container {
     max-width: 1060px;
     padding: 18px 14px 24px;
-    background: rgba(43, 91, 176, 0.36);
-    border: 1px solid rgba(177, 221, 255, 0.26);
+    background: rgba(43, 91, 176, 0.28);
+    border: 1px solid rgba(var(--accent-rgb), 0.26);
     border-radius: 16px;
     box-shadow:
         0 24px 70px rgba(0, 0, 50, 0.42),
@@ -1483,67 +1472,49 @@ body.experimental-ui .dashboard-container {
     -webkit-backdrop-filter: blur(18px) saturate(130%);
 }
 
-body.experimental-ui .profile-card,
-body.experimental-ui .dash-box {
-    background: rgba(52, 109, 204, 0.30);
-    border-color: rgba(180, 223, 255, 0.24);
+body.secret-classic-ui .profile-card,
+body.secret-classic-ui .dash-box {
+    background: rgba(52, 109, 204, 0.26);
+    border-color: rgba(var(--accent-rgb), 0.24);
     box-shadow:
         0 12px 34px rgba(0, 18, 80, 0.22),
         inset 0 1px 0 rgba(255, 255, 255, 0.06);
 }
 
-body.experimental-ui .profile-card {
-    border-radius: 14px;
+body.secret-classic-ui .quote-bubble,
+body.secret-classic-ui .setting-row,
+body.secret-classic-ui .spec-item {
+    background: rgba(76, 139, 215, 0.18);
+    border-color: rgba(var(--accent-rgb), 0.18);
 }
 
-body.experimental-ui .dash-box {
-    border-radius: 13px;
-}
-
-body.experimental-ui .profile-card .avatar-ring {
-    border-color: #2d8dff;
+body.secret-classic-ui .profile-card .avatar-ring {
+    border-color: var(--accent);
     box-shadow:
-        0 0 0 4px rgba(54, 153, 255, 0.20),
-        0 0 28px rgba(42, 161, 255, 0.32);
+        0 0 0 4px rgba(var(--accent-rgb), 0.18),
+        0 0 28px rgba(var(--accent-rgb), 0.28);
 }
 
-body.experimental-ui .profile-card .profile-avatar {
-    object-fit: cover;
-}
-
-body.experimental-ui .quote-bubble,
-body.experimental-ui .setting-row,
-body.experimental-ui .spec-item {
-    background: rgba(76, 139, 215, 0.20);
-    border-color: rgba(185, 225, 255, 0.18);
-}
-
-body.experimental-ui .box-title,
-body.experimental-ui .profile-name,
-body.experimental-ui .profile-tag,
-body.experimental-ui .node-label,
-body.experimental-ui .node-value {
+body.secret-classic-ui .box-title,
+body.secret-classic-ui .profile-name,
+body.secret-classic-ui .profile-tag,
+body.secret-classic-ui .node-label,
+body.secret-classic-ui .node-value {
     text-shadow: 0 2px 14px rgba(0, 18, 70, 0.45);
 }
 
-body.experimental-ui .exp-console,
-body.experimental-ui .exp-bios-screen {
-    border-color: rgba(160, 218, 255, 0.38);
-    box-shadow: 0 20px 60px rgba(0, 22, 80, 0.45);
-}
-
-@keyframes experimentalBeansBackdrop {
+@keyframes secretBeansBackdrop {
     0% { transform: scale(1.04); background-position: 48% 46%; }
     50% { transform: scale(1.075); background-position: 52% 50%; }
     100% { transform: scale(1.10); background-position: 47% 54%; }
 }
 
 @media (max-width: 768px) {
-    body.experimental-ui {
+    body.secret-classic-ui {
         padding-top: 86px;
     }
 
-    body.experimental-ui .dashboard-container {
+    body.secret-classic-ui .dashboard-container {
         padding: 12px 8px 18px;
     }
 }

@@ -449,12 +449,6 @@
         body.classList.toggle('low-end', !!settings.lowEndMode);
 
         body.classList.toggle('experimental', !!settings.experimentalFeatures);
-        body.classList.toggle('experimental-ui', !!settings.experimentalFeatures);
-
-        document.querySelectorAll('.profile-avatar').forEach(function (img) {
-            if (!img.dataset.normalSrc) img.dataset.normalSrc = img.getAttribute('src') || '';
-            img.src = settings.experimentalFeatures ? 'icons/beans-card.jpg' : img.dataset.normalSrc;
-        });
 
         syncBeansWallpaperFx(settings);
 
@@ -578,8 +572,9 @@
 
             if (clickCount >= CLICKS_TO_FALL) {
                 ring.classList.remove('wobble');
-                ring.classList.add('fallen');
+                document.body.classList.add('secret-classic-ui');
                 ring.style.cursor = 'default';
+                showToast('secret UI unlocked 🫘');
                 return;
             }
 
