@@ -562,16 +562,24 @@
         const ring = document.querySelector('.avatar-ring');
         if (!ring) return;
 
-        const CLICKS_TO_FALL = 7;
+        const CLICKS_TO_UNLOCK = 7;
         let clickCount = 0;
+        let unlocked = document.body.classList.contains('secret-classic-ui');
 
-        ring.addEventListener('click', function () {
-            if (ring.classList.contains('fallen')) return;
+        document.addEventListener('click', function (e) {
+            if (unlocked) return;
+
+            const target = e.target;
+            if (!target || !target.closest) return;
+
+            const avatar = target.closest('#avatar-ring, #avatar-ring .profile-avatar');
+            if (!avatar) return;
 
             clickCount++;
 
-            if (clickCount >= CLICKS_TO_FALL) {
-                ring.classList.remove('wobble');
+            if (clickCount >= CLICKS_TO_UNLOCK) {
+                unlocked = true;
+                ring.classList.remove('wobble', 'fallen');
                 document.body.classList.add('secret-classic-ui');
                 ring.style.cursor = 'default';
                 showToast('secret UI unlocked 🫘');
@@ -579,9 +587,8 @@
             }
 
             const reduced = document.body.classList.contains('reduced-motion');
-
             ring.classList.remove('wobble');
-            void ring.offsetWidth; // restart the animation if clicked again quickly
+            void ring.offsetWidth;
             if (!reduced) ring.classList.add('wobble');
 
             if (reduced) return;
