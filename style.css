@@ -1429,7 +1429,7 @@ body.secret-classic-ui {
 }
 
 body.secret-classic-ui::before {
-    z-index: -2;
+    z-index: -1;
     background-image: url('icons/beans-extended.jpg');
     background-size: 100% 100%;
     background-position: center;
