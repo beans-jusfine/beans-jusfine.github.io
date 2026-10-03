@@ -562,7 +562,7 @@
         const ring = document.querySelector('.avatar-ring');
         if (!ring) return;
 
-        const CLICKS_TO_FALL = 20;
+        const CLICKS_TO_FALL = 7;
         let clickCount = 0;
 
         ring.addEventListener('click', function () {
