@@ -1431,11 +1431,12 @@ body.secret-classic-ui {
 body.secret-classic-ui::before {
     z-index: -2;
     background-image: url('icons/beans-extended.jpg');
-    background-size: cover;
+    background-size: 100% 100%;
     background-position: center;
+    background-repeat: no-repeat;
     opacity: 0.22;
     filter: blur(8px) saturate(1.05);
-    transform: scale(1.04);
+    transform: scale(1.01);
     animation: secretBeansBackdrop 18s ease-in-out infinite alternate;
 }
 
