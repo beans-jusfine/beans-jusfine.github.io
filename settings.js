@@ -378,6 +378,36 @@
         });
     }
 
+    function syncBeansWallpaperFx(settings) {
+        const active = settings.wallpaper === 'beans' && !settings.lowEndMode;
+        let layer = document.querySelector('.beans-wallpaper-fx');
+
+        if (!active) {
+            if (layer) layer.remove();
+            return;
+        }
+
+        if (!layer) {
+            layer = document.createElement('div');
+            layer.className = 'beans-wallpaper-fx';
+            layer.setAttribute('aria-hidden', 'true');
+
+            for (let i = 0; i < 18; i++) {
+                const bean = document.createElement('span');
+                bean.className = 'beans-wallpaper-bean';
+                bean.textContent = '🫘';
+                bean.style.left = (Math.random() * 100) + 'vw';
+                bean.style.setProperty('--drift', ((Math.random() - 0.5) * 180) + 'px');
+                bean.style.setProperty('--delay', (Math.random() * 5) + 's');
+                bean.style.setProperty('--duration', (4.5 + Math.random() * 4) + 's');
+                bean.style.setProperty('--size', (14 + Math.random() * 18) + 'px');
+                layer.appendChild(bean);
+            }
+
+            document.body.appendChild(layer);
+        }
+    }
+
     function applySettings(settings) {
         const body = document.body;
         if (!body) return;
@@ -419,6 +449,8 @@
         body.classList.toggle('low-end', !!settings.lowEndMode);
 
         body.classList.toggle('experimental', !!settings.experimentalFeatures);
+
+        syncBeansWallpaperFx(settings);
 
         if (window.beansExperimental && typeof window.beansExperimental.sync === 'function') {
             window.beansExperimental.sync(settings);

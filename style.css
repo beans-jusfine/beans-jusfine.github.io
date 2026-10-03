@@ -1373,3 +1373,46 @@ body.font-pixel .exp-bios {
         min-height: calc(100vh - 40px);
     }
 }
+
+/* Animated Beans wallpaper effect inspired by the supplied video reference. */
+body.wallpaper-beans::before {
+    opacity: 0.22;
+    background-size: 115% 115%;
+    animation: beansWallpaperDrift 18s ease-in-out infinite alternate;
+    transform-origin: center center;
+}
+
+@keyframes beansWallpaperDrift {
+    0% { background-position: 46% 48%; transform: scale(1); }
+    50% { background-position: 54% 52%; transform: scale(1.035); }
+    100% { background-position: 48% 56%; transform: scale(1.07); }
+}
+
+.beans-wallpaper-fx {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.beans-wallpaper-bean {
+    position: absolute;
+    top: -48px;
+    font-size: var(--size);
+    filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.25));
+    opacity: 0;
+    animation: beansWallpaperBeanFlight var(--duration) linear var(--delay) infinite;
+}
+
+@keyframes beansWallpaperBeanFlight {
+    0% { transform: translate3d(0, -60px, 0) rotate(-20deg); opacity: 0; }
+    10% { opacity: 0.72; }
+    55% { transform: translate3d(var(--drift), 54vh, 0) rotate(160deg); opacity: 0.55; }
+    100% { transform: translate3d(calc(var(--drift) * -0.55), 112vh, 0) rotate(340deg); opacity: 0; }
+}
+
+body.reduced-motion .beans-wallpaper-bean,
+body.no-wallpaper-blur .beans-wallpaper-bean {
+    display: none;
+}
