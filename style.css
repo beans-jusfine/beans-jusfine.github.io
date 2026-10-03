@@ -1435,7 +1435,7 @@ body.secret-classic-ui::before {
     background-position: center;
     background-repeat: no-repeat;
     opacity: 0.22;
-    filter: blur(8px) saturate(1.05);
+    filter: none;
     transform: scale(1.01);
     animation: secretBeansBackdrop 18s ease-in-out infinite alternate;
 }
