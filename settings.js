@@ -62,10 +62,6 @@
             setReducedAnim: `Reduced Animation`,
             setLowEnd: `Low-End Mode`,
             setExperimental: `Experimental Features`,
-            setExperimentalGravity: `Low-Gravity Mode`,
-            setExperimentalMatrix: `Matrix Mode`,
-            setExperimentalCrt: `CRT Mode`,
-            setExperimentalBios: `Fake BIOS Screen`,
             posTop: `Top`,
             posBottom: `Bottom`,
             wpDefault: `Default`,
@@ -164,10 +160,6 @@
             setReducedAnim: `Animación reducida`,
             setLowEnd: `Modo de bajo rendimiento`,
             setExperimental: `Funciones experimentales`,
-            setExperimentalGravity: `Modo de baja gravedad`,
-            setExperimentalMatrix: `Modo Matrix`,
-            setExperimentalCrt: `Modo CRT`,
-            setExperimentalBios: `Pantalla BIOS falsa`,
             posTop: `Arriba`,
             posBottom: `Abajo`,
             wpDefault: `Predeterminado`,
@@ -266,10 +258,6 @@
             setReducedAnim: `Animation réduite`,
             setLowEnd: `Mode faible performance`,
             setExperimental: `Fonctionnalités expérimentales`,
-            setExperimentalGravity: `Mode faible gravité`,
-            setExperimentalMatrix: `Mode Matrix`,
-            setExperimentalCrt: `Mode CRT`,
-            setExperimentalBios: `Faux écran BIOS`,
             posTop: `Haut`,
             posBottom: `Bas`,
             wpDefault: `Par défaut`,
@@ -452,10 +440,6 @@
 
         syncBeansWallpaperFx(settings);
 
-        if (window.beansExperimental && typeof window.beansExperimental.sync === 'function') {
-            window.beansExperimental.sync(settings);
-        }
-
         applyLanguage(settings.language);
     }
 
@@ -636,176 +620,6 @@
     }
 
 
-    function initExperimentalFeatures() {
-        if (window.beansExperimental) return;
-
-        let matrixCanvas = null;
-        let matrixFrame = 0;
-        let matrixResize = null;
-        let biosScreen = null;
-        const state = {
-            gravity: false,
-            matrix: false,
-            crt: false,
-            bios: false
-        };
-
-        function gravity(on) {
-            state.gravity = !!on;
-            document.body.classList.toggle('exp-gravity', state.gravity);
-        }
-
-        function matrix(on) {
-            on = !!on;
-            state.matrix = on;
-            document.body.classList.toggle('exp-matrix', on);
-
-            if (on && !matrixCanvas) {
-                const canvas = document.createElement('canvas');
-                canvas.className = 'exp-matrix-canvas';
-                document.body.appendChild(canvas);
-
-                const ctx = canvas.getContext('2d');
-                let drops = [];
-
-                function resize() {
-                    canvas.width = window.innerWidth;
-                    canvas.height = window.innerHeight;
-                    drops = Array(Math.ceil(canvas.width / 16)).fill(1);
-                }
-
-                function draw() {
-                    if (!state.matrix || !document.body.classList.contains('exp-matrix')) return;
-
-                    // Fade the Matrix trails only; leave the page underneath untouched.
-                    ctx.globalCompositeOperation = 'destination-out';
-                    ctx.fillStyle = 'rgba(0,0,0,0.08)';
-                    ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-                    ctx.globalCompositeOperation = 'source-over';
-                    ctx.fillStyle = '#32ff75';
-                    ctx.font = '14px monospace';
-
-                    const chars = '01{}[]<>/|$#@%*';
-                    for (let i = 0; i < drops.length; i++) {
-                        ctx.fillText(
-                            chars.charAt(Math.floor(Math.random() * chars.length)),
-                            i * 16,
-                            drops[i] * 16
-                        );
-
-                        if (drops[i] * 16 > canvas.height && Math.random() > 0.975) {
-                            drops[i] = 0;
-                        }
-                        drops[i]++;
-                    }
-
-                    matrixFrame = requestAnimationFrame(draw);
-                }
-
-                resize();
-                matrixCanvas = canvas;
-                matrixResize = resize;
-                window.addEventListener('resize', matrixResize);
-                matrixFrame = requestAnimationFrame(draw);
-            }
-
-            if (!on) {
-                if (matrixFrame) cancelAnimationFrame(matrixFrame);
-                matrixFrame = 0;
-
-                if (matrixResize) {
-                    window.removeEventListener('resize', matrixResize);
-                }
-                matrixResize = null;
-
-                if (matrixCanvas) {
-                    matrixCanvas.remove();
-                }
-                matrixCanvas = null;
-            }
-        }
-
-        function crt(on) {
-            state.crt = !!on;
-            document.body.classList.toggle('exp-crt', state.crt);
-        }
-
-        function setBiosPreference(on) {
-            const settings = loadSettings();
-            settings.experimentalBios = !!on;
-            saveSettings(settings);
-            window.dispatchEvent(new CustomEvent('beansExperimentalChange', {
-                detail: { key: 'experimentalBios', value: !!on }
-            }));
-        }
-
-        function closeBios(savePreference) {
-            if (biosScreen) {
-                biosScreen.remove();
-                biosScreen = null;
-            }
-            state.bios = false;
-            if (savePreference) setBiosPreference(false);
-        }
-
-        function bios(on) {
-            on = !!on;
-            if (!on) {
-                closeBios(false);
-                return;
-            }
-
-            if (biosScreen) return;
-
-            state.bios = true;
-            const screen = document.createElement('div');
-            screen.className = 'exp-bios';
-            screen.innerHTML =
-                '<div class="exp-bios-screen">' +
-                '<div class="exp-bios-title">BEANS BIOS v1.0</div>' +
-                '<div>Copyright (C) beans ツ</div><br>' +
-                '<div>CPU ............ BEAN PROCESSOR</div>' +
-                '<div>MEMORY ......... OK</div>' +
-                '<div>STORAGE ........ OK</div>' +
-                '<div>DISPLAY ........ OK</div>' +
-                '<div>NETWORK ........ OK</div><br>' +
-                '<div>Experimental firmware loaded.</div>' +
-                '<div>Press ESC or click to continue...</div>' +
-                '<div class="exp-bios-cursor">_</div>' +
-                '</div>';
-
-            biosScreen = screen;
-            document.body.appendChild(screen);
-
-            function close() {
-                closeBios(true);
-                document.removeEventListener('keydown', key);
-            }
-
-            function key(e) {
-                if (e.key === 'Escape' || e.key === 'Enter') close();
-            }
-
-            screen.addEventListener('click', close);
-            document.addEventListener('keydown', key);
-        }
-
-        function sync(settings) {
-            const enabled = !!settings.experimentalFeatures;
-
-            gravity(enabled && !!settings.experimentalGravity);
-            matrix(enabled && !!settings.experimentalMatrix);
-            crt(enabled && !!settings.experimentalCrt);
-            bios(enabled && !!settings.experimentalBios);
-        }
-
-        window.beansExperimental = {
-            sync: sync,
-            closeBios: function () { closeBios(true); }
-        };
-    }
-
     function initSecretCode() {
         const SECRET_CODE = 'beans';
         let typed = '';
@@ -826,12 +640,8 @@
         });
     }
 
-    document.addEventListener('DOMContentLoaded', function () {
-        initExperimentalFeatures();
-        applySettings(loadSettings());
+    document.addEventListener('DOMContentLoaded', function () {        applySettings(loadSettings());
         initPageFade();
         initQuoteTypewriter();        initLiveClock();
-        initSecretCode();
-        initExperimentalFeatures();
-    });
+        initSecretCode();    });
 })();

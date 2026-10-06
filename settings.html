@@ -249,14 +249,6 @@
                     });
                 }
 
-                function syncExperimentalUI() {
-                    const forced = !settings.experimentalFeatures;
-                    ['experimental-gravity', 'experimental-matrix', 'experimental-crt', 'experimental-bios'].forEach(function (id) {
-                        const el = document.getElementById(id);
-                        if (el) el.disabled = forced;
-                    });
-                }
-
                 bindCheckbox('dark-mode', 'darkMode');
                 bindCheckbox('show-figcaptions', 'showFigcaptions');
                 bindCheckbox('small-pagebar', 'smallPagebar');
@@ -271,10 +263,6 @@
                 bindCheckbox('wallpaper-blur', 'wallpaperBlur');
                 bindCheckbox('reduced-animation', 'reducedAnimation');
                 bindCheckbox('low-end-mode', 'lowEndMode');
-                bindCheckbox('experimental-gravity', 'experimentalGravity');
-                bindCheckbox('experimental-matrix', 'experimentalMatrix');
-                bindCheckbox('experimental-crt', 'experimentalCrt');
-                bindCheckbox('experimental-bios', 'experimentalBios');
 
                 const expToggle = document.getElementById('experimental-features');
                 const expDialog = document.getElementById('experimental-dialog');
@@ -323,20 +311,7 @@
                     }
                 });
 
-                window.addEventListener('beansExperimentalChange', function (e) {
-                    const detail = e.detail || {};
-                    if (!detail.key) return;
-                    settings[detail.key] = !!detail.value;
-                    const checkboxIds = {
-                        experimentalBios: 'experimental-bios',
-                        experimentalGravity: 'experimental-gravity',
-                        experimentalMatrix: 'experimental-matrix',
-                        experimentalCrt: 'experimental-crt'
-                    };
-                    const checkbox = document.getElementById(checkboxIds[detail.key] || '');
-                    if (checkbox) checkbox.checked = !!detail.value;
-                    syncExperimentalUI();
-                });
+
 
                 document.getElementById('exp-enable').addEventListener('click', tryEnableExperimental);
                 document.getElementById('exp-cancel').addEventListener('click', function () {
@@ -360,7 +335,6 @@
                 });
 
                 syncLowEndUI();
-                syncExperimentalUI();
                 window.beansSettings.apply(settings);
             });
         })();
