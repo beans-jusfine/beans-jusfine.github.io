@@ -558,55 +558,6 @@
         setTimeout(typeNext, 350); // let the page fade-in settle first
     }
 
-    function initAvatarBeanBurst() {
-        const ring = document.querySelector('.avatar-ring');
-        if (!ring) return;
-
-        const CLICKS_TO_UNLOCK = 7;
-        let clickCount = 0;
-        let unlocked = document.body.classList.contains('secret-classic-ui');
-
-        document.addEventListener('click', function (e) {
-            if (unlocked) return;
-
-            const target = e.target;
-            if (!target || !target.closest) return;
-
-            const avatar = target.closest('#avatar-ring, #avatar-ring .profile-avatar');
-            if (!avatar) return;
-
-            clickCount++;
-
-            if (clickCount >= CLICKS_TO_UNLOCK) {
-                unlocked = true;
-                ring.classList.remove('wobble', 'fallen');
-                document.body.classList.add('secret-classic-ui');
-                ring.style.cursor = 'default';
-                showToast('secret UI unlocked 🫘');
-                return;
-            }
-
-            const reduced = document.body.classList.contains('reduced-motion');
-            ring.classList.remove('wobble');
-            void ring.offsetWidth;
-            if (!reduced) ring.classList.add('wobble');
-
-            if (reduced) return;
-
-            for (let i = 0; i < 6; i++) {
-                const particle = document.createElement('span');
-                particle.className = 'bean-particle';
-                particle.textContent = '🫘';
-                const tx = (Math.random() - 0.5) * 80;
-                particle.style.setProperty('--tx', tx + 'px');
-                particle.style.left = (45 + Math.random() * 10) + '%';
-                particle.style.top = '40%';
-                ring.appendChild(particle);
-                setTimeout(function () { particle.remove(); }, 1000);
-            }
-        });
-    }
-
     const BEANS_TIMEZONE = 'America/Grand_Turk';
     const CLOCK_LOCALES = { en: 'en-US', es: 'es-ES', fr: 'fr-FR' };
 
@@ -879,9 +830,7 @@
         initExperimentalFeatures();
         applySettings(loadSettings());
         initPageFade();
-        initQuoteTypewriter();
-        initAvatarBeanBurst();
-        initLiveClock();
+        initQuoteTypewriter();        initLiveClock();
         initSecretCode();
         initExperimentalFeatures();
     });
