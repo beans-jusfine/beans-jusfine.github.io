@@ -1205,5 +1205,5 @@ body.halloween-spooky-font :where(
     .spec-text, .fig-caption, .nav-item, .quote-bubble, .setting-row,
     .bean-game-help
 ) {
-    font-size: 1.1em !important;
+    font-size: 1.3em !important;
 }
