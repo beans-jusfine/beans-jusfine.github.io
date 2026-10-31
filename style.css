@@ -1149,3 +1149,42 @@ body.no-wallpaper-blur .beans-wallpaper-bean {
 body.reduced-motion .halloween-rain {
     display: none;
 }
+
+
+/* Click burst from the profile can: beans normally, spooky icons in Halloween mode. */
+.can-burst-layer {
+    position: fixed;
+    inset: 0;
+    z-index: 2300;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.can-burst-item {
+    position: absolute;
+    display: block;
+    line-height: 1;
+    opacity: 0;
+    user-select: none;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.28));
+    animation: canBurstFly 1.05s cubic-bezier(0.18, 0.72, 0.3, 1) both;
+}
+
+@keyframes canBurstFly {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) translate(0, 0) scale(0.35) rotate(0deg);
+    }
+    14% {
+        opacity: 1;
+        transform: translate(-50%, -50%) translate(0, 0) scale(1.12) rotate(0deg);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) translate(var(--burst-x), var(--burst-y)) scale(0.82) rotate(var(--burst-spin));
+    }
+}
+
+body.reduced-motion .can-burst-layer {
+    display: none;
+}

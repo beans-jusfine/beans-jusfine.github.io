@@ -623,10 +623,40 @@
     }
 
 
+    function isHalloweenActive() {
+        try {
+            return sessionStorage.getItem('beansHalloweenActive') === '1';
+        } catch (e) {
+            return false;
+        }
+    }
+
+    function stopHalloween() {
+        try {
+            sessionStorage.removeItem('beansHalloweenActive');
+        } catch (e) {}
+
+        if (window.__beansHalloweenRainTimer) {
+            clearInterval(window.__beansHalloweenRainTimer);
+            window.__beansHalloweenRainTimer = null;
+        }
+
+        document.querySelectorAll('.halloween-rain').forEach(function (layer) {
+            layer.remove();
+        });
+
+        document.querySelectorAll('.profile-avatar').forEach(function (img) {
+            img.src = img.dataset.normalAvatarSrc || 'icons/pfp.png';
+            img.alt = "Beans's Avatar";
+            delete img.dataset.normalAvatarSrc;
+        });
+
+        showToast('Easter egg stopped');
+    }
+
     function triggerHalloween(options) {
         const config = options || {};
 
-        // sessionStorage survives normal page-to-page navigation in the same tab.
         try {
             sessionStorage.setItem('beansHalloweenActive', '1');
         } catch (e) {}
@@ -676,16 +706,61 @@
             }
         }
 
-        // Start with a full screen of emojis, then keep generating them indefinitely.
         spawnRain(42, true);
         window.__beansHalloweenRainTimer = window.setInterval(function () {
-            if (!layer.isConnected) {
+            if (!layer.isConnected || !isHalloweenActive()) {
                 clearInterval(window.__beansHalloweenRainTimer);
                 window.__beansHalloweenRainTimer = null;
                 return;
             }
             spawnRain(3, false);
         }, 450);
+    }
+
+    function burstFromCan(ring, spooky) {
+        if (!ring || document.body.classList.contains('reduced-motion')) return;
+
+        const rect = ring.getBoundingClientRect();
+        const originX = rect.left + rect.width / 2;
+        const originY = rect.top + rect.height / 2;
+        const layer = document.createElement('div');
+        layer.className = 'can-burst-layer';
+        layer.setAttribute('aria-hidden', 'true');
+        document.body.appendChild(layer);
+
+        const beans = ['🫘', '🫘', '🫘', '🥫'];
+        const spookyEmojis = ['🎃', '👻', '🦇', '🕷️', '🕸️', '🍬', '💀'];
+
+        for (let i = 0; i < 16; i++) {
+            const angle = (Math.PI * 2 * i / 16) + (Math.random() - 0.5) * 0.34;
+            const distance = 65 + Math.random() * 105;
+            const piece = document.createElement('span');
+            piece.className = 'can-burst-item';
+            piece.textContent = spooky
+                ? spookyEmojis[Math.floor(Math.random() * spookyEmojis.length)]
+                : beans[Math.floor(Math.random() * beans.length)];
+            piece.style.left = originX + 'px';
+            piece.style.top = originY + 'px';
+            piece.style.setProperty('--burst-x', (Math.cos(angle) * distance) + 'px');
+            piece.style.setProperty('--burst-y', (Math.sin(angle) * distance) + 'px');
+            piece.style.setProperty('--burst-spin', (Math.random() * 520 - 260) + 'deg');
+            piece.style.animationDelay = (Math.random() * 0.12) + 's';
+            piece.style.fontSize = (18 + Math.random() * 16) + 'px';
+            layer.appendChild(piece);
+        }
+
+        window.setTimeout(function () { layer.remove(); }, 1500);
+    }
+
+    function initCanClickEffect() {
+        document.addEventListener('click', function (e) {
+            const target = e.target;
+            if (!target || !target.closest) return;
+            const ring = target.closest('.avatar-ring');
+            if (!ring) return;
+
+            burstFromCan(ring, isHalloweenActive());
+        });
     }
 
     function initSecretCodes() {
@@ -713,13 +788,19 @@
                 triggerBeanRain();
             } else if (typed.endsWith('boo')) {
                 typed = '';
-                triggerHalloween();
+                if (isHalloweenActive()) {
+                    stopHalloween();
+                } else {
+                    triggerHalloween();
+                }
             }
         });
     }
 
     document.addEventListener('DOMContentLoaded', function () {        applySettings(loadSettings());
         initPageFade();
-        initQuoteTypewriter();        initLiveClock();
+        initQuoteTypewriter();
+        initLiveClock();
+        initCanClickEffect();
         initSecretCodes();    });
 })();
