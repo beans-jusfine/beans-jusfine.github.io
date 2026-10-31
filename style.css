@@ -1120,3 +1120,32 @@ body.no-wallpaper-blur .beans-wallpaper-bean {
 }
 
 
+
+
+/* Halloween Easter egg: falling seasonal emoji */
+.halloween-rain {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.halloween-rain-item {
+    position: absolute;
+    top: -64px;
+    line-height: 1;
+    user-select: none;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.28));
+    animation: halloweenRainFall linear forwards;
+}
+
+@keyframes halloweenRainFall {
+    to {
+        transform: translate3d(var(--sway, 30px), calc(100vh + 100px), 0) rotate(var(--spin));
+    }
+}
+
+body.reduced-motion .halloween-rain {
+    display: none;
+}
