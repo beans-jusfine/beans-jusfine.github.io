@@ -628,7 +628,7 @@
             if (!img.dataset.normalAvatarSrc) {
                 img.dataset.normalAvatarSrc = img.getAttribute('src') || 'icons/pfp.png';
             }
-            img.src = 'icons/pumpkin-can.jpg';
+            img.src = 'icons/pumpkin-can.webp';
             img.alt = 'Pumpkin can avatar';
         });
 
