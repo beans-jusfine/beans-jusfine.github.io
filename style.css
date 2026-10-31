@@ -1197,3 +1197,13 @@ body.halloween-spooky-font *:not(i):not(svg):not(path):not(.halloween-rain-item)
     font-weight: 400 !important;
     letter-spacing: normal;
 }
+
+/* Slightly enlarge text while spooky mode is active, without scaling the layout. */
+body.halloween-spooky-font :where(
+    h1, h2, h3, h4, p, a, button, label, input, select, textarea, li,
+    small, strong, em, .box-title, .profile-tag, .node-label, .node-value,
+    .spec-text, .fig-caption, .nav-item, .quote-bubble, .setting-row,
+    .bean-game-help
+) {
+    font-size: 1.2em !important;
+}
