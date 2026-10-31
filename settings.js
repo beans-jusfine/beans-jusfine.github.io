@@ -623,7 +623,14 @@
     }
 
 
-    function triggerHalloween() {
+    function triggerHalloween(options) {
+        const config = options || {};
+
+        // sessionStorage survives normal page-to-page navigation in the same tab.
+        try {
+            sessionStorage.setItem('beansHalloweenActive', '1');
+        } catch (e) {}
+
         document.querySelectorAll('.profile-avatar').forEach(function (img) {
             if (!img.dataset.normalAvatarSrc) {
                 img.dataset.normalAvatarSrc = img.getAttribute('src') || 'icons/pfp.png';
@@ -632,8 +639,13 @@
             img.alt = 'Pumpkin can avatar';
         });
 
-        showToast(t('halloweenToast'));
+        if (config.notify !== false) showToast(t('halloweenToast'));
         if (document.body.classList.contains('reduced-motion')) return;
+
+        if (window.__beansHalloweenRainTimer) {
+            clearInterval(window.__beansHalloweenRainTimer);
+            window.__beansHalloweenRainTimer = null;
+        }
 
         const existing = document.querySelector('.halloween-rain');
         if (existing) existing.remove();
@@ -644,23 +656,46 @@
         document.body.appendChild(layer);
 
         const halloweenEmojis = ['🎃', '👻', '🦇', '🕷️', '🕸️', '🍬', '💀'];
-        for (let i = 0; i < 65; i++) {
-            const piece = document.createElement('span');
-            piece.className = 'halloween-rain-item';
-            piece.textContent = halloweenEmojis[Math.floor(Math.random() * halloweenEmojis.length)];
-            piece.style.left = (Math.random() * 100) + 'vw';
-            piece.style.fontSize = (20 + Math.random() * 24) + 'px';
-            piece.style.animationDuration = (2.8 + Math.random() * 2.4) + 's';
-            piece.style.animationDelay = (Math.random() * 1.2) + 's';
-            piece.style.setProperty('--spin', (Math.random() * 720 - 360) + 'deg');
-            piece.style.setProperty('--sway', ((Math.random() - 0.5) * 120) + 'px');
-            layer.appendChild(piece);
+
+        function spawnRain(count, stagger) {
+            for (let i = 0; i < count; i++) {
+                if (layer.childElementCount >= 55) break;
+
+                const piece = document.createElement('span');
+                piece.className = 'halloween-rain-item';
+                piece.textContent = halloweenEmojis[Math.floor(Math.random() * halloweenEmojis.length)];
+                piece.style.left = (Math.random() * 100) + 'vw';
+                piece.style.fontSize = (20 + Math.random() * 24) + 'px';
+                const duration = 4.2 + Math.random() * 2.5;
+                piece.style.animationDuration = duration + 's';
+                piece.style.animationDelay = stagger ? (-Math.random() * duration) + 's' : '0s';
+                piece.style.setProperty('--spin', (Math.random() * 720 - 360) + 'deg');
+                piece.style.setProperty('--sway', ((Math.random() - 0.5) * 120) + 'px');
+                piece.addEventListener('animationend', function () { piece.remove(); }, { once: true });
+                layer.appendChild(piece);
+            }
         }
 
-        setTimeout(function () { layer.remove(); }, 6500);
+        // Start with a full screen of emojis, then keep generating them indefinitely.
+        spawnRain(42, true);
+        window.__beansHalloweenRainTimer = window.setInterval(function () {
+            if (!layer.isConnected) {
+                clearInterval(window.__beansHalloweenRainTimer);
+                window.__beansHalloweenRainTimer = null;
+                return;
+            }
+            spawnRain(3, false);
+        }, 450);
     }
 
     function initSecretCodes() {
+        // Re-apply Halloween mode after every internal page navigation.
+        try {
+            if (sessionStorage.getItem('beansHalloweenActive') === '1') {
+                triggerHalloween({ notify: false });
+            }
+        } catch (e) {}
+
         let typed = '';
 
         document.addEventListener('keydown', function (e) {
