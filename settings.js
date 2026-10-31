@@ -632,6 +632,7 @@
     }
 
     function stopHalloween() {
+        document.body.classList.remove('halloween-spooky-font');
         try {
             sessionStorage.removeItem('beansHalloweenActive');
         } catch (e) {}
@@ -656,6 +657,8 @@
 
     function triggerHalloween(options) {
         const config = options || {};
+
+        document.body.classList.add('halloween-spooky-font');
 
         try {
             sessionStorage.setItem('beansHalloweenActive', '1');
