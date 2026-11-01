@@ -1189,3 +1189,79 @@ body.reduced-motion .christmas-rain {
 body.reduced-motion .can-burst-layer {
     display: none;
 }
+
+
+/* --- Experimental font size --- */
+body.experimental.exp-font-size-80 { --experimental-font-scale: 0.8; }
+body.experimental.exp-font-size-90 { --experimental-font-scale: 0.9; }
+body.experimental.exp-font-size-100 { --experimental-font-scale: 1; }
+body.experimental.exp-font-size-110 { --experimental-font-scale: 1.1; }
+body.experimental.exp-font-size-120 { --experimental-font-scale: 1.2; }
+body.experimental.exp-font-size-130 { --experimental-font-scale: 1.3; }
+body.experimental.exp-font-size-140 { --experimental-font-scale: 1.4; }
+
+body.experimental[class*="exp-font-size-"] .nav-item { font-size: calc(14px * var(--experimental-font-scale)) !important; }
+body.font-pixel.experimental[class*="exp-font-size-"] .nav-item { font-size: calc(11px * var(--experimental-font-scale)) !important; }
+body.experimental[class*="exp-font-size-"] .profile-name { font-size: calc(26px * var(--experimental-font-scale)) !important; }
+body.font-pixel.experimental[class*="exp-font-size-"] .profile-name { font-size: calc(15px * var(--experimental-font-scale)) !important; }
+body.experimental[class*="exp-font-size-"] .profile-tag { font-size: calc(13px * var(--experimental-font-scale)) !important; }
+body.font-pixel.experimental[class*="exp-font-size-"] .profile-tag { font-size: calc(10px * var(--experimental-font-scale)) !important; }
+body.experimental[class*="exp-font-size-"] .quote-bubble p { font-size: calc(13px * var(--experimental-font-scale)) !important; }
+body.font-pixel.experimental[class*="exp-font-size-"] .quote-bubble p { font-size: calc(10px * var(--experimental-font-scale)) !important; }
+body.experimental[class*="exp-font-size-"] .box-title { font-size: calc(17px * var(--experimental-font-scale)) !important; }
+body.font-pixel.experimental[class*="exp-font-size-"] .box-title { font-size: calc(12px * var(--experimental-font-scale)) !important; }
+body.experimental[class*="exp-font-size-"] .profile-card-status .box-title { font-size: calc(15px * var(--experimental-font-scale)) !important; }
+body.font-pixel.experimental[class*="exp-font-size-"] .profile-card-status .box-title { font-size: calc(11px * var(--experimental-font-scale)) !important; }
+body.experimental[class*="exp-font-size-"] .spotify-song-title { font-size: calc(15px * var(--experimental-font-scale)) !important; }
+body.font-pixel.experimental[class*="exp-font-size-"] .spotify-song-title { font-size: calc(11px * var(--experimental-font-scale)) !important; }
+body.experimental[class*="exp-font-size-"] .spotify-artist-name { font-size: calc(13px * var(--experimental-font-scale)) !important; }
+body.font-pixel.experimental[class*="exp-font-size-"] .spotify-artist-name { font-size: calc(10px * var(--experimental-font-scale)) !important; }
+body.experimental[class*="exp-font-size-"] .node-label { font-size: calc(13px * var(--experimental-font-scale)) !important; }
+body.font-pixel.experimental[class*="exp-font-size-"] .node-label { font-size: calc(10px * var(--experimental-font-scale)) !important; }
+body.experimental[class*="exp-font-size-"] .node-value { font-size: calc(14px * var(--experimental-font-scale)) !important; }
+body.font-pixel.experimental[class*="exp-font-size-"] .node-value { font-size: calc(11px * var(--experimental-font-scale)) !important; }
+body.experimental[class*="exp-font-size-"] .setting-row { font-size: calc(14px * var(--experimental-font-scale)) !important; }
+body.font-pixel.experimental[class*="exp-font-size-"] .setting-row { font-size: calc(11px * var(--experimental-font-scale)) !important; }
+body.experimental[class*="exp-font-size-"] .dropdown-control { font-size: calc(13px * var(--experimental-font-scale)) !important; }
+body.font-pixel.experimental[class*="exp-font-size-"] .dropdown-control { font-size: calc(10px * var(--experimental-font-scale)) !important; }
+body.experimental[class*="exp-font-size-"] .spec-text { font-size: calc(14px * var(--experimental-font-scale)) !important; }
+body.font-pixel.experimental[class*="exp-font-size-"] .spec-text { font-size: calc(11px * var(--experimental-font-scale)) !important; }
+body.experimental[class*="exp-font-size-"] .fig-caption { font-size: calc(12px * var(--experimental-font-scale)) !important; }
+body.font-pixel.experimental[class*="exp-font-size-"] .fig-caption { font-size: calc(9px * var(--experimental-font-scale)) !important; }
+body.experimental[class*="exp-font-size-"] .profile-clock { font-size: calc(12px * var(--experimental-font-scale)) !important; }
+body.font-pixel.experimental[class*="exp-font-size-"] .profile-clock { font-size: calc(9px * var(--experimental-font-scale)) !important; }
+body.experimental[class*="exp-font-size-"] .btn-link { font-size: calc(14px * var(--experimental-font-scale)) !important; }
+body.font-pixel.experimental[class*="exp-font-size-"] .btn-link { font-size: calc(10px * var(--experimental-font-scale)) !important; }
+body.experimental[class*="exp-font-size-"] .bean-game-help { font-size: calc(12px * var(--experimental-font-scale)) !important; }
+body.font-pixel.experimental[class*="exp-font-size-"] .bean-game-help { font-size: calc(9px * var(--experimental-font-scale)) !important; }
+body.experimental[class*="exp-font-size-"] .notfound-code { font-size: calc(72px * var(--experimental-font-scale)) !important; }
+body.font-pixel.experimental[class*="exp-font-size-"] .notfound-code { font-size: calc(40px * var(--experimental-font-scale)) !important; }
+body.experimental[class*="exp-font-size-"] .notfound-text { font-size: calc(14px * var(--experimental-font-scale)) !important; }
+body.font-pixel.experimental[class*="exp-font-size-"] .notfound-text { font-size: calc(10px * var(--experimental-font-scale)) !important; }
+body.experimental[class*="exp-font-size-"] .notfound-path { font-size: calc(12px * var(--experimental-font-scale)) !important; }
+body.font-pixel.experimental[class*="exp-font-size-"] .notfound-path { font-size: calc(9px * var(--experimental-font-scale)) !important; }
+body.experimental[class*="exp-font-size-"] .secret-toast { font-size: calc(13px * var(--experimental-font-scale)) !important; }
+body.font-pixel.experimental[class*="exp-font-size-"] .secret-toast { font-size: calc(10px * var(--experimental-font-scale)) !important; }
+body.experimental[class*="exp-font-size-"] .exp-title { font-size: calc(22px * var(--experimental-font-scale)) !important; }
+body.font-pixel.experimental[class*="exp-font-size-"] .exp-title { font-size: calc(14px * var(--experimental-font-scale)) !important; }
+body.experimental[class*="exp-font-size-"] .exp-text { font-size: calc(14px * var(--experimental-font-scale)) !important; }
+body.font-pixel.experimental[class*="exp-font-size-"] .exp-text { font-size: calc(10px * var(--experimental-font-scale)) !important; }
+body.experimental[class*="exp-font-size-"] .exp-label { font-size: calc(14px * var(--experimental-font-scale)) !important; }
+body.font-pixel.experimental[class*="exp-font-size-"] .exp-label { font-size: calc(10px * var(--experimental-font-scale)) !important; }
+body.experimental[class*="exp-font-size-"] .exp-input { font-size: calc(15px * var(--experimental-font-scale)) !important; }
+body.font-pixel.experimental[class*="exp-font-size-"] .exp-input { font-size: calc(11px * var(--experimental-font-scale)) !important; }
+body.experimental[class*="exp-font-size-"] .exp-hint { font-size: calc(13px * var(--experimental-font-scale)) !important; }
+body.font-pixel.experimental[class*="exp-font-size-"] .exp-hint { font-size: calc(9px * var(--experimental-font-scale)) !important; }
+body.experimental[class*="exp-font-size-"] .exp-error { font-size: calc(13px * var(--experimental-font-scale)) !important; }
+body.font-pixel.experimental[class*="exp-font-size-"] .exp-error { font-size: calc(9px * var(--experimental-font-scale)) !important; }
+body.experimental[class*="exp-font-size-"] .exp-btn { font-size: calc(14px * var(--experimental-font-scale)) !important; }
+body.font-pixel.experimental[class*="exp-font-size-"] .exp-btn { font-size: calc(10px * var(--experimental-font-scale)) !important; }
+
+@media (max-width: 768px) {
+    body.experimental[class*="exp-font-size-"] .notfound-code {
+        font-size: calc(56px * var(--experimental-font-scale)) !important;
+    }
+    body.font-pixel.experimental[class*="exp-font-size-"] .notfound-code {
+        font-size: calc(40px * var(--experimental-font-scale)) !important;
+    }
+}

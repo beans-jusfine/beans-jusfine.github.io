@@ -21,6 +21,7 @@
         reducedAnimation: false,
         lowEndMode: false,
         experimentalFeatures: false,
+        experimentalFontSize: '100',
         experimentalGravity: false,
         experimentalMatrix: false,
         experimentalCrt: false,
@@ -61,6 +62,7 @@
             setWallpaperBlur: `Wallpaper Blur`,
             setReducedAnim: `Reduced Animation`,
             setLowEnd: `Low-End Mode`,
+            setExperimentalFontSize: `Font Size`,
             setExperimental: `Experimental Features`,
             posTop: `Top`,
             posBottom: `Bottom`,
@@ -159,6 +161,7 @@
             setWallpaperBlur: `Desenfoque del fondo`,
             setReducedAnim: `Animación reducida`,
             setLowEnd: `Modo de bajo rendimiento`,
+            setExperimentalFontSize: `Tamaño de fuente`,
             setExperimental: `Funciones experimentales`,
             posTop: `Arriba`,
             posBottom: `Abajo`,
@@ -257,6 +260,7 @@
             setWallpaperBlur: `Flou du fond d'écran`,
             setReducedAnim: `Animation réduite`,
             setLowEnd: `Mode faible performance`,
+            setExperimentalFontSize: `Taille de police`,
             setExperimental: `Fonctionnalités expérimentales`,
             posTop: `Haut`,
             posBottom: `Bas`,
@@ -437,6 +441,14 @@
         body.classList.toggle('low-end', !!settings.lowEndMode);
 
         body.classList.toggle('experimental', !!settings.experimentalFeatures);
+
+        ['80', '90', '100', '110', '120', '130', '140'].forEach(function (size) {
+            body.classList.remove('exp-font-size-' + size);
+        });
+        const experimentalFontSize = String(settings.experimentalFontSize || '100');
+        if (settings.experimentalFeatures && ['80', '90', '100', '110', '120', '130', '140'].indexOf(experimentalFontSize) !== -1) {
+            body.classList.add('exp-font-size-' + experimentalFontSize);
+        }
 
         syncBeansWallpaperFx(settings);
 
