@@ -112,7 +112,6 @@
             notFoundButton: `← back home`,
             clockLabel: `it's {time} for beans ツ rn`,
             secretToast: `you typed the secret code 🫘`,
-            halloweenToast: `Happy Halloween! 🎃`,
             expTitle: `Enable Experimental Mode?`,
             expText: `Are you sure you want to enable Experimental Mode?`,
             expPassword: `Password`,
@@ -211,7 +210,6 @@
             notFoundButton: `← volver al inicio`,
             clockLabel: `hora de beans ツ ahora: {time}`,
             secretToast: `escribiste el código secreto 🫘`,
-            halloweenToast: `¡Feliz Halloween! 🎃`,
             expTitle: `¿Activar el Modo Experimental?`,
             expText: `¿Seguro que quieres activar el Modo Experimental?`,
             expPassword: `Contraseña`,
@@ -310,7 +308,6 @@
             notFoundButton: `← retour à l'accueil`,
             clockLabel: `heure de beans ツ maintenant : {time}`,
             secretToast: `tu as tapé le code secret 🫘`,
-            halloweenToast: `Joyeux Halloween ! 🎃`,
             expTitle: `Activer le mode expérimental ?`,
             expText: `Tu veux vraiment activer le mode expérimental ?`,
             expPassword: `Mot de passe`,
@@ -623,80 +620,69 @@
     }
 
 
-    function isHalloweenActive() {
+    function isChristmasActive() {
         try {
-            return sessionStorage.getItem('beansHalloweenActive') === '1';
+            return sessionStorage.getItem('beansChristmasActive') === '1';
         } catch (e) {
             return false;
         }
     }
 
-    function stopHalloween() {
-        document.body.classList.remove('halloween-spooky-font');
+    function stopChristmas() {
         try {
-            sessionStorage.removeItem('beansHalloweenActive');
+            sessionStorage.removeItem('beansChristmasActive');
         } catch (e) {}
 
-        if (window.__beansHalloweenRainTimer) {
-            clearInterval(window.__beansHalloweenRainTimer);
-            window.__beansHalloweenRainTimer = null;
+        document.body.classList.remove('christmas-mode');
+
+        if (window.__beansChristmasRainTimer) {
+            clearInterval(window.__beansChristmasRainTimer);
+            window.__beansChristmasRainTimer = null;
         }
 
-        document.querySelectorAll('.halloween-rain').forEach(function (layer) {
+        document.querySelectorAll('.christmas-rain').forEach(function (layer) {
             layer.remove();
         });
 
-        document.querySelectorAll('.profile-avatar').forEach(function (img) {
-            img.src = img.dataset.normalAvatarSrc || 'icons/pfp.png';
-            img.alt = "Beans's Avatar";
-            delete img.dataset.normalAvatarSrc;
-        });
-
-        showToast('Easter egg stopped');
+        showToast('Christmas Easter egg stopped 🎄');
     }
 
-    function triggerHalloween(options) {
+    function triggerChristmas(options) {
         const config = options || {};
 
-        document.body.classList.add('halloween-spooky-font');
-
         try {
-            sessionStorage.setItem('beansHalloweenActive', '1');
+            sessionStorage.setItem('beansChristmasActive', '1');
         } catch (e) {}
 
-        document.querySelectorAll('.profile-avatar').forEach(function (img) {
-            if (!img.dataset.normalAvatarSrc) {
-                img.dataset.normalAvatarSrc = img.getAttribute('src') || 'icons/pfp.png';
-            }
-            img.src = 'icons/pumpkin-can.webp';
-            img.alt = 'Pumpkin can avatar';
-        });
+        document.body.classList.add('christmas-mode');
 
-        if (config.notify !== false) showToast(t('halloweenToast'));
-        if (document.body.classList.contains('reduced-motion')) return;
+        if (config.notify !== false) showToast('Merry Christmas! 🎄');
 
-        if (window.__beansHalloweenRainTimer) {
-            clearInterval(window.__beansHalloweenRainTimer);
-            window.__beansHalloweenRainTimer = null;
+        if (window.__beansChristmasRainTimer) {
+            clearInterval(window.__beansChristmasRainTimer);
+            window.__beansChristmasRainTimer = null;
         }
 
-        const existing = document.querySelector('.halloween-rain');
-        if (existing) existing.remove();
+        document.querySelectorAll('.christmas-rain').forEach(function (layer) {
+            layer.remove();
+        });
+
+        if (document.body.classList.contains('reduced-motion')) return;
 
         const layer = document.createElement('div');
-        layer.className = 'halloween-rain';
+        layer.className = 'christmas-rain';
         layer.setAttribute('aria-hidden', 'true');
         document.body.appendChild(layer);
 
-        const halloweenEmojis = ['🎃', '👻', '🦇', '🕷️', '🕸️', '🍬', '💀'];
+        const christmasEmojis = ['🎄', '🎅', '❄️', '🎁', '🔔', '⭐', '☃️', '🦌', '✨'];
 
         function spawnRain(count, stagger) {
             for (let i = 0; i < count; i++) {
                 if (layer.childElementCount >= 55) break;
 
                 const piece = document.createElement('span');
-                piece.className = 'halloween-rain-item';
-                piece.textContent = halloweenEmojis[Math.floor(Math.random() * halloweenEmojis.length)];
+                piece.className = 'christmas-rain-item';
+                piece.textContent = christmasEmojis[Math.floor(Math.random() * christmasEmojis.length)];
                 piece.style.left = (Math.random() * 100) + 'vw';
                 piece.style.fontSize = (20 + Math.random() * 24) + 'px';
                 const duration = 4.2 + Math.random() * 2.5;
@@ -710,17 +696,17 @@
         }
 
         spawnRain(42, true);
-        window.__beansHalloweenRainTimer = window.setInterval(function () {
-            if (!layer.isConnected || !isHalloweenActive()) {
-                clearInterval(window.__beansHalloweenRainTimer);
-                window.__beansHalloweenRainTimer = null;
+        window.__beansChristmasRainTimer = window.setInterval(function () {
+            if (!layer.isConnected || !isChristmasActive()) {
+                clearInterval(window.__beansChristmasRainTimer);
+                window.__beansChristmasRainTimer = null;
                 return;
             }
             spawnRain(3, false);
         }, 450);
     }
 
-    function burstFromCan(ring, spooky) {
+    function burstFromCan(ring, christmas) {
         if (!ring || document.body.classList.contains('reduced-motion')) return;
 
         const rect = ring.getBoundingClientRect();
@@ -732,15 +718,15 @@
         document.body.appendChild(layer);
 
         const beans = ['🫘', '🫘', '🫘', '🥫'];
-        const spookyEmojis = ['🎃', '👻', '🦇', '🕷️', '🕸️', '🍬', '💀'];
+        const christmasEmojis = ['🎄', '🎅', '❄️', '🎁', '🔔', '⭐', '☃️', '🦌'];
 
         for (let i = 0; i < 16; i++) {
             const angle = (Math.PI * 2 * i / 16) + (Math.random() - 0.5) * 0.34;
             const distance = 65 + Math.random() * 105;
             const piece = document.createElement('span');
             piece.className = 'can-burst-item';
-            piece.textContent = spooky
-                ? spookyEmojis[Math.floor(Math.random() * spookyEmojis.length)]
+            piece.textContent = christmas
+                ? christmasEmojis[Math.floor(Math.random() * christmasEmojis.length)]
                 : beans[Math.floor(Math.random() * beans.length)];
             piece.style.left = originX + 'px';
             piece.style.top = originY + 'px';
@@ -762,15 +748,15 @@
             const ring = target.closest('.avatar-ring');
             if (!ring) return;
 
-            burstFromCan(ring, isHalloweenActive());
+            burstFromCan(ring, isChristmasActive());
         });
     }
 
     function initSecretCodes() {
-        // Re-apply Halloween mode after every internal page navigation.
+        // Restore Christmas mode after page navigation in this tab.
         try {
-            if (sessionStorage.getItem('beansHalloweenActive') === '1') {
-                triggerHalloween({ notify: false });
+            if (sessionStorage.getItem('beansChristmasActive') === '1') {
+                triggerChristmas({ notify: false });
             }
         } catch (e) {}
 
@@ -789,12 +775,12 @@
             if (typed.endsWith('beans')) {
                 typed = '';
                 triggerBeanRain();
-            } else if (typed.endsWith('boo')) {
+            } else if (typed.endsWith('joy')) {
                 typed = '';
-                if (isHalloweenActive()) {
-                    stopHalloween();
+                if (isChristmasActive()) {
+                    stopChristmas();
                 } else {
-                    triggerHalloween();
+                    triggerChristmas();
                 }
             }
         });

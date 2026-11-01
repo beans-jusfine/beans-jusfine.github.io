@@ -1122,8 +1122,9 @@ body.no-wallpaper-blur .beans-wallpaper-bean {
 
 
 
-/* Halloween Easter egg: falling seasonal emoji */
-.halloween-rain {
+/* Seasonal emoji rain effect. */
+/* Christmas emoji rain effect. */
+.christmas-rain {
     position: fixed;
     inset: 0;
     z-index: 2000;
@@ -1131,27 +1132,27 @@ body.no-wallpaper-blur .beans-wallpaper-bean {
     pointer-events: none;
 }
 
-.halloween-rain-item {
+.christmas-rain-item {
     position: absolute;
     top: -64px;
     line-height: 1;
     user-select: none;
     filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.28));
-    animation: halloweenRainFall linear forwards;
+    animation: christmasRainFall linear forwards;
 }
 
-@keyframes halloweenRainFall {
+@keyframes christmasRainFall {
     to {
         transform: translate3d(var(--sway, 30px), calc(100vh + 100px), 0) rotate(var(--spin));
     }
 }
 
-body.reduced-motion .halloween-rain {
+body.reduced-motion .christmas-rain {
     display: none;
 }
 
 
-/* Click burst from the profile can: beans normally, spooky icons in Halloween mode. */
+/* Click burst from the profile can: beans normally, Christmas icons in seasonal mode. */
 .can-burst-layer {
     position: fixed;
     inset: 0;
@@ -1187,23 +1188,4 @@ body.reduced-motion .halloween-rain {
 
 body.reduced-motion .can-burst-layer {
     display: none;
-}
-
-
-/* Halloween-only spooky typeface: Jacquard 12 (pixel Gothic / Blackletter). */
-body.halloween-spooky-font,
-body.halloween-spooky-font *:not(i):not(svg):not(path):not(.halloween-rain-item):not(.can-burst-item) {
-    font-family: 'Jacquard 12', serif !important;
-    font-weight: 400 !important;
-    letter-spacing: normal;
-}
-
-/* Slightly enlarge text while spooky mode is active, without scaling the layout. */
-body.halloween-spooky-font :where(
-    h1, h2, h3, h4, p, a, button, label, input, select, textarea, li,
-    small, strong, em, .box-title, .profile-tag, .node-label, .node-value,
-    .spec-text, .fig-caption, .nav-item, .quote-bubble, .setting-row,
-    .bean-game-help
-) {
-    font-size: 1.3em !important;
 }
