@@ -1191,6 +1191,12 @@ body.reduced-motion .can-burst-layer {
 }
 
 
+/* Keep the experimental-only font control hidden unless the master switch is active. */
+#experimental-font-size-row[hidden],
+body:not(.experimental) #experimental-font-size-row {
+    display: none !important;
+}
+
 /* --- Experimental font size --- */
 body.experimental.exp-font-size-80 { --experimental-font-scale: 0.8; }
 body.experimental.exp-font-size-90 { --experimental-font-scale: 0.9; }
