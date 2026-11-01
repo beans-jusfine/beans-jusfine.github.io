@@ -690,7 +690,8 @@
         });
 
         document.querySelectorAll('.profile-avatar').forEach(function (img) {
-            img.src = img.dataset.normalAvatarSrc || 'icons/pfp.png';
+            img.onerror = null;
+            img.src = img.dataset.normalAvatarSrc || '/icons/pfp.png';
             img.alt = "Beans's Avatar";
             delete img.dataset.normalAvatarSrc;
         });
@@ -709,9 +710,19 @@
 
         document.querySelectorAll('.profile-avatar').forEach(function (img) {
             if (!img.dataset.normalAvatarSrc) {
-                img.dataset.normalAvatarSrc = img.getAttribute('src') || 'icons/pfp.png';
+                img.dataset.normalAvatarSrc = img.getAttribute('src') || '/icons/pfp.png';
             }
-            img.src = 'icons/christmas-bean-can.webp';
+
+            // Use a root-based URL and a fresh filename to avoid relative-path
+            // issues and stale cached copies of the earlier image.
+            img.onerror = function () {
+                if (isChristmasActive() && img.src.indexOf('/icons/christmas-bean-can-v3.webp') !== -1) {
+                    img.onerror = null;
+                    img.src = img.dataset.normalAvatarSrc || '/icons/pfp.png';
+                    img.alt = "Beans's Avatar";
+                }
+            };
+            img.src = '/icons/christmas-bean-can-v3.webp';
             img.alt = 'Bean can wearing a Santa hat';
         });
 
