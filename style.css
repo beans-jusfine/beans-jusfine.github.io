@@ -1197,77 +1197,141 @@ body:not(.experimental) #experimental-font-size-row {
     display: none !important;
 }
 
-/* --- Experimental font size --- */
-body.experimental.exp-font-size-80 { --experimental-font-scale: 0.8; }
-body.experimental.exp-font-size-90 { --experimental-font-scale: 0.9; }
-body.experimental.exp-font-size-100 { --experimental-font-scale: 1; }
-body.experimental.exp-font-size-110 { --experimental-font-scale: 1.1; }
-body.experimental.exp-font-size-120 { --experimental-font-scale: 1.2; }
-body.experimental.exp-font-size-130 { --experimental-font-scale: 1.3; }
-body.experimental.exp-font-size-140 { --experimental-font-scale: 1.4; }
+/* --- Experimental font size (5% increments) --- */
+body.experimental { --experimental-font-scale: 1; }
 
-body.experimental[class*="exp-font-size-"] .nav-item { font-size: calc(14px * var(--experimental-font-scale)) !important; }
-body.font-pixel.experimental[class*="exp-font-size-"] .nav-item { font-size: calc(11px * var(--experimental-font-scale)) !important; }
-body.experimental[class*="exp-font-size-"] .profile-name { font-size: calc(26px * var(--experimental-font-scale)) !important; }
-body.font-pixel.experimental[class*="exp-font-size-"] .profile-name { font-size: calc(15px * var(--experimental-font-scale)) !important; }
-body.experimental[class*="exp-font-size-"] .profile-tag { font-size: calc(13px * var(--experimental-font-scale)) !important; }
-body.font-pixel.experimental[class*="exp-font-size-"] .profile-tag { font-size: calc(10px * var(--experimental-font-scale)) !important; }
-body.experimental[class*="exp-font-size-"] .quote-bubble p { font-size: calc(13px * var(--experimental-font-scale)) !important; }
-body.font-pixel.experimental[class*="exp-font-size-"] .quote-bubble p { font-size: calc(10px * var(--experimental-font-scale)) !important; }
-body.experimental[class*="exp-font-size-"] .box-title { font-size: calc(17px * var(--experimental-font-scale)) !important; }
-body.font-pixel.experimental[class*="exp-font-size-"] .box-title { font-size: calc(12px * var(--experimental-font-scale)) !important; }
-body.experimental[class*="exp-font-size-"] .profile-card-status .box-title { font-size: calc(15px * var(--experimental-font-scale)) !important; }
-body.font-pixel.experimental[class*="exp-font-size-"] .profile-card-status .box-title { font-size: calc(11px * var(--experimental-font-scale)) !important; }
-body.experimental[class*="exp-font-size-"] .spotify-song-title { font-size: calc(15px * var(--experimental-font-scale)) !important; }
-body.font-pixel.experimental[class*="exp-font-size-"] .spotify-song-title { font-size: calc(11px * var(--experimental-font-scale)) !important; }
-body.experimental[class*="exp-font-size-"] .spotify-artist-name { font-size: calc(13px * var(--experimental-font-scale)) !important; }
-body.font-pixel.experimental[class*="exp-font-size-"] .spotify-artist-name { font-size: calc(10px * var(--experimental-font-scale)) !important; }
-body.experimental[class*="exp-font-size-"] .node-label { font-size: calc(13px * var(--experimental-font-scale)) !important; }
-body.font-pixel.experimental[class*="exp-font-size-"] .node-label { font-size: calc(10px * var(--experimental-font-scale)) !important; }
-body.experimental[class*="exp-font-size-"] .node-value { font-size: calc(14px * var(--experimental-font-scale)) !important; }
-body.font-pixel.experimental[class*="exp-font-size-"] .node-value { font-size: calc(11px * var(--experimental-font-scale)) !important; }
-body.experimental[class*="exp-font-size-"] .setting-row { font-size: calc(14px * var(--experimental-font-scale)) !important; }
-body.font-pixel.experimental[class*="exp-font-size-"] .setting-row { font-size: calc(11px * var(--experimental-font-scale)) !important; }
-body.experimental[class*="exp-font-size-"] .dropdown-control { font-size: calc(13px * var(--experimental-font-scale)) !important; }
-body.font-pixel.experimental[class*="exp-font-size-"] .dropdown-control { font-size: calc(10px * var(--experimental-font-scale)) !important; }
-body.experimental[class*="exp-font-size-"] .spec-text { font-size: calc(14px * var(--experimental-font-scale)) !important; }
-body.font-pixel.experimental[class*="exp-font-size-"] .spec-text { font-size: calc(11px * var(--experimental-font-scale)) !important; }
-body.experimental[class*="exp-font-size-"] .fig-caption { font-size: calc(12px * var(--experimental-font-scale)) !important; }
-body.font-pixel.experimental[class*="exp-font-size-"] .fig-caption { font-size: calc(9px * var(--experimental-font-scale)) !important; }
-body.experimental[class*="exp-font-size-"] .profile-clock { font-size: calc(12px * var(--experimental-font-scale)) !important; }
-body.font-pixel.experimental[class*="exp-font-size-"] .profile-clock { font-size: calc(9px * var(--experimental-font-scale)) !important; }
-body.experimental[class*="exp-font-size-"] .btn-link { font-size: calc(14px * var(--experimental-font-scale)) !important; }
-body.font-pixel.experimental[class*="exp-font-size-"] .btn-link { font-size: calc(10px * var(--experimental-font-scale)) !important; }
-body.experimental[class*="exp-font-size-"] .bean-game-help { font-size: calc(12px * var(--experimental-font-scale)) !important; }
-body.font-pixel.experimental[class*="exp-font-size-"] .bean-game-help { font-size: calc(9px * var(--experimental-font-scale)) !important; }
-body.experimental[class*="exp-font-size-"] .notfound-code { font-size: calc(72px * var(--experimental-font-scale)) !important; }
-body.font-pixel.experimental[class*="exp-font-size-"] .notfound-code { font-size: calc(40px * var(--experimental-font-scale)) !important; }
-body.experimental[class*="exp-font-size-"] .notfound-text { font-size: calc(14px * var(--experimental-font-scale)) !important; }
-body.font-pixel.experimental[class*="exp-font-size-"] .notfound-text { font-size: calc(10px * var(--experimental-font-scale)) !important; }
-body.experimental[class*="exp-font-size-"] .notfound-path { font-size: calc(12px * var(--experimental-font-scale)) !important; }
-body.font-pixel.experimental[class*="exp-font-size-"] .notfound-path { font-size: calc(9px * var(--experimental-font-scale)) !important; }
-body.experimental[class*="exp-font-size-"] .secret-toast { font-size: calc(13px * var(--experimental-font-scale)) !important; }
-body.font-pixel.experimental[class*="exp-font-size-"] .secret-toast { font-size: calc(10px * var(--experimental-font-scale)) !important; }
-body.experimental[class*="exp-font-size-"] .exp-title { font-size: calc(22px * var(--experimental-font-scale)) !important; }
-body.font-pixel.experimental[class*="exp-font-size-"] .exp-title { font-size: calc(14px * var(--experimental-font-scale)) !important; }
-body.experimental[class*="exp-font-size-"] .exp-text { font-size: calc(14px * var(--experimental-font-scale)) !important; }
-body.font-pixel.experimental[class*="exp-font-size-"] .exp-text { font-size: calc(10px * var(--experimental-font-scale)) !important; }
-body.experimental[class*="exp-font-size-"] .exp-label { font-size: calc(14px * var(--experimental-font-scale)) !important; }
-body.font-pixel.experimental[class*="exp-font-size-"] .exp-label { font-size: calc(10px * var(--experimental-font-scale)) !important; }
-body.experimental[class*="exp-font-size-"] .exp-input { font-size: calc(15px * var(--experimental-font-scale)) !important; }
-body.font-pixel.experimental[class*="exp-font-size-"] .exp-input { font-size: calc(11px * var(--experimental-font-scale)) !important; }
-body.experimental[class*="exp-font-size-"] .exp-hint { font-size: calc(13px * var(--experimental-font-scale)) !important; }
-body.font-pixel.experimental[class*="exp-font-size-"] .exp-hint { font-size: calc(9px * var(--experimental-font-scale)) !important; }
-body.experimental[class*="exp-font-size-"] .exp-error { font-size: calc(13px * var(--experimental-font-scale)) !important; }
-body.font-pixel.experimental[class*="exp-font-size-"] .exp-error { font-size: calc(9px * var(--experimental-font-scale)) !important; }
-body.experimental[class*="exp-font-size-"] .exp-btn { font-size: calc(14px * var(--experimental-font-scale)) !important; }
-body.font-pixel.experimental[class*="exp-font-size-"] .exp-btn { font-size: calc(10px * var(--experimental-font-scale)) !important; }
+body.experimental .nav-item { font-size: calc(14px * var(--experimental-font-scale)) !important; }
+body.font-pixel.experimental .nav-item { font-size: calc(11px * var(--experimental-font-scale)) !important; }
+body.experimental .profile-name { font-size: calc(26px * var(--experimental-font-scale)) !important; }
+body.font-pixel.experimental .profile-name { font-size: calc(15px * var(--experimental-font-scale)) !important; }
+body.experimental .profile-tag { font-size: calc(13px * var(--experimental-font-scale)) !important; }
+body.font-pixel.experimental .profile-tag { font-size: calc(10px * var(--experimental-font-scale)) !important; }
+body.experimental .quote-bubble p { font-size: calc(13px * var(--experimental-font-scale)) !important; }
+body.font-pixel.experimental .quote-bubble p { font-size: calc(10px * var(--experimental-font-scale)) !important; }
+body.experimental .box-title { font-size: calc(17px * var(--experimental-font-scale)) !important; }
+body.font-pixel.experimental .box-title { font-size: calc(12px * var(--experimental-font-scale)) !important; }
+body.experimental .profile-card-status .box-title { font-size: calc(15px * var(--experimental-font-scale)) !important; }
+body.font-pixel.experimental .profile-card-status .box-title { font-size: calc(11px * var(--experimental-font-scale)) !important; }
+body.experimental .spotify-song-title { font-size: calc(15px * var(--experimental-font-scale)) !important; }
+body.font-pixel.experimental .spotify-song-title { font-size: calc(11px * var(--experimental-font-scale)) !important; }
+body.experimental .spotify-artist-name { font-size: calc(13px * var(--experimental-font-scale)) !important; }
+body.font-pixel.experimental .spotify-artist-name { font-size: calc(10px * var(--experimental-font-scale)) !important; }
+body.experimental .node-label { font-size: calc(13px * var(--experimental-font-scale)) !important; }
+body.font-pixel.experimental .node-label { font-size: calc(10px * var(--experimental-font-scale)) !important; }
+body.experimental .node-value { font-size: calc(14px * var(--experimental-font-scale)) !important; }
+body.font-pixel.experimental .node-value { font-size: calc(11px * var(--experimental-font-scale)) !important; }
+body.experimental .setting-row { font-size: calc(14px * var(--experimental-font-scale)) !important; }
+body.font-pixel.experimental .setting-row { font-size: calc(11px * var(--experimental-font-scale)) !important; }
+body.experimental .dropdown-control { font-size: calc(13px * var(--experimental-font-scale)) !important; }
+body.font-pixel.experimental .dropdown-control { font-size: calc(10px * var(--experimental-font-scale)) !important; }
+body.experimental .spec-text { font-size: calc(14px * var(--experimental-font-scale)) !important; }
+body.font-pixel.experimental .spec-text { font-size: calc(11px * var(--experimental-font-scale)) !important; }
+body.experimental .fig-caption { font-size: calc(12px * var(--experimental-font-scale)) !important; }
+body.font-pixel.experimental .fig-caption { font-size: calc(9px * var(--experimental-font-scale)) !important; }
+body.experimental .profile-clock { font-size: calc(12px * var(--experimental-font-scale)) !important; }
+body.font-pixel.experimental .profile-clock { font-size: calc(9px * var(--experimental-font-scale)) !important; }
+body.experimental .btn-link { font-size: calc(14px * var(--experimental-font-scale)) !important; }
+body.font-pixel.experimental .btn-link { font-size: calc(10px * var(--experimental-font-scale)) !important; }
+body.experimental .bean-game-help { font-size: calc(12px * var(--experimental-font-scale)) !important; }
+body.font-pixel.experimental .bean-game-help { font-size: calc(9px * var(--experimental-font-scale)) !important; }
+body.experimental .notfound-code { font-size: calc(72px * var(--experimental-font-scale)) !important; }
+body.font-pixel.experimental .notfound-code { font-size: calc(40px * var(--experimental-font-scale)) !important; }
+body.experimental .notfound-text { font-size: calc(14px * var(--experimental-font-scale)) !important; }
+body.font-pixel.experimental .notfound-text { font-size: calc(10px * var(--experimental-font-scale)) !important; }
+body.experimental .notfound-path { font-size: calc(12px * var(--experimental-font-scale)) !important; }
+body.font-pixel.experimental .notfound-path { font-size: calc(9px * var(--experimental-font-scale)) !important; }
+body.experimental .secret-toast { font-size: calc(13px * var(--experimental-font-scale)) !important; }
+body.font-pixel.experimental .secret-toast { font-size: calc(10px * var(--experimental-font-scale)) !important; }
+body.experimental .exp-title { font-size: calc(22px * var(--experimental-font-scale)) !important; }
+body.font-pixel.experimental .exp-title { font-size: calc(14px * var(--experimental-font-scale)) !important; }
+body.experimental .exp-text { font-size: calc(14px * var(--experimental-font-scale)) !important; }
+body.font-pixel.experimental .exp-text { font-size: calc(10px * var(--experimental-font-scale)) !important; }
+body.experimental .exp-label { font-size: calc(14px * var(--experimental-font-scale)) !important; }
+body.font-pixel.experimental .exp-label { font-size: calc(10px * var(--experimental-font-scale)) !important; }
+body.experimental .exp-input { font-size: calc(15px * var(--experimental-font-scale)) !important; }
+body.font-pixel.experimental .exp-input { font-size: calc(11px * var(--experimental-font-scale)) !important; }
+body.experimental .exp-hint { font-size: calc(13px * var(--experimental-font-scale)) !important; }
+body.font-pixel.experimental .exp-hint { font-size: calc(9px * var(--experimental-font-scale)) !important; }
+body.experimental .exp-error { font-size: calc(13px * var(--experimental-font-scale)) !important; }
+body.font-pixel.experimental .exp-error { font-size: calc(9px * var(--experimental-font-scale)) !important; }
+body.experimental .exp-btn { font-size: calc(14px * var(--experimental-font-scale)) !important; }
+body.font-pixel.experimental .exp-btn { font-size: calc(10px * var(--experimental-font-scale)) !important; }
 
 @media (max-width: 768px) {
-    body.experimental[class*="exp-font-size-"] .notfound-code {
+    body.experimental .notfound-code {
         font-size: calc(56px * var(--experimental-font-scale)) !important;
     }
-    body.font-pixel.experimental[class*="exp-font-size-"] .notfound-code {
+    body.font-pixel.experimental .notfound-code {
         font-size: calc(40px * var(--experimental-font-scale)) !important;
+    }
+}
+
+
+/* Experimental-only settings rows must remain hidden even though setting-row uses display:flex. */
+.setting-row[hidden] {
+    display: none !important;
+}
+body:not(.experimental) .experimental-setting-row {
+    display: none !important;
+}
+
+.experimental-color-picker {
+    width: 54px;
+    height: 34px;
+    padding: 3px;
+    border: 1px solid rgba(var(--accent-rgb), 0.45);
+    border-radius: 7px;
+    background: var(--dropdown-bg);
+    cursor: pointer;
+}
+
+.experimental-wallpaper-control {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+    max-width: 100%;
+}
+
+.experimental-wallpaper-control input[type="file"] {
+    width: min(100%, 230px);
+    max-width: 230px;
+    color: var(--text-color);
+    font-size: 12px;
+}
+
+.experimental-wallpaper-status {
+    flex-basis: 100%;
+    text-align: right;
+    font-size: 11px;
+    opacity: 0.65;
+}
+
+body.experimental-custom-accent {
+    --accent: var(--experimental-accent);
+    --accent-glow: var(--experimental-accent);
+    --accent-rgb: var(--experimental-accent-rgb);
+}
+
+body.experimental-custom-wallpaper::before {
+    background-image: var(--experimental-wallpaper-image);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.24;
+    animation: none !important;
+}
+
+body.no-wallpaper-blur.experimental-custom-wallpaper::before {
+    opacity: 0;
+}
+
+@media (max-width: 768px) {
+    .experimental-wallpaper-control {
+        justify-content: flex-start;
+    }
+    .experimental-wallpaper-status {
+        text-align: left;
     }
 }

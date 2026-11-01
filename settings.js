@@ -22,6 +22,8 @@
         lowEndMode: false,
         experimentalFeatures: false,
         experimentalFontSize: '100',
+        experimentalCustomAccent: '',
+        experimentalCustomWallpaper: '',
         experimentalGravity: false,
         experimentalMatrix: false,
         experimentalCrt: false,
@@ -62,6 +64,8 @@
             setWallpaperBlur: `Wallpaper Blur`,
             setReducedAnim: `Reduced Animation`,
             setLowEnd: `Low-End Mode`,
+            setExperimentalCustomAccent: `Custom Accent Color`,
+            setExperimentalCustomWallpaper: `Custom Wallpaper`,
             setExperimentalFontSize: `Font Size`,
             setExperimental: `Experimental Features`,
             posTop: `Top`,
@@ -161,6 +165,8 @@
             setWallpaperBlur: `Desenfoque del fondo`,
             setReducedAnim: `Animación reducida`,
             setLowEnd: `Modo de bajo rendimiento`,
+            setExperimentalCustomAccent: `Color de acento personalizado`,
+            setExperimentalCustomWallpaper: `Fondo personalizado`,
             setExperimentalFontSize: `Tamaño de fuente`,
             setExperimental: `Funciones experimentales`,
             posTop: `Arriba`,
@@ -260,6 +266,8 @@
             setWallpaperBlur: `Flou du fond d'écran`,
             setReducedAnim: `Animation réduite`,
             setLowEnd: `Mode faible performance`,
+            setExperimentalCustomAccent: `Couleur d’accent personnalisée`,
+            setExperimentalCustomWallpaper: `Fond d’écran personnalisé`,
             setExperimentalFontSize: `Taille de police`,
             setExperimental: `Fonctionnalités expérimentales`,
             posTop: `Haut`,
@@ -442,12 +450,37 @@
 
         body.classList.toggle('experimental', !!settings.experimentalFeatures);
 
-        ['80', '90', '100', '110', '120', '130', '140'].forEach(function (size) {
-            body.classList.remove('exp-font-size-' + size);
-        });
-        const experimentalFontSize = String(settings.experimentalFontSize || '100');
-        if (settings.experimentalFeatures && ['80', '90', '100', '110', '120', '130', '140'].indexOf(experimentalFontSize) !== -1) {
-            body.classList.add('exp-font-size-' + experimentalFontSize);
+        const requestedFontSize = Number(settings.experimentalFontSize || 100);
+        const validFontSize = Number.isFinite(requestedFontSize) &&
+            requestedFontSize >= 80 && requestedFontSize <= 140 &&
+            requestedFontSize % 5 === 0;
+        body.style.setProperty('--experimental-font-scale',
+            String((validFontSize ? requestedFontSize : 100) / 100));
+
+        const customAccent = String(settings.experimentalCustomAccent || '');
+        const accentMatch = customAccent.match(/^#([0-9a-f]{6})$/i);
+        if (settings.experimentalFeatures && accentMatch) {
+            const hex = accentMatch[1];
+            const red = parseInt(hex.slice(0, 2), 16);
+            const green = parseInt(hex.slice(2, 4), 16);
+            const blue = parseInt(hex.slice(4, 6), 16);
+            body.classList.add('experimental-custom-accent');
+            body.style.setProperty('--experimental-accent', customAccent);
+            body.style.setProperty('--experimental-accent-rgb', red + ', ' + green + ', ' + blue);
+        } else {
+            body.classList.remove('experimental-custom-accent');
+            body.style.removeProperty('--experimental-accent');
+            body.style.removeProperty('--experimental-accent-rgb');
+        }
+
+        const customWallpaper = String(settings.experimentalCustomWallpaper || '');
+        if (settings.experimentalFeatures &&
+            /^data:image\/(webp|jpeg);base64,[a-z0-9+/=]+$/i.test(customWallpaper)) {
+            body.classList.add('experimental-custom-wallpaper');
+            body.style.setProperty('--experimental-wallpaper-image', 'url("' + customWallpaper + '")');
+        } else {
+            body.classList.remove('experimental-custom-wallpaper');
+            body.style.removeProperty('--experimental-wallpaper-image');
         }
 
         syncBeansWallpaperFx(settings);

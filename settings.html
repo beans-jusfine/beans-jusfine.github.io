@@ -182,17 +182,35 @@
                             <span class="slider"></span>
                         </label>
                     </div>
-                    <div class="setting-row" id="experimental-font-size-row" hidden>
+                    <div class="setting-row experimental-setting-row" id="experimental-font-size-row" hidden>
                         <span data-i18n="setExperimentalFontSize">Font Size</span>
                         <select id="experimental-font-size" class="dropdown-control">
                             <option value="80">80%</option>
+                            <option value="85">85%</option>
                             <option value="90">90%</option>
+                            <option value="95">95%</option>
                             <option value="100" selected>100% (Default)</option>
+                            <option value="105">105%</option>
                             <option value="110">110%</option>
+                            <option value="115">115%</option>
                             <option value="120">120%</option>
+                            <option value="125">125%</option>
                             <option value="130">130%</option>
+                            <option value="135">135%</option>
                             <option value="140">140%</option>
                         </select>
+                    </div>
+                    <div class="setting-row experimental-setting-row" id="experimental-accent-row" hidden>
+                        <span data-i18n="setExperimentalCustomAccent">Custom Accent Color</span>
+                        <input type="color" id="experimental-accent-color" class="experimental-color-picker" value="#a34b25" aria-label="Custom accent color">
+                    </div>
+                    <div class="setting-row experimental-setting-row" id="experimental-wallpaper-row" hidden>
+                        <span data-i18n="setExperimentalCustomWallpaper">Custom Wallpaper</span>
+                        <div class="experimental-wallpaper-control">
+                            <input type="file" id="experimental-wallpaper-file" accept="image/png,image/jpeg,image/webp,image/gif">
+                            <button type="button" class="exp-btn" id="experimental-wallpaper-remove">Remove</button>
+                            <span id="experimental-wallpaper-status" class="experimental-wallpaper-status">No custom wallpaper selected</span>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -262,8 +280,9 @@
                 }
 
                 function syncExperimentalUI() {
-                    const row = document.getElementById('experimental-font-size-row');
-                    if (row) row.hidden = !settings.experimentalFeatures;
+                    document.querySelectorAll('.experimental-setting-row').forEach(function (row) {
+                        row.hidden = !settings.experimentalFeatures;
+                    });
                 }
 
                 bindCheckbox('dark-mode', 'darkMode');
@@ -281,6 +300,98 @@
                 bindCheckbox('reduced-animation', 'reducedAnimation');
                 bindCheckbox('low-end-mode', 'lowEndMode');
                 bindSelect('experimental-font-size', 'experimentalFontSize');
+
+                const experimentalAccentInput = document.getElementById('experimental-accent-color');
+                experimentalAccentInput.value = /^#[0-9a-f]{6}$/i.test(settings.experimentalCustomAccent || '')
+                    ? settings.experimentalCustomAccent
+                    : '#a34b25';
+                experimentalAccentInput.addEventListener('input', function () {
+                    settings.experimentalCustomAccent = experimentalAccentInput.value;
+                    commit();
+                });
+
+                const wallpaperFileInput = document.getElementById('experimental-wallpaper-file');
+                const wallpaperStatus = document.getElementById('experimental-wallpaper-status');
+                const wallpaperRemoveButton = document.getElementById('experimental-wallpaper-remove');
+
+                function updateWallpaperStatus() {
+                    wallpaperStatus.textContent = settings.experimentalCustomWallpaper
+                        ? 'Custom wallpaper saved'
+                        : 'No custom wallpaper selected';
+                    wallpaperRemoveButton.disabled = !settings.experimentalCustomWallpaper;
+                }
+
+                function compressWallpaper(file) {
+                    return new Promise(function (resolve, reject) {
+                        if (!file || !/^image\/(png|jpeg|webp|gif)$/i.test(file.type)) {
+                            reject(new Error('Choose a PNG, JPG, WebP, or GIF image.'));
+                            return;
+                        }
+                        if (file.size > 15 * 1024 * 1024) {
+                            reject(new Error('Please choose an image smaller than 15 MB.'));
+                            return;
+                        }
+
+                        const objectUrl = URL.createObjectURL(file);
+                        const image = new Image();
+                        image.onload = function () {
+                            URL.revokeObjectURL(objectUrl);
+                            try {
+                                const maxDimension = 1920;
+                                const scale = Math.min(1, maxDimension / Math.max(image.naturalWidth, image.naturalHeight));
+                                const canvas = document.createElement('canvas');
+                                canvas.width = Math.max(1, Math.round(image.naturalWidth * scale));
+                                canvas.height = Math.max(1, Math.round(image.naturalHeight * scale));
+                                const context = canvas.getContext('2d');
+                                if (!context) throw new Error('Your browser could not process that image.');
+                                context.drawImage(image, 0, 0, canvas.width, canvas.height);
+
+                                let dataUrl = '';
+                                [0.82, 0.72, 0.62, 0.52].some(function (quality) {
+                                    dataUrl = canvas.toDataURL('image/webp', quality);
+                                    if (!dataUrl.startsWith('data:image/webp;')) {
+                                        dataUrl = canvas.toDataURL('image/jpeg', quality);
+                                    }
+                                    return dataUrl.length <= 2600000;
+                                });
+                                if (!dataUrl || dataUrl.length > 2600000) {
+                                    reject(new Error('That image is still too large after compression. Try a smaller image.'));
+                                    return;
+                                }
+                                resolve(dataUrl);
+                            } catch (error) {
+                                reject(error);
+                            }
+                        };
+                        image.onerror = function () {
+                            URL.revokeObjectURL(objectUrl);
+                            reject(new Error('Could not read that image file.'));
+                        };
+                        image.src = objectUrl;
+                    });
+                }
+
+                wallpaperFileInput.addEventListener('change', async function () {
+                    const file = wallpaperFileInput.files && wallpaperFileInput.files[0];
+                    if (!file) return;
+                    wallpaperStatus.textContent = 'Processing image…';
+                    try {
+                        settings.experimentalCustomWallpaper = await compressWallpaper(file);
+                        commit();
+                        updateWallpaperStatus();
+                    } catch (error) {
+                        wallpaperStatus.textContent = error.message || 'Could not save that wallpaper.';
+                    }
+                });
+
+                wallpaperRemoveButton.addEventListener('click', function () {
+                    settings.experimentalCustomWallpaper = '';
+                    wallpaperFileInput.value = '';
+                    commit();
+                    updateWallpaperStatus();
+                });
+
+                updateWallpaperStatus();
 
                 const expToggle = document.getElementById('experimental-features');
                 const expDialog = document.getElementById('experimental-dialog');
