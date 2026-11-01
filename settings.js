@@ -644,6 +644,12 @@
             layer.remove();
         });
 
+        document.querySelectorAll('.profile-avatar').forEach(function (img) {
+            img.src = img.dataset.normalAvatarSrc || 'icons/pfp.png';
+            img.alt = "Beans's Avatar";
+            delete img.dataset.normalAvatarSrc;
+        });
+
         showToast('Christmas Easter egg stopped 🎄');
     }
 
@@ -655,6 +661,14 @@
         } catch (e) {}
 
         document.body.classList.add('christmas-mode');
+
+        document.querySelectorAll('.profile-avatar').forEach(function (img) {
+            if (!img.dataset.normalAvatarSrc) {
+                img.dataset.normalAvatarSrc = img.getAttribute('src') || 'icons/pfp.png';
+            }
+            img.src = 'icons/christmas-bean-can.webp';
+            img.alt = 'Bean can wearing a Santa hat';
+        });
 
         if (config.notify !== false) showToast('Merry Christmas! 🎄');
 
