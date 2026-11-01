@@ -1335,3 +1335,17 @@ body.no-wallpaper-blur.experimental-custom-wallpaper::before {
         text-align: left;
     }
 }
+
+
+.experimental-accent-controls {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+#experimental-accent-reset:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}

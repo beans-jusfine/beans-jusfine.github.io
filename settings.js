@@ -64,6 +64,7 @@
             setWallpaperBlur: `Wallpaper Blur`,
             setReducedAnim: `Reduced Animation`,
             setLowEnd: `Low-End Mode`,
+            expAccentReset: `Restore original`,
             setExperimentalCustomAccent: `Custom Accent Color`,
             setExperimentalCustomWallpaper: `Custom Wallpaper`,
             setExperimentalFontSize: `Font Size`,
@@ -165,6 +166,7 @@
             setWallpaperBlur: `Desenfoque del fondo`,
             setReducedAnim: `Animación reducida`,
             setLowEnd: `Modo de bajo rendimiento`,
+            expAccentReset: `Restaurar original`,
             setExperimentalCustomAccent: `Color de acento personalizado`,
             setExperimentalCustomWallpaper: `Fondo personalizado`,
             setExperimentalFontSize: `Tamaño de fuente`,
@@ -266,6 +268,7 @@
             setWallpaperBlur: `Flou du fond d'écran`,
             setReducedAnim: `Animation réduite`,
             setLowEnd: `Mode faible performance`,
+            expAccentReset: `Rétablir l’original`,
             setExperimentalCustomAccent: `Couleur d’accent personnalisée`,
             setExperimentalCustomWallpaper: `Fond d’écran personnalisé`,
             setExperimentalFontSize: `Taille de police`,
@@ -475,7 +478,7 @@
 
         const customWallpaper = String(settings.experimentalCustomWallpaper || '');
         if (settings.experimentalFeatures &&
-            /^data:image\/(webp|jpeg);base64,[a-z0-9+/=]+$/i.test(customWallpaper)) {
+            /^data:image\/(webp|jpeg|gif);base64,[a-z0-9+/=]+$/i.test(customWallpaper)) {
             body.classList.add('experimental-custom-wallpaper');
             body.style.setProperty('--experimental-wallpaper-image', 'url("' + customWallpaper + '")');
         } else {

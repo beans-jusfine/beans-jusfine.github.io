@@ -202,7 +202,10 @@
                     </div>
                     <div class="setting-row experimental-setting-row" id="experimental-accent-row" hidden>
                         <span data-i18n="setExperimentalCustomAccent">Custom Accent Color</span>
-                        <input type="color" id="experimental-accent-color" class="experimental-color-picker" value="#a34b25" aria-label="Custom accent color">
+                        <div class="experimental-accent-controls">
+                            <input type="color" id="experimental-accent-color" class="experimental-color-picker" value="#a34b25" aria-label="Custom accent color">
+                            <button type="button" class="exp-btn" id="experimental-accent-reset" data-i18n="expAccentReset">Restore original</button>
+                        </div>
                     </div>
                     <div class="setting-row experimental-setting-row" id="experimental-wallpaper-row" hidden>
                         <span data-i18n="setExperimentalCustomWallpaper">Custom Wallpaper</span>
@@ -302,13 +305,39 @@
                 bindSelect('experimental-font-size', 'experimentalFontSize');
 
                 const experimentalAccentInput = document.getElementById('experimental-accent-color');
-                experimentalAccentInput.value = /^#[0-9a-f]{6}$/i.test(settings.experimentalCustomAccent || '')
-                    ? settings.experimentalCustomAccent
-                    : '#a34b25';
+                const experimentalAccentReset = document.getElementById('experimental-accent-reset');
+
+                function getOriginalAccentColor() {
+                    const presetColors = {
+                        orange: '#a34b25',
+                        blue: '#3d7bf5',
+                        purple: '#9b5de5',
+                        black: '#1a1a1a'
+                    };
+                    return presetColors[settings.accentColor] || presetColors.orange;
+                }
+
+                function syncExperimentalAccentPicker() {
+                    const hasCustomAccent = /^#[0-9a-f]{6}$/i.test(settings.experimentalCustomAccent || '');
+                    experimentalAccentInput.value = hasCustomAccent
+                        ? settings.experimentalCustomAccent
+                        : getOriginalAccentColor();
+                    experimentalAccentReset.disabled = !hasCustomAccent;
+                }
+
                 experimentalAccentInput.addEventListener('input', function () {
                     settings.experimentalCustomAccent = experimentalAccentInput.value;
                     commit();
+                    syncExperimentalAccentPicker();
                 });
+
+                experimentalAccentReset.addEventListener('click', function () {
+                    settings.experimentalCustomAccent = '';
+                    syncExperimentalAccentPicker();
+                    commit();
+                });
+
+                syncExperimentalAccentPicker();
 
                 const wallpaperFileInput = document.getElementById('experimental-wallpaper-file');
                 const wallpaperStatus = document.getElementById('experimental-wallpaper-status');
@@ -329,6 +358,29 @@
                         }
                         if (file.size > 15 * 1024 * 1024) {
                             reject(new Error('Please choose an image smaller than 15 MB.'));
+                            return;
+                        }
+
+                        // Keep GIF bytes intact: canvas conversion removes animation frames.
+                        if (file.type.toLowerCase() === 'image/gif') {
+                            if (file.size > 1800 * 1024) {
+                                reject(new Error('To keep GIF animation, choose a GIF smaller than 1.8 MB.'));
+                                return;
+                            }
+
+                            const reader = new FileReader();
+                            reader.onload = function () {
+                                if (typeof reader.result !== 'string' ||
+                                    !reader.result.startsWith('data:image/gif;base64,')) {
+                                    reject(new Error('Could not read the animated GIF.'));
+                                    return;
+                                }
+                                resolve(reader.result);
+                            };
+                            reader.onerror = function () {
+                                reject(new Error('Could not read that GIF file.'));
+                            };
+                            reader.readAsDataURL(file);
                             return;
                         }
 
